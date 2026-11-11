@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T11:22:16.027312+00:00",
+  "generatedAt": "2026-11-11T12:07:35.008816+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-11T13:21:10+02:00",
+      "sourceTime": "2026-11-11T14:06:55+02:00",
       "24": {
         "sell": 7045.75,
         "buy": 6988.5
@@ -13,24 +13,24 @@
         "buy": 6115.0
       },
       "status": "available",
-      "fetchedAt": "2026-11-11T11:22:14.043895+00:00",
+      "fetchedAt": "2026-11-11T12:07:32.915085+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "misr": {
-      "sourceTime": "2026-11-11T13:10:39+02:00",
-      "buy": 53.46,
-      "sell": 53.56,
+      "sourceTime": "2026-11-11T13:53:30+02:00",
+      "buy": 53.5,
+      "sell": 53.6,
       "quoteType": "notes",
       "status": "available",
-      "fetchedAt": "2026-11-11T11:22:14.044740+00:00",
+      "fetchedAt": "2026-11-11T12:07:32.915795+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 4056.100098,
-      "sourceTime": "2026-11-11T11:21:59+00:00",
+      "sell": 4046.899902,
+      "sourceTime": "2026-11-11T12:07:29+00:00",
       "name": "gold-api.com",
       "status": "available",
-      "fetchedAt": "2026-11-11T11:22:14.045274+00:00",
+      "fetchedAt": "2026-11-11T12:07:32.916310+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
