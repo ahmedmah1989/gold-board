@@ -80,6 +80,25 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold-bright); o
 .rows{list-style:none; margin:14px 0 0; padding:0}
 .rows li{display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid rgba(255,247,227,.3)}
 .rows b{white-space:nowrap; color:var(--gold-bright)}
+.tblw{overflow-x:auto; margin-top:12px; border:2px solid var(--line); border-radius:12px; background:var(--surface)}
+table.per{width:100%; border-collapse:collapse; min-width:520px; font-size:1rem}
+table.per th,table.per td{padding:8px 10px; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap}
+table.per th{background:var(--gold-soft); color:var(--ink); font-weight:700}
+table.per tr:last-child td{border-bottom:0}
+.up{color:var(--good); font-weight:700} .dn{color:var(--bad); font-weight:700}
+.ind{list-style:none; margin:12px 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.ind li{background:var(--surface); border:2px solid var(--line); border-radius:12px; padding:10px 12px}
+.ind b{display:block; font-size:1.25rem; color:var(--teal); line-height:1.6}
+.ind span{display:block; font-size:.95rem; line-height:1.7}
+.chart{margin-top:12px; background:var(--surface); border:2px solid var(--line); border-radius:12px; padding:8px}
+.chart svg{display:block; width:100%; height:auto}
+.legend{display:flex; flex-wrap:wrap; gap:14px; font-size:.95rem; padding:0 6px}
+.sc{list-style:none; margin:12px 0 0; padding:0}
+.sc li{background:var(--surface); border:2px solid var(--line); border-right:8px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:10px}
+.sc li.up{border-right-color:var(--good); color:inherit; font-weight:400} .sc li.base{border-right-color:var(--gold)} .sc li.dn{border-right-color:var(--bad); color:inherit; font-weight:400}
+.sc h3{color:var(--ink)} .sc .v{font-weight:700}
+.muted-note{font-size:.95rem; margin-top:8px}
+@media (max-width:520px){.ind{grid-template-columns:1fr}}
 ul.plain{margin:10px 0 0; padding:0 22px 0 0} ul.plain li{margin-bottom:8px} ul.plain li::marker{color:var(--gold)}
 .srcs{list-style:none; margin:14px 0 0; padding:0}
 .srcs li{background:var(--panel-2); border-radius:10px; padding:10px 12px; margin-top:8px; line-height:1.8}
@@ -122,8 +141,36 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
   <ul class="checks">
     <li><h3>هل سعر الصاغة قريب من السعر العادل؟ <span class="tag none" id="t1">—</span></h3><p id="c1"></p></li>
     <li><h3>البنوك العالمية متوقعة طلوع ولا نزول؟ <span class="tag none" id="t2">—</span></h3><p id="c2"></p></li>
-    <li><h3>الأونصة فين من نطاق محلل البوست؟ <span class="tag none" id="t3">—</span></h3><p id="c3"></p></li>
+    <li><h3>اتجاه السعر على المدى المتوسط والطويل <span class="tag none" id="t3">—</span></h3><p id="c3"></p></li>
   </ul>
+
+  <h2>رؤية تحليلية للسوق</h2>
+  <p>كل الجزء ده بيتحسب لوحده من بيانات أسعار يومية مؤرخة (من مارس 2024 لحد النهارده)، وبيتحدث مع كل فتحة للصفحة.</p>
+
+  <h3 style="margin-top:18px">مقارنة الفترات</h3>
+  <p>السعر اتغير قد إيه في كل فترة. عمود الأونصة بيوريك حركة الذهب عالميًا، وعمود عيار 21 بيوريك اللي حصل في مصر بعد أثر الدولار.</p>
+  <div class="tblw"><table class="per">
+    <thead><tr><th>من</th><th>الأونصة وقتها</th><th>التغير</th><th>عيار 21 (عادل) وقتها</th><th>التغير</th></tr></thead>
+    <tbody id="perBody"><tr><td colspan="5">بجيب البيانات التاريخية…</td></tr></tbody>
+  </table></div>
+
+  <h3 style="margin-top:22px">مؤشرات الاتجاه</h3>
+  <ul class="ind">
+    <li><b id="iA50">—</b><span>متوسط آخر 50 يوم. لو السعر فوقه يبقى الاتجاه القريب طالع.</span></li>
+    <li><b id="iA200">—</b><span>متوسط آخر 200 يوم. لو السعر فوقه يبقى الاتجاه الطويل طالع.</span></li>
+    <li><b id="iPos">—</b><span>مكان السعر بين أقل وأعلى سعر في السنة (0% القاع، 100% القمة).</span></li>
+    <li><b id="iDD">—</b><span>بعد السعر عن أعلى سعر في السنة.</span></li>
+  </ul>
+  <p class="muted-note" id="iNote"></p>
+
+  <h3 style="margin-top:22px">سعر الأونصة خلال آخر سنة</h3>
+  <div class="chart"><div id="chart">بجيب البيانات…</div>
+    <div class="legend"><span>الخط المتصل: السعر أسبوعيًا</span><span>الخط المتقطع: متوسط 200 يوم</span></div>
+  </div>
+
+  <h3 style="margin-top:22px">سيناريوهات الصعود والهبوط</h3>
+  <p>السيناريوهات محسوبة بسعر الدولار النهارده عشان تشوف أثرها على عيار 21 في مصر. سيناريوهات الصعود والأساسي من توقعات البنوك، وسيناريو الهبوط اختبار ضغط من بيانات السوق نفسها، مش توقع.</p>
+  <ul class="sc" id="scBox"></ul>
 
   <h2>الأرقام</h2>
   <p>أول خانتين بيتملوا لوحدهم. الخانة الثالثة اكتب فيها سعر عيار 21 اللي شايفه عند التاجر أو في تطبيق الأسعار، والصفحة هتفتكره.</p>
@@ -146,6 +193,7 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
 
   <h2>توقعات المؤسسات الكبرى لسعر الأونصة</h2>
   <p>دي بنوك عالمية بتنشر توقعاتها علنًا. الجزء ده مش بيتحدث لوحده لأن مفيش مصدر آلي ليه، وتاريخ كل توقع مكتوب جنبه. وحتى البنوك دي بتغلط كتير.</p>
+  <p class="muted-note" id="fcAge"></p>
   <div id="fcBox"></div>
 
   <h2>الأرقام دي جاية منين وبنتأكد منها إزاي</h2>
@@ -153,13 +201,15 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
   <ul class="plain">
     <li><strong>الأونصة:</strong> المصدر الأساسي gold-api.com وبيتحدث كل كام دقيقة. المصدر التاني currency-api (مشروع مفتوح المصدر) وبيتحدث مرة في اليوم، فالفرق بينهم لحد 3% طبيعي لأنه سعر أمس.</li>
     <li><strong>الدولار:</strong> المصدر الأساسي open.er-api.com وبيتحدث مرة في اليوم. والمصدر التاني نفس مشروع currency-api.</li>
+    <li><strong>البيانات التاريخية والرؤية التحليلية:</strong> أسعار يومية مؤرخة من مشروع currency-api مفتوح المصدر (أرشيف من مارس 2024)، والصفحة بتحفظها على جهازك عشان متتجابش كل مرة.</li>
+    <li><strong>توقعات البنوك:</strong> Goldman Sachs وUBS وBank of America كما نقلتها تقارير السوق المنشورة في أكتوبر ونوفمبر 2026.</li>
     <li><strong>ليه مش البنك المركزي أو بورصة لندن مباشرة؟</strong> لأنهم مش بيوفروا رابط بيانات مجاني تقدر صفحة تقراه لوحدها. للتأكد يدويًا: سعر الدولار الرسمي على موقع البنك المركزي المصري، وسعر عيار 21 من شعبة الذهب.</li>
   </ul>
 
   <h2>إزاي تقرا اللوحة</h2>
   <ol class="read">
     <li>بص على اللون والجملة اللي فوق أول حاجة، وعلى «جودة البيانات» جنب وقت التحديث.</li>
-    <li>انزل للفحوصات الثلاثة وشوف أنهي واحد سبب النتيجة.</li>
+    <li>انزل للفحوصات الثلاثة وشوف أنهي واحد سبب النتيجة، وبعدها الرؤية التحليلية.</li>
     <li>لو النتيجة «مناسب»، اشتري جزء من المبلغ بس، مش كله.</li>
     <li>قبل الدفع قارن سعر التاجر بالسعر العادل المكتوب هنا.</li>
   </ol>
@@ -179,7 +229,7 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
     {who:"Bank of America", t:4813, horizon:"متوسط سنة 2027", date:"نوفمبر 2026", note:"", counted:true},
     {who:"J.P. Morgan", t:6300, horizon:"بنهاية 2027", date:"يونيو إلى أغسطس 2026", note:"توقع أقدم ومصادره متضاربة، فمش داخل في المتوسط", counted:false}
   ];
-  var OZ=31.1035, K21=0.875, LOW=3800, HIGH=4800, EVERY=5*60*1000;
+  var OZ=31.1035, K21=0.875, EVERY=5*60*1000, FC_REVIEWED="2026-11-11", TREND=null, HIST=null;
   function $(i){return document.getElementById(i)}
   function num(v){
     v=String(v==null?"":v).replace(/[٠-٩]/g,function(d){return "٠١٢٣٤٥٦٧٨٩".indexOf(d)}).replace(/٫/g,".").replace(/[٬,\s]/g,"");
@@ -215,10 +265,13 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
     var up=(avg-oz)/oz*100, r2=up>5?"good":up>=-5?"warn":"bad"; res.push(r2); tag($("t2"),r2,LABEL[r2]);
     $("c2").textContent="متوسط أحدث "+counted.length+" توقعات: "+fmt(avg)+" دولار للأونصة خلال 2027، يعني "+(up>=0?"أعلى":"أقل")+" من السعر الحالي بـ"+fmt(Math.abs(up),1)+"%.";
 
-    var p=(oz-LOW)/(HIGH-LOW), r3=(p<0||p>0.7)?"bad":p<=0.4?"good":"warn"; res.push(r3); tag($("t3"),r3,LABEL[r3]);
-    $("c3").textContent=p<0?"الأونصة نزلت تحت القاع اللي حدده (3,800 دولار)، يعني توقعه اتكسر ومينفعش تعتمد عليه."
-      :p>1?"الأونصة فوق القمة اللي حددها (4,800 دولار)."
-      :"الأونصة عند "+fmt(p*100)+"% من المسافة بين قاعه 3,800 وقمته 4,800. ده رأي محلل واحد وأداؤه غير موثّق، فخده كمعلومة إضافية بس.";
+    if(TREND){
+      var a50=oz>TREND.a50, a200=oz>TREND.a200, r3=(a50&&a200)?"good":"warn"; res.push(r3); tag($("t3"),r3,LABEL[r3]);
+      $("c3").textContent=(a50&&a200)?"السعر فوق متوسط 50 يوم ومتوسط 200 يوم، يعني الاتجاه طالع على المدى القريب والطويل."
+        :(!a50&&!a200)?"السعر تحت متوسط 50 يوم وتحت متوسط 200 يوم، يعني في موجة نزول. الشراء على دفعات أأمن من الشراء مرة واحدة."
+        :(a200?"الاتجاه الطويل لسه طالع (فوق متوسط 200 يوم)، لكن القريب نازل (تحت متوسط 50 يوم). ده غالبًا تصحيح مؤقت."
+              :"الاتجاه القريب بدأ يطلع (فوق متوسط 50 يوم)، لكن الطويل لسه نازل (تحت متوسط 200 يوم).");
+    } else { tag($("t3"),"none","بيتحسب"); $("c3").textContent="بجيب البيانات التاريخية عشان أحسب الاتجاه."; }
 
     var bad=res.indexOf("bad")>-1, allGood=res.every(function(x){return x==="good"});
     if(bad){sig.classList.add("bad"); $("sigHead").textContent="المؤشر: استنى";
@@ -310,8 +363,126 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
     var dq=document.createElement("span"); dq.className="dq chk "+(q.indexOf("bad")>-1?"bad":q.indexOf("warn")>-1?"warn":"ok");
     dq.textContent=q.indexOf("bad")>-1?"جودة البيانات: فيها مشكلة":q.indexOf("warn")>-1?"جودة البيانات: مقبولة":"جودة البيانات: ممتازة";
     st.appendChild(dq);
-    render(); busy=false; $("go").disabled=false;
+    analyze(); render(); busy=false; $("go").disabled=false;
   }
+
+  /* ===== البيانات التاريخية والرؤية التحليلية ===== */
+  var HBASE="https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@";
+  function iso(d){return d.toISOString().slice(0,10)}
+  function addDays(d,n){var x=new Date(d.getTime()); x.setUTCDate(x.getUTCDate()+n); return x}
+  async function histPoint(date){
+    var k="gh_"+date, c=store(k);
+    if(c){try{return JSON.parse(c)}catch(e){}}
+    var j=await getJSON(HBASE+date+"/v1/currencies/xau.json");
+    var pt={d:date, usd:num(j.xau.usd), egp:num(j.xau.egp)};
+    if(pt.usd>0&&pt.egp>0) store(k,JSON.stringify(pt)); return pt;
+  }
+  async function loadHistory(){
+    var base=addDays(new Date(),-1), dates=[];
+    for(var i=0;i<=52;i++) dates.push(iso(addDays(base,-7*i)));
+    dates.push(iso(addDays(base,-730)));
+    var rs=await Promise.allSettled(dates.map(histPoint));
+    var pts=rs.filter(function(r){return r.status==="fulfilled"&&r.value&&r.value.usd>0}).map(function(r){return r.value});
+    pts.sort(function(a,b){return a.d<b.d?-1:1});
+    return pts;
+  }
+  function daysBetween(a,b){return Math.round((Date.parse(b)-Date.parse(a))/864e5)}
+  function nearest(pts,target){
+    var best=null,bd=1e9; pts.forEach(function(p){var d=Math.abs(daysBetween(p.d,target)); if(d<bd){bd=d;best=p}});
+    return bd<=10?best:null;
+  }
+  function pct(a,b){return (a-b)/b*100}
+  function cell(v){var td=document.createElement("td"); td.textContent=v; return td}
+  function pctCell(v){var td=document.createElement("td"); td.className=v>=0?"up":"dn"; td.textContent=(v>=0?"+":"−")+fmt(Math.abs(v),1)+"%"; return td}
+
+  function analyze(){
+    if(!HIST||!HIST.length) return;
+    var oz=num($("oz").value), usd=num($("usd").value);
+    var last=HIST[HIST.length-1];
+    if(!(oz>0)) oz=last.usd;
+    if(!(usd>0)) usd=last.egp/last.usd;
+    var today=iso(new Date()), now21=oz*usd/OZ*K21;
+
+    // جدول الفترات
+    var per=[["أسبوع",7],["شهر",30],["3 شهور",91],["6 شهور",182],["سنة",365],["سنتين",730]];
+    var tb=$("perBody"); tb.textContent="";
+    per.forEach(function(x){
+      var p=nearest(HIST,iso(addDays(new Date(),-x[1]))); if(!p) return;
+      var f21=p.egp/OZ*K21, tr=document.createElement("tr");
+      tr.appendChild(cell(x[0]+" ("+p.d+")"));
+      tr.appendChild(cell(fmt(p.usd)+" $")); tr.appendChild(pctCell(pct(oz,p.usd)));
+      tr.appendChild(cell(fmt(f21)+" ج")); tr.appendChild(pctCell(pct(now21,f21)));
+      tb.appendChild(tr);
+    });
+    if(!tb.children.length){var tr=document.createElement("tr"); var td=cell("مفيش بيانات تاريخية كفاية دلوقتي."); td.colSpan=5; tr.appendChild(td); tb.appendChild(tr);}
+
+    // المؤشرات
+    function within(n){return HIST.filter(function(p){return daysBetween(p.d,today)<=n})}
+    var p50=within(50), p200=within(200), p365=within(366);
+    var avg=function(a){return a.reduce(function(s,p){return s+p.usd},0)/a.length};
+    if(p50.length&&p200.length&&p365.length){
+      var a50=avg(p50), a200=avg(p200);
+      var ys=p365.map(function(p){return p.usd}).concat([oz]);
+      var hi=Math.max.apply(null,ys), lo=Math.min.apply(null,ys);
+      var peak=0, mdd=0; p365.map(function(p){return p.usd}).concat([oz]).forEach(function(v){peak=Math.max(peak,v); mdd=Math.max(mdd,(peak-v)/peak)});
+      TREND={a50:a50,a200:a200,hi:hi,lo:lo,mdd:mdd};
+      $("iA50").textContent=fmt(a50)+" $ ("+(oz>a50?"السعر فوقه":"السعر تحته")+")";
+      $("iA200").textContent=fmt(a200)+" $ ("+(oz>a200?"السعر فوقه":"السعر تحته")+")";
+      $("iPos").textContent=fmt((oz-lo)/(hi-lo)*100)+"%";
+      $("iDD").textContent="−"+fmt(pct(hi,oz)>0?(hi-oz)/hi*100:0,1)+"% من "+fmt(hi)+" $";
+      $("iNote").textContent="أعلى سعر في السنة "+fmt(hi)+" دولار، وأقل سعر "+fmt(lo)+" دولار. أكبر هبوط من قمة لقاع خلال السنة كان "+fmt(mdd*100,1)+"%. المتوسطات محسوبة من نقاط أسبوعية، فهي تقريبية.";
+      drawChart(p365,oz,a200);
+      scenarios(oz,usd,mdd);
+    }
+    render();
+  }
+
+  function drawChart(pts,oz,a200){
+    var data=pts.map(function(p){return p.usd}).concat([oz]);
+    var W=640,H=230,L=58,R=12,T=14,B=30;
+    var mn=Math.min.apply(null,data.concat([a200])), mx=Math.max.apply(null,data.concat([a200]));
+    var pad=(mx-mn)*0.08||10; mn-=pad; mx+=pad;
+    var X=function(i){return L+(W-L-R)*i/(data.length-1)}, Y=function(v){return T+(H-T-B)*(1-(v-mn)/(mx-mn))};
+    var NS="http://www.w3.org/2000/svg", svg=document.createElementNS(NS,"svg");
+    svg.setAttribute("viewBox","0 0 "+W+" "+H); svg.setAttribute("role","img");
+    svg.setAttribute("aria-label","سعر الأونصة خلال آخر سنة من "+fmt(data[0])+" إلى "+fmt(oz)+" دولار");
+    var cs=getComputedStyle(document.documentElement), ink=cs.getPropertyValue("--ink").trim(), gold=cs.getPropertyValue("--gold").trim(), line=cs.getPropertyValue("--line").trim(), teal=cs.getPropertyValue("--teal").trim();
+    for(var g=0;g<=3;g++){
+      var v=mn+(mx-mn)*g/3, y=Y(v);
+      var gl=document.createElementNS(NS,"line"); gl.setAttribute("x1",L); gl.setAttribute("x2",W-R); gl.setAttribute("y1",y); gl.setAttribute("y2",y); gl.setAttribute("stroke",line); svg.appendChild(gl);
+      var tx=document.createElementNS(NS,"text"); tx.setAttribute("x",L-6); tx.setAttribute("y",y+4); tx.setAttribute("text-anchor","end"); tx.setAttribute("font-size","12"); tx.setAttribute("fill",ink); tx.textContent=fmt(v); svg.appendChild(tx);
+    }
+    var av=document.createElementNS(NS,"line"); av.setAttribute("x1",L); av.setAttribute("x2",W-R); av.setAttribute("y1",Y(a200)); av.setAttribute("y2",Y(a200)); av.setAttribute("stroke",teal); av.setAttribute("stroke-width","2"); av.setAttribute("stroke-dasharray","6 5"); svg.appendChild(av);
+    var d=data.map(function(v,i){return (i?"L":"M")+X(i).toFixed(1)+" "+Y(v).toFixed(1)}).join(" ");
+    var pl=document.createElementNS(NS,"path"); pl.setAttribute("d",d); pl.setAttribute("fill","none"); pl.setAttribute("stroke",gold); pl.setAttribute("stroke-width","3"); pl.setAttribute("stroke-linejoin","round"); svg.appendChild(pl);
+    var dot=document.createElementNS(NS,"circle"); dot.setAttribute("cx",X(data.length-1)); dot.setAttribute("cy",Y(oz)); dot.setAttribute("r","5"); dot.setAttribute("fill",gold); svg.appendChild(dot);
+    [[0,pts[0].d],[data.length-1,"النهارده"]].forEach(function(q){var t=document.createElementNS(NS,"text"); t.setAttribute("x",X(q[0])); t.setAttribute("y",H-8); t.setAttribute("text-anchor",q[0]?"end":"start"); t.setAttribute("font-size","12"); t.setAttribute("fill",ink); t.textContent=q[1]; svg.appendChild(t)});
+    var box=$("chart"); box.textContent=""; box.appendChild(svg);
+  }
+
+  function scenarios(oz,usd,mdd){
+    var hi=Math.max.apply(null,FORECASTS.filter(function(f){return f.counted}).map(function(f){return f.t}));
+    var bear=oz*(1-mdd);
+    var list=[
+      {cls:"up",name:"سيناريو صعود",t:hi,why:"أعلى توقع حديث بين البنوك (UBS، 5,400 دولار حتى سبتمبر 2027، صادر 19 أكتوبر 2026)."},
+      {cls:"base",name:"سيناريو أساسي",t:avg,why:"متوسط توقعات Goldman Sachs وUBS وBank of America لسنة 2027."},
+      {cls:"dn",name:"سيناريو هبوط (اختبار ضغط)",t:bear,why:"لو حصل هبوط بنفس حجم أكبر هبوط في السنة اللي فاتت ("+fmt(mdd*100,1)+"%). ده مش توقع، ده بيوريك الخسارة الممكنة لو التاريخ القريب اتكرر."}
+    ];
+    var box=$("scBox"); box.textContent="";
+    list.forEach(function(x){
+      var li=document.createElement("li"); li.className=x.cls;
+      var h=document.createElement("h3"); h.textContent=x.name; li.appendChild(h);
+      var f21=x.t*usd/OZ*K21, now21=oz*usd/OZ*K21;
+      var p=document.createElement("div"); p.className="v";
+      p.textContent="الأونصة "+fmt(x.t)+" دولار ("+(x.t>=oz?"+":"−")+fmt(Math.abs(pct(x.t,oz)),1)+"%) ← عيار 21 حوالي "+fmt(f21)+" جنيه ("+(f21>=now21?"+":"−")+fmt(Math.abs(f21-now21))+" ج للجرام)";
+      li.appendChild(p);
+      var w=document.createElement("div"); w.textContent=x.why; li.appendChild(w);
+      box.appendChild(li);
+    });
+  }
+
+  var fa=daysBetween(FC_REVIEWED,iso(new Date()));
+  $("fcAge").textContent="آخر مراجعة لقائمة التوقعات: "+FC_REVIEWED+" (من "+fa+" يوم)."+(fa>90?" القائمة عدّى عليها أكتر من 3 شهور، ومحتاجة تتحدث.":"");
 
   var saved=store("gold_loc"); if(saved) $("loc").value=saved;
   $("oz").value=""; $("usd").value="";
@@ -319,6 +490,7 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
   ["oz","usd"].forEach(function(i){$(i).addEventListener("input",render)});
   $("go").addEventListener("click",load);
   showForecasts(); render(); load(); setInterval(load,EVERY);
+  loadHistory().then(function(h){HIST=h; if(!h.length){$("perBody").textContent=""; $("chart").textContent="معرفتش أجيب البيانات التاريخية دلوقتي."; return;} analyze();}).catch(function(){$("chart").textContent="معرفتش أجيب البيانات التاريخية دلوقتي.";});
 })();
 </script>
 </body>
