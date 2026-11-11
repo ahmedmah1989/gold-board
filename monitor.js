@@ -1,4 +1,3 @@
-/* Local calculations only. No bank connection or automatic notification is claimed. */
 (function () {
   'use strict';
   const OUNCE = 31.1034768;
@@ -12,56 +11,84 @@
       fxPercent: (local24 / gramUSD / bankSell - 1) * 100,
       drop24: Math.max(0, 7735 - local24), drop21: local21 > 0 ? Math.max(0, 6767 - local21) : null };
   }
-  if (typeof module !== 'undefined') module.exports = { calculate, OUNCE };
+
+  function assess(sources, now = Date.now()) {
+    const quotes = [sources?.isagha, sources?.misr, sources?.gold];
+    const times = quotes.map(q => Date.parse(q?.sourceTime));
+    if (quotes.some(q => q?.status !== 'available') || times.some(t => !Number.isFinite(t))) return {usable:false, fresh:false, reason:'مصدر أو وقت تسعير غير متاح؛ ستُستكمل المقارنة تلقائيًا عند وصوله.'};
+    if (![sources.isagha?.['24']?.sell,sources.isagha?.['21']?.sell,sources.misr?.sell,sources.gold?.sell].every(v=>Number.isFinite(v)&&v>0)) return {usable:false,fresh:false,reason:'إحدى قيم الأسعار غير صالحة؛ المقارنة معلقة.'};
+    if (times.some(t => t > now + 120000)) return {usable:false, fresh:false, reason:'توقيت أحد المصادر في المستقبل؛ المقارنة معلقة لحين التحقق.'};
+    if (times.some(t => now-t > 24*3600000)) return {usable:false, fresh:false, reason:'إحدى القراءات تجاوزت 24 ساعة؛ المقارنة معلقة حتى يصل سعر أحدث.'};
+    const fresh = times.every(t => now-t <= 300000) && Math.max(...times)-Math.min(...times) <= 300000;
+    return {usable:true, fresh, reason:fresh ? 'أوقات المصادر حديثة ومتقاربة. الحساب قبل رسوم المنتج النهائي.' : 'حساب استرشادي من آخر أسعار منشورة؛ أوقات المصادر مختلفة أو تجاوز أحدها 5 دقائق. راجع الأوقات أدناه؛ ليست إشارة لحظية.'};
+  }
+  if (typeof module !== 'undefined') module.exports = {calculate, OUNCE, assess};
   if (typeof document === 'undefined') return;
   const $ = id => document.getElementById(id);
-  const n = value => { const s = String(value).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٬,\s]/g, '').replace(/٫/g, '.'); return /^\d+(\.\d+)?$/.test(s) ? Number(s) : NaN; };
-  const fmt = (x, unit = ' جنيه') => Number.isFinite(x) ? x.toLocaleString('ar-EG', { maximumFractionDigits: 2 }) + unit : '—';
-  let snapshot = null;
-  const time = value => Number.isFinite(Date.parse(value)) ? new Date(value).toLocaleString('ar-EG', {timeZone:'Africa/Cairo'}) + ' بتوقيت القاهرة' : 'غير متاح';
-  function verified() {
-    if (!snapshot || $('quoteMode').value !== 'auto') return false;
-    const a = snapshot.sources.isagha, b = snapshot.sources.misr;
-    const times = [a.sourceTime, b.sourceTime, $('oz').dataset.sourceTime].map(Date.parse);
-    return a.status === 'available' && b.status === 'available' && times.every(t => Number.isFinite(t) && Date.now()-t >= -120000 && Date.now()-t <= 5*60000) && Math.max(...times)-Math.min(...times) <= 5*60000;
+  const state = {sources:{}, generatedAt:null, lastCheck:null, busy:false, dealerEdited:false};
+  const number = v => { const s=String(v).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[٬,\s]/g,'').replace(/٫/g,'.'); return /^\d+(\.\d+)?$/.test(s)?Number(s):NaN; };
+  const positive = v => Number.isFinite(v) && v>0;
+  const fmt = (v,unit=' جنيه') => Number.isFinite(v)?v.toLocaleString('ar-EG',{maximumFractionDigits:2})+unit:'—';
+  const time = v => Number.isFinite(Date.parse(v))?new Date(v).toLocaleString('ar-EG',{timeZone:'Africa/Cairo',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'غير متاح';
+  function usable(q) {const t=Date.parse(q?.sourceTime);return q?.status==='available' && Number.isFinite(t) && t<=Date.now()+120000 && Date.now()-t<=86400000;}
+  function calculator() {
+    const budget=number($('budget').value), price=number($('dealer').value);
+    $('grams').textContent=positive(budget)&&positive(price)?fmt(budget/price,' جرام'):'—';
+    $('calculatorNote').textContent=state.dealerEdited?'الحساب بسعر التاجر الذي أدخلته؛ لا يشمل المصنعية.':'السعر من آخر قراءة آي صاغة؛ لا يشمل المصنعية.';
+  }
+  function row(label,q,buy,sell,unit) {
+    const tr=document.createElement('tr');
+    [label,fmt(buy,unit),fmt(sell,unit),time(q?.sourceTime),time(q?.fetchedAt)].forEach(value=>{const td=document.createElement('td');td.textContent=value;tr.appendChild(td)});
+    return tr;
   }
   function render() {
-    const auto = $('quoteMode').value === 'auto';
-    const r = (!auto || verified()) ? calculate(n($('oz').value), n($('bankSell').value), n($('local24').value), n($('local21').value)) : null;
-    const values = r ? [fmt(r.globalEGP), fmt(r.global21), fmt(r.gapEGP), fmt(r.gapUSD, ' دولار'), fmt(r.gapPercent, '%'), fmt(r.implied), fmt(r.fxGap), fmt(r.fxPercent, '%'), fmt(r.drop24) + ' (' + fmt(r.drop24 / 7735 * 100, '%') + ')', r.drop21 === null ? '—' : fmt(r.drop21) + ' (' + fmt(r.drop21 / 6767 * 100, '%') + ')'] : Array(10).fill('—');
-    values.forEach((v, i) => $('metric' + i).textContent = v);
-    $('gapMeaning').textContent = r ? (r.gapEGP >= 0 ? 'علاوة محلية فوق القيمة العالمية' : 'خصم محلي عن القيمة العالمية') : 'أدخل الأسعار لحساب الفجوة.';
-    const t = Date.parse($('quoteTime').value), age = Date.now() - t;
-    $('monitorQuality').textContent = auto ? (r ? 'اجتازت فحوص الاكتمال والتوقيت؛ الأسعار المنقولة لا تضمن تنفيذ صفقة' : 'المقارنة معلقة: نحتاج أسعارًا موثقة خلال 5 دقائق وفارق توقيت لا يتجاوز 5 دقائق') : !r ? 'البيانات غير مكتملة' : !Number.isFinite(t) ? 'حساب يدوي غير موثق: وقت التسعير غير محدد' : age < 0 ? 'وقت التسعير في المستقبل؛ راجع الإدخال' : age > 5 * 60000 ? 'اللقطة اليدوية أقدم من 5 دقائق؛ لا تستخدم لتنبيه لحظي' : 'لقطة يدوية حديثة؛ لم يتم التحقق من تزامنها مع المصدر العالمي';
+    const a=state.sources.isagha,b=state.sources.misr,g=state.sources.gold;
+    $('price24').textContent=usable(a)?fmt(a['24'].sell):'غير متاح';
+    $('price21').textContent=usable(a)?fmt(a['21'].sell):'غير متاح';
+    $('priceBank').textContent=usable(b)?fmt(b.sell):'غير متاح';
+    $('priceOunce').textContent=usable(g)?fmt(g.sell,' دولار'):'غير متاح';
+    $('time24').textContent=$('time21').textContent='آي صاغة • وقت المصدر '+time(a?.sourceTime);
+    $('timeBank').textContent='بنك مصر • وقت المصدر '+time(b?.sourceTime);
+    $('timeOunce').textContent=(g?.name||'gold-api.com')+' • وقت المصدر '+time(g?.sourceTime);
+    const quality=assess(state.sources);
+    const result=quality.usable?calculate(g.sell,b.sell,a['24'].sell,a['21'].sell):null;
+    const map={gapEGP:[result?.gapEGP],gapPercent:[result?.gapPercent,'%'],gapUSD:[result?.gapUSD,' دولار'],implied:[result?.implied],fxGap:[result?.fxGap],fxPercent:[result?.fxPercent,'%'],global24:[result?.globalEGP],global21:[result?.global21]};
+    Object.entries(map).forEach(([id,args])=>$(id).textContent=fmt(...args));
+    $('gapMeaning').textContent=result?(result.gapEGP>=0?'علاوة محلية فوق القيمة العالمية':'خصم محلي عن القيمة العالمية'):'انتظار بيانات صالحة للمقارنة — لا يلزم إدخال أسعار.';
+    $('qualityBadge').textContent=result?(quality.fresh?'مقارنة حديثة ومتزامنة':'مقارنة استرشادية • آخر أسعار منشورة'):'المقارنة معلقة';
+    $('qualityBadge').className='badge'+(result&&quality.fresh?' good':'');
+    $('qualityText').textContent=quality.reason;
+    $('collectedAt').textContent='جمع الأسعار المحلية والبنك: '+time(state.generatedAt);
+    $('fetchStatus').textContent=state.busy?'جاري فحص المصادر…':state.lastCheck?'آخر فحص للصفحة: '+time(state.lastCheck):'تحميل الأسعار…';
+    const table=$('sourceRows'); table.replaceChildren();
+    table.append(row('آي صاغة • عيار 24',a,a?.['24']?.buy,a?.['24']?.sell,' جنيه'),row('آي صاغة • عيار 21',a,a?.['21']?.buy,a?.['21']?.sell,' جنيه'),row('بنك مصر • دولار نقدي',b,b?.buy,b?.sell,' جنيه'),row(g?.name||'gold-api.com • أونصة',g,g?.buy,g?.sell,' دولار'));
+    if (!state.dealerEdited) $('dealer').value=usable(a)?a['21'].sell:'';
+    calculator();
   }
-  function applySnapshot() {
-    const auto = $('quoteMode').value === 'auto';
-    ['bankSell','local24','local21','quoteTime'].forEach(id => $(id).disabled = auto);
-    if (auto) {
-      const sources = snapshot && snapshot.sources, a = sources && sources.isagha, b = sources && sources.misr;
-      $('local24').value = a && a.status === 'available' ? a['24'].sell : '';
-      $('local21').value = a && a.status === 'available' ? a['21'].sell : '';
-      $('bankSell').value = b && b.status === 'available' ? b.sell : '';
-      $('quoteTime').value = '';
-    }
-    render();
+  async function json(url) {
+    const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
+    try {const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}finally{clearTimeout(timer);}
   }
   async function refresh() {
-    try {
-      const response = await fetch('data/quotes.json?t='+Date.now(), {cache:'no-store'});
-      if (!response.ok) throw Error('Unavailable');
-      const value = await response.json();
-      if (value.schemaVersion !== 1 || !value.sources) throw Error('Unsupported quote schema');
-      snapshot = value;
-      const a = value.sources.isagha, b = value.sources.misr;
-      $('feedStatus').textContent = 'آخر جمع: '+time(value.generatedAt)+' | آي صاغة: '+(a.status==='available' ? 'بيع 24: '+fmt(a['24'].sell)+'، شراء: '+fmt(a['24'].buy)+'؛ بيع 21: '+fmt(a['21'].sell)+'، شراء: '+fmt(a['21'].buy)+'؛ وقت المصدر '+time(a.sourceTime) : 'غير متاح')+' | بنك مصر: '+(b.status==='available' ? 'شراء '+fmt(b.buy)+'، بيع '+fmt(b.sell)+'؛ وقت المصدر '+time(b.sourceTime) : 'غير متاح')+' | الأهلي والمركزي: الربط غير متاح';
-    } catch (_) { snapshot = null; $('feedStatus').textContent = 'تعذر تحميل آخر لقطة موثقة. المقارنة التلقائية معلقة.'; }
-    applySnapshot();
+    if(state.busy)return;
+    state.busy=true;$('refresh').disabled=true;render();
+    const [snapshot,global]=await Promise.allSettled([json('data/quotes.json?t='+Date.now()),json('https://api.gold-api.com/price/XAU')]);
+    const previousGold=state.sources.gold;
+    if(snapshot.status==='fulfilled'&&snapshot.value.schemaVersion===1) {
+      state.sources=snapshot.value.sources||{};state.generatedAt=snapshot.value.generatedAt;
+    } else {
+      // Keep visible previous values and their real timestamps, never relabel as new.
+      state.sources={...state.sources};
+    }
+    if(!state.sources.gold&&previousGold)state.sources.gold=previousGold;
+    if(global.status==='fulfilled'&&positive(Number(global.value.price))&&Number.isFinite(Date.parse(global.value.updatedAt))) {
+      state.sources.gold={status:'available',sell:Number(global.value.price),sourceTime:global.value.updatedAt,fetchedAt:new Date().toISOString(),name:'gold-api.com'};
+    }
+    state.lastCheck=new Date().toISOString();state.busy=false;$('refresh').disabled=false;render();
+    if(snapshot.status==='rejected') $('fetchStatus').textContent+=' • تعذر جلب لقطة أحدث؛ المعروض يحتفظ بتوقيته الأصلي.';
   }
-  $('quoteMode').addEventListener('change', applySnapshot);
-  ['bankSell', 'local24', 'local21', 'bankChoice', 'quoteTime'].forEach(id => $(id).addEventListener('input', render));
-  $('oz').addEventListener('input', render);
-  new MutationObserver(render).observe($('stamp'), { childList: true, subtree: true, characterData: true });
-  setInterval(render, 60000); setInterval(refresh, 60000);
-  refresh();
+  $('refresh').addEventListener('click',refresh);
+  $('budget').addEventListener('input',calculator);
+  $('dealer').addEventListener('input',()=>{state.dealerEdited=true;calculator();});
+  setInterval(refresh,60000);refresh();
 })();

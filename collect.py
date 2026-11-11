@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 URLS = {
     'isagha': 'https://market.isagha.com/prices',
     'misr': 'https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies',
+    'gold': 'https://api.gold-api.com/price/XAU',
 }
 
 def parse_isagha(html):
@@ -48,7 +49,13 @@ def fetch(name):
         req = urllib.request.Request(URLS[name], headers={'User-Agent': 'GoldBoard/1.0 public quote monitoring'})
         with urllib.request.urlopen(req, timeout=25) as response:
             html = response.read().decode('utf-8')
-        data = (parse_isagha if name == 'isagha' else parse_misr)(html)
+        if name == 'gold':
+            raw = json.loads(html)
+            price = float(raw['price'])
+            if not 100 < price < 100000: raise ValueError('Invalid ounce price')
+            data = {'sell': price, 'sourceTime': datetime.fromisoformat(raw['updatedAt'].replace('Z', '+00:00')).isoformat(), 'name': 'gold-api.com'}
+        else:
+            data = (parse_isagha if name == 'isagha' else parse_misr)(html)
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(data['sourceTime'])).total_seconds()
         if age < -120: raise ValueError('Source timestamp in future')
         return name, dict(data, status='available', fetchedAt=now, url=URLS[name])
@@ -56,7 +63,7 @@ def fetch(name):
         return name, {'status': 'unavailable', 'fetchedAt': now, 'url': URLS[name], 'reason': 'تعذر توثيق السعر ووقت المصدر؛ لم يُستخدم سعر بديل'}
 
 if __name__ == '__main__':
-    with ThreadPoolExecutor(max_workers=2) as pool: sources = dict(pool.map(fetch, URLS))
+    with ThreadPoolExecutor(max_workers=3) as pool: sources = dict(pool.map(fetch, URLS))
     sources['nbe'] = {'status': 'unavailable', 'reason': 'لم يُتحقق من قناة ربط مستقرة للبنك الأهلي'}
     sources['cbe'] = {'status': 'unavailable', 'reason': 'لم يُتحقق من قناة ربط مستقرة لمرجع البنك المركزي'}
     out = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat(), 'sources': sources}
