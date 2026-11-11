@@ -36,6 +36,37 @@ def reasons(previous,current,peaks):
         if dd-old>=2:result.append('تعمق الهبوط من القمة المرصودة بنقطتين مئويتين لعيار '+karat)
     return result
 
+def local_observation(snapshot,now=None):
+    now=datetime.now(timezone.utc).timestamp() if now is None else now
+    try:
+        a=snapshot['sources']['isagha'];t=timestamp(a['sourceTime'])
+        if a['status']!='available' or not -120<=now-t<=300:return None
+        values={k:a[k]['sell'] for k in ('24','21')}
+        if not all(type(v) in (int,float) and math.isfinite(v) and v>0 for v in values.values()):return None
+        return {'local24':values['24'],'local21':values['21'],'time':t}
+    except (KeyError,TypeError,ValueError):return None
+
+def evaluate(state,current,local):
+    """Fresh local highs are independent of the stricter multi-source FX comparison."""
+    why=[];created=False
+    if current:
+        previous=state.get('baseline')
+        if not previous:state['baseline']=current;created=True
+        else:
+            if abs(current['gap']-previous['gap'])>=75 or abs(current['gapPct']-previous['gapPct'])>=1.5:why.append('تغير فجوة الذهب بلغ 75 جنيهًا أو 1.5 نقطة مئوية')
+            if abs(current['fxGap']-previous['fxGap'])>=1 or abs(current['fxPct']-previous['fxPct'])>=2:why.append('تغير فجوة الدولار الضمني بلغ جنيهًا أو نقطتين مئويتين')
+    if local:
+        previous=state.get('localBaseline');peaks=state.get('localPeaks')
+        if not previous or not peaks:
+            state['localBaseline']={**local,'dd24':0,'dd21':0};state['localPeaks']={'24':local['local24'],'21':local['local21']};created=True
+        else:
+            if any(local['local'+k]>peaks[k] for k in ('24','21')):why.append('قمة محلية جديدة ضمن السجل المرصود منذ تفعيل المراقبة المحلية')
+            for k in ('24','21'):
+                dd=(peaks[k]-local['local'+k])/peaks[k]*100
+                if dd-previous.get('dd'+k,0)>=2:why.append('تعمق الهبوط من القمة المحلية المرصودة بنقطتين مئويتين لعيار '+k)
+            state['localPeaks']={k:max(v,local['local'+k]) for k,v in peaks.items()}
+    return why,created
+
 def save(value):
     STATE.parent.mkdir(exist_ok=True)
     temp=STATE.with_suffix('.tmp');temp.write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding='utf-8');temp.replace(STATE)
@@ -78,28 +109,28 @@ def main():
     if not connect(state,token,chat):
         public['status']='connection_needs_review';state['service']=public;save(state);print('Telegram: connection needs review. No credentials logged.');return
     public['enabled']=True
-    current=observation(snapshot)
-    if current is None:
-        public['status']='waiting_for_fresh_synchronized_quotes';state['service']=public;save(state);print('Telegram: no alert; quotes are incomplete or unsynchronized.');return
-    if not state.get('baseline'):
-        state.update(baseline={**current,'dd24':0,'dd21':0},peaks={'24':current['local24'],'21':current['local21']})
-        public['status']='baseline_created';state['service']=public;save(state);print('Telegram: baseline created; no routine message sent.');return
-    peaks=state['peaks'];why=reasons(state['baseline'],current,peaks)
-    peaks={k:max(v,current['local'+k]) for k,v in peaks.items()};state['peaks']=peaks
-    if not why:
-        public['status']='no_material_change';state['service']=public;save(state);print('Telegram: no material change; no message sent.');return
-    identity=hashlib.sha256(json.dumps({'baseline':state['baseline'],'values':{k:v for k,v in current.items() if k!='time'},'reasons':why},sort_keys=True).encode()).hexdigest()[:20]
-    # An uncertain delivery must be reviewed, not retried automatically with possible duplicates.
     if state.get('delivery',{}).get('status')=='pending_or_unknown':
         public['status']='delivery_needs_review';state['service']=public;save(state);print('Telegram: prior uncertain delivery requires review.');return
-    text='تنبيه لوحة الذهب\n'+'\n'.join('• '+r for r in why)+f"\nعيار 24: {current['local24']:,.2f} ج\nعيار 21: {current['local21']:,.2f} ج\nالفجوة: {current['gap']:,.2f} ج ({current['gapPct']:.2f}%)\nالدولار الضمني: {current['implied']:.2f} ج\nبنك مصر بيع: {current['bank']:.2f} ج\nhttps://ahmedmah1989.github.io/gold-board/\nالمصادر: آي صاغة، بنك مصر، Gold API. تنبيه تغير وليس توصية شراء."
+    current=observation(snapshot);local=local_observation(snapshot)
+    if current is None and local is None:
+        public['status']='waiting_for_fresh_synchronized_quotes';state['service']=public;save(state);print('Telegram: no alert; quotes are incomplete or unsynchronized.');return
+    why,created=evaluate(state,current,local)
+    if not why:
+        public['status']='local_monitoring_gap_waiting' if current is None else 'baseline_created' if created else 'no_material_change';state['service']=public;save(state);print('Telegram: references evaluated; no material-change message.');return
+    identity=hashlib.sha256(json.dumps({'baseline':state.get('baseline'),'localBaseline':state.get('localBaseline'),'current':current,'local':local,'reasons':why},sort_keys=True).encode()).hexdigest()[:20]
+    text='تنبيه لوحة الذهب\n'+'\n'.join('• '+r for r in why)
+    if local:text+=f"\nعيار 24: {local['local24']:,.2f} ج\nعيار 21: {local['local21']:,.2f} ج\nوقت آي صاغة UTC: {datetime.fromtimestamp(local['time'],timezone.utc).isoformat()}"
+    if current:text+=f"\nالفجوة: {current['gap']:,.2f} ج ({current['gapPct']:.2f}%)\nالدولار الضمني: {current['implied']:.2f} ج\nبنك مصر بيع: {current['bank']:.2f} ج"
+    else:text+='\nمقارنة الفجوة والدولار معلقة لعدم حداثة أو تزامن أحد مصادرها؛ هذا تنبيه محلي فقط.'
+    text+='\nhttps://ahmedmah1989.github.io/gold-board/\nالمصادر: آي صاغة للمحلي؛ بنك مصر وGold API للمقارنة عند صلاحيتها. تنبيه تغير وليس توصية شراء.'
     state['delivery']={'id':identity,'status':'pending_or_unknown'};state['service']=public;save(state)
     try:
         payload=json.dumps({'chat_id':chat,'text':text,'link_preview_options':{'is_disabled':True}}).encode()
         req=urllib.request.Request('https://api.telegram.org/bot'+token+'/sendMessage',data=payload,headers={'Content-Type':'application/json'},method='POST')
         with urllib.request.urlopen(req,timeout=20) as response:result=json.load(response)
         if result.get('ok') is not True:raise ValueError('Rejected')
-        state['baseline']={**current,**{'dd'+k:(v-current['local'+k])/v*100 for k,v in peaks.items()}}
+        if current:state['baseline']=current
+        if local:state['localBaseline']={**local,**{'dd'+k:(v-local['local'+k])/v*100 for k,v in state['localPeaks'].items()}}
         state['delivery']={'id':identity,'status':'sent','sentAt':public['checkedAt']};public['status']='sent';state['service']=public;save(state);print('Telegram: one material-change alert sent.')
     except Exception:
         public['status']='delivery_needs_review';state['service']=public;save(state);print('Telegram: delivery uncertain; inspect bot before retrying. No credential details are logged.')

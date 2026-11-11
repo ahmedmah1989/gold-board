@@ -24,7 +24,7 @@
  }
  function telegram(data){
   const status=data.service?.status,checked=Date.parse(data.service?.checkedAt),recent=Number.isFinite(checked)&&Date.now()-checked<=30*60000;
-  const names={awaiting_configuration:'المفاتيح غير موصولة',connection_needs_review:'الربط يحتاج مراجعة',waiting_for_fresh_synchronized_quotes:'الربط جاهز؛ تنبيهات السوق تنتظر أسعارًا حديثة ومتزامنة',baseline_created:'الربط جاهز وتم إنشاء مرجع صامت للمقارنة',no_material_change:'لم يتحقق تغير مهم يستدعي رسالة',sent:'أُرسل تنبيه لتغير مهم',delivery_needs_review:'نتيجة إرسال سابق تحتاج مراجعة قبل إعادة المحاولة'};
+  const names={awaiting_configuration:'المفاتيح غير موصولة',connection_needs_review:'الربط يحتاج مراجعة',waiting_for_fresh_synchronized_quotes:'انتظار أسعار محلية حديثة ومصادر صالحة للمقارنة',local_monitoring_gap_waiting:'مراقبة القمم والهبوط المحلي جاهزة؛ تنبيهات الفجوة تنتظر مصادر حديثة ومتزامنة',baseline_created:'الربط جاهز وتم إنشاء مرجع صامت للمقارنة',no_material_change:'لم يتحقق تغير مهم يستدعي رسالة',sent:'أُرسل تنبيه لتغير مهم',delivery_needs_review:'نتيجة إرسال سابق تحتاج مراجعة قبل إعادة المحاولة'};
   $('telegramStatus').textContent=(recent?'':'حالة محفوظة؛ لم يصل فحص خلال آخر 30 دقيقة. ')+(names[status]||'الحالة لم تصل بعد')+' • آخر فحص '+t(data.service?.checkedAt);
   $('telegramConnection').textContent=data.connection?.status==='confirmed'?'Telegram أكد إرسال رسالة تأكيد الربط؛ لا يثبت ذلك فتحها أو قراءتها.':'لا يوجد تأكيد موثق لرسالة الربط حتى الآن.';
  }

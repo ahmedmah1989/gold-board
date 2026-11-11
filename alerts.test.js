@@ -6,3 +6,8 @@ assert.ok(changes(base,{...base,fxGap:1.1}).some(x=>x.includes('الدولار')
 assert.ok(changes(base,{...base,local24:7101}).some(x=>x.includes('قمة')));
 assert.ok(changes(base,{...base,local24:6800}).some(x=>x.includes('الهبوط')));
 console.log('Alert thresholds, quiet updates, new peaks and deeper drawdown passed.');
+const {localUsable}=require('./alerts.js');
+const clock=Date.parse('2026-11-11T12:00:00Z');
+const local={status:'available',sourceTime:'2026-11-11T11:59:00Z','24':{sell:7000},'21':{sell:6125}};
+assert.equal(localUsable(local,clock),true);
+assert.equal(localUsable(local,clock+300000),false);

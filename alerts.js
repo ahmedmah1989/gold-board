@@ -10,22 +10,28 @@
     if(dd24-previous.dd24>=2 || dd21-previous.dd21>=2)notices.push('الهبوط من قمة مرصودة على هذا المتصفح تعمق بنقطتين مئويتين.');
     return notices;
   }
-  if(typeof module!=='undefined')module.exports={changes};
+  function localUsable(a,now=Date.now()){
+    const t=Date.parse(a?.sourceTime);
+    return a?.status==='available'&&Number.isFinite(t)&&now-t<=300000&&t-now<=120000&&[a?.['24']?.sell,a?.['21']?.sell].every(v=>Number.isFinite(v)&&v>0);
+  }
+  if(typeof module!=='undefined')module.exports={changes,localUsable};
   if(typeof document==='undefined')return;
-  let previous=null;try{previous=JSON.parse(localStorage.getItem('gold-alert-baseline-v1'));}catch(_){}
+  let previousLocal=null,previousComparison=null;try{const saved=JSON.parse(localStorage.getItem('gold-alert-state-v2'));previousLocal=saved?.local||null;previousComparison=saved?.comparison||null;}catch(_){}
   window.addEventListener('gold-board-updated',event=>{
     const box=document.getElementById('localAlerts'),status=document.getElementById('alertStatus');if(!box||!status)return;
     const s=event.detail.sources,q=event.detail.quality,r=event.detail.result;
-    if(!q?.fresh||!r){status.textContent='التقييم معلق: يلزم وصول مصادر حديثة ومتزامنة. لا يُنشأ تنبيه من مقارنة استرشادية.';return;}
-    const a=s.isagha,current={gapEGP:r.gapEGP,gapPercent:r.gapPercent,fxGap:r.fxGap,fxPercent:r.fxPercent,local24:a['24'].sell,local21:a['21'].sell};
+    if(!localUsable(s.isagha)){status.textContent='انتظار آي صاغة حديثة لمتابعة القمم والهبوط. تنبيهات الفجوة تحتاج كل مصادرها حديثة ومتزامنة.';return;}
+    const a=s.isagha,gapReady=q?.fresh&&r,current={gapEGP:gapReady?r.gapEGP:NaN,gapPercent:gapReady?r.gapPercent:NaN,fxGap:gapReady?r.fxGap:NaN,fxPercent:gapReady?r.fxPercent:NaN,local24:a['24'].sell,local21:a['21'].sell};
+    const previous=previousLocal?{...previousLocal,gapEGP:previousComparison?.gapEGP,gapPercent:previousComparison?.gapPercent,fxGap:previousComparison?.fxGap,fxPercent:previousComparison?.fxPercent}:null;
     const notices=changes(previous,current);
-    status.textContent=notices.length?'تحققت شروط تغير مهمة. التنبيهات تظهر هنا فقط.':previous?'لا تغير يحقق شروط التنبيه منذ آخر مرجع محفوظ.':'تم إنشاء أول مرجع للتنبيهات على هذا المتصفح.';
-    if(!previous||notices.length){
-      const peak24=Math.max(previous?.peak24||0,current.local24),peak21=Math.max(previous?.peak21||0,current.local21);
-      previous={...current,peak24,peak21,dd24:(peak24-current.local24)/peak24*100,dd21:(peak21-current.local21)/peak21*100};
-      try{localStorage.setItem('gold-alert-baseline-v1',JSON.stringify(previous));}catch(_){}
+    status.textContent=notices.length?'تحققت شروط تغير مهمة؛ تظهر هنا بصورة مستقلة عن رسائل Telegram.':gapReady?'لا تغير مهم؛ أول مرجع لكل نوع يُنشأ صامتًا.':'المراقبة المحلية جاهزة؛ تنبيهات الفجوة تنتظر مصادر حديثة ومتزامنة.';
+    if(!previousLocal||notices.length){
+      const peak24=Math.max(previousLocal?.peak24||0,current.local24),peak21=Math.max(previousLocal?.peak21||0,current.local21);
+      previousLocal={local24:current.local24,local21:current.local21,peak24,peak21,dd24:(peak24-current.local24)/peak24*100,dd21:(peak21-current.local21)/peak21*100};
       notices.forEach(text=>{const li=document.createElement('li');li.textContent=new Date().toLocaleTimeString('ar-EG',{timeZone:'Africa/Cairo'})+' — '+text;box.prepend(li);});
       while(box.children.length>10)box.lastElementChild.remove();
     }
+    if(gapReady&&(!previousComparison||notices.length))previousComparison={gapEGP:r.gapEGP,gapPercent:r.gapPercent,fxGap:r.fxGap,fxPercent:r.fxPercent};
+    try{localStorage.setItem('gold-alert-state-v2',JSON.stringify({local:previousLocal,comparison:previousComparison}));}catch(_){}
   });
 })();
