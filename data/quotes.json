@@ -1,19 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T13:08:41.807659+00:00",
+  "generatedAt": "2026-11-11T13:13:31.505903+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-11T15:08:23+02:00",
+      "sourceTime": "2026-11-11T15:12:26+02:00",
+      "sourceTimeKind": "published_price_update",
       "24": {
-        "sell": 7040.0,
-        "buy": 6982.75
+        "sell": 7034.25,
+        "buy": 6977.25
       },
       "21": {
-        "sell": 6160.0,
-        "buy": 6110.0
+        "sell": 6155.0,
+        "buy": 6105.0
       },
       "status": "available",
-      "fetchedAt": "2026-11-11T13:08:39.863144+00:00",
+      "requestedAt": "2026-11-11T13:13:28.636708+00:00",
+      "fetchedAt": "2026-11-11T13:13:28.767812+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "misr": {
@@ -21,25 +23,41 @@
       "buy": 53.5,
       "sell": 53.6,
       "quoteType": "notes",
+      "sourceTimeKind": "bank_page_quote_update",
+      "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "fetchedAt": "2026-11-11T13:08:39.863945+00:00",
+      "requestedAt": "2026-11-11T13:13:28.637305+00:00",
+      "fetchedAt": "2026-11-11T13:13:30.397717+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 4041.0,
-      "sourceTime": "2026-11-11T13:08:30+00:00",
+      "sell": 4045.199951,
+      "sourceTime": "2026-11-11T13:12:59+00:00",
       "name": "gold-api.com",
+      "sourceTimeKind": "provider_upstream_fetch",
+      "quoteType": "spot_reference",
+      "currency": "USD",
+      "unit": "troy_ounce",
       "status": "available",
-      "fetchedAt": "2026-11-11T13:08:39.864663+00:00",
+      "requestedAt": "2026-11-11T13:13:28.637855+00:00",
+      "fetchedAt": "2026-11-11T13:13:29.004043+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
+      "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
+      "fetchedAt": "2026-11-11T13:13:30.398148+00:00",
+      "quoteType": "bank_quote",
       "status": "unavailable",
-      "reason": "لم يُتحقق من قناة ربط مستقرة للبنك الأهلي"
+      "errorCode": "unrecognized",
+      "reason": "تعذر توثيق السعر ووقت نشره من الصفحة الرسمية."
     },
     "cbe": {
+      "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
+      "fetchedAt": "2026-11-11T13:13:30.398367+00:00",
+      "quoteType": "average_market_reference",
       "status": "unavailable",
-      "reason": "لم يُتحقق من قناة ربط مستقرة لمرجع البنك المركزي"
+      "errorCode": "blocked",
+      "reason": "المصدر الرسمي رفض القراءة الآلية."
     }
   }
 }
