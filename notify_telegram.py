@@ -7,7 +7,9 @@ ROOT=Path(__file__).resolve().parent
 STATE=ROOT/'data/alert-state.json'
 
 def timestamp(value):
-    return datetime.fromisoformat(value.replace('Z','+00:00')).timestamp()
+    parsed=datetime.fromisoformat(value.replace('Z','+00:00'))
+    if parsed.tzinfo is None:raise ValueError('Missing quote timezone')
+    return parsed.timestamp()
 
 def observation(snapshot, now=None):
     now=now or datetime.now(timezone.utc).timestamp()
@@ -17,7 +19,7 @@ def observation(snapshot, now=None):
         times=[timestamp(q['sourceTime']) for q in (a,b,g)]
         if any(now-t>300 or t-now>120 for t in times) or max(times)-min(times)>300:return None
         local24,local21,bank,ounce=a['24']['sell'],a['21']['sell'],b['sell'],g['sell']
-        if not all(isinstance(x,(int,float)) and math.isfinite(x) and x>0 for x in (local24,local21,bank,ounce)):return None
+        if not all(type(x) in (int,float) and math.isfinite(x) and x>0 for x in (local24,local21,bank,ounce)):return None
         usd=ounce/31.1034768; fair=usd*bank; implied=local24/usd
         return {'local24':local24,'local21':local21,'gap':local24-fair,'gapPct':(local24/fair-1)*100,'fxGap':implied-bank,'fxPct':(implied/bank-1)*100,'implied':implied,'bank':bank,'ounce':ounce,'time':max(times)}
     except (KeyError,TypeError,ValueError):return None

@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "automatedCheckedAt": "2026-11-11T13:06:47.579305+00:00",
+  "quoteSnapshotTime": "2026-11-11T12:53:26.489334+00:00",
+  "arithmetic": {
+    "method": "Python Decimal with original input prices; frontend independently checked in Node tests",
+    "values": {
+      "gramUSD": 130.00797232417437,
+      "globalEGP": 6968.427316575747,
+      "gapEGP": 71.57268342425307,
+      "gapUSD": 1.3353112579151694,
+      "gapPercent": 1.0270995186245777,
+      "implied": 54.15052534198277,
+      "fxGap": 0.5505253419827736,
+      "fxPercent": 1.0270995186245777
+    },
+    "note": "Arithmetic only; snapshot timestamps must be assessed separately. Values are retained at quoteSnapshotTime, not live prices."
+  },
+  "historyProfile": {
+    "expectedWeekdays": 267,
+    "availableWeekdays": 265,
+    "missingWeekdays": [
+      "2025-12-10",
+      "2026-08-19"
+    ],
+    "lastReferenceDate": "2026-11-10",
+    "maxCalendarGap": 3,
+    "calendar": "Weekdays only; exchange holidays not independently reconciled"
+  },
+  "manualSample": {
+    "reviewDate": "2026-11-11",
+    "source": "https://www.investing.com/currencies/xau-usd-historical-data",
+    "comparison": "Daily reference versus same-date displayed range; provider time boundaries may differ. Not a closing-price reconciliation or full-series verification.",
+    "records": [
+      {
+        "date": "2026-11-10",
+        "referenceUSD": 4121.18424702,
+        "investingClose": 4031.33,
+        "investingLow": 4013.64,
+        "investingHigh": 4146.94,
+        "withinDailyRange": true,
+        "deltaFromClosePct": 2.2288983293354825
+      },
+      {
+        "date": "2026-11-09",
+        "referenceUSD": 4121.48318991,
+        "investingClose": 4139.84,
+        "investingLow": 4054.04,
+        "investingHigh": 4148.95,
+        "withinDailyRange": true,
+        "deltaFromClosePct": -0.44341834684432646
+      },
+      {
+        "date": "2026-11-06",
+        "referenceUSD": 4042.89348269,
+        "investingClose": 4066.63,
+        "investingLow": 4029.95,
+        "investingHigh": 4107.5,
+        "withinDailyRange": true,
+        "deltaFromClosePct": -0.5836901146649698
+      },
+      {
+        "date": "2026-11-05",
+        "referenceUSD": 4116.46127583,
+        "investingClose": 4087.71,
+        "investingLow": 4057.82,
+        "investingHigh": 4147.02,
+        "withinDailyRange": true,
+        "deltaFromClosePct": 0.7033589914646532
+      },
+      {
+        "date": "2026-11-04",
+        "referenceUSD": 3981.65095972,
+        "investingClose": 4060.02,
+        "investingLow": 3919.65,
+        "investingHigh": 4070.66,
+        "withinDailyRange": true,
+        "deltaFromClosePct": -1.9302624193969442
+      }
+    ]
+  },
+  "sourceFindings": {
+    "nbe": "Public page returned a script-rendered shell without a timestamped USD quote.",
+    "cbe": "Official page rejected automated request. Page-maintenance date is never used as USD quote time.",
+    "gold": "updatedAt is provider upstream-fetch time, per official documentation; not exchange tick time."
+  }
+}

@@ -1,9 +1,11 @@
 """Collect public quotes; fail closed on missing source time or changed HTML."""
 import json, re, urllib.request
+import math
 from datetime import datetime, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
+from bank_sources import fetch as fetch_bank
 
 URLS = {
     'isagha': 'https://market.isagha.com/prices',
@@ -14,7 +16,8 @@ URLS = {
 def parse_isagha(html):
     stamp = re.search(r'<time\s+datetime="([^"]+)"\s+data-testid="prices-updated"', html)
     if not stamp: raise ValueError('Missing local quote time')
-    result = {'sourceTime': datetime.fromisoformat(stamp[1]).isoformat()}
+    result = {'sourceTime': datetime.fromisoformat(stamp[1]).isoformat(),'sourceTimeKind':'published_price_update'}
+    if datetime.fromisoformat(result['sourceTime']).tzinfo is None: raise ValueError('Missing quote timezone')
     for unit in ['24', '21']:
         row = re.search(r'<tr\b[^>]*data-unit="'+unit+r'"[^>]*>(.*?)</tr>', html, re.S)
         if not row: raise ValueError('Missing local quote row')
@@ -32,8 +35,10 @@ def parse_isagha(html):
     return result
 
 def parse_misr(html):
+    head=re.search(r'<thead\b[^>]*>(.*?)</thead>',html,re.S)
+    labels=re.findall(r'<td\b[^>]*>\s*([^<]+?)\s*</td>',head[1],re.S) if head else []
+    if [v.strip() for v in labels]!=['Currency','Notes','Transfer','Buy','Sell','Buy','Sell']:raise ValueError('Unrecognized bank quote column order')
     stamp = re.search(r'generic-details-title[^>]*>\s*<p>([^<]+)</p>', html)
-    row = re.search(r'<tr>\s*<td>[^<]*(?:.*?US Dollar.*?)</tr>', html, re.S)
     # Restrict to the one row actually containing US Dollar.
     rows = [x for x in re.findall(r'<tr\b[^>]*>(.*?)</tr>', html, re.S) if 'US Dollar' in x]
     if not stamp or len(rows) != 1: raise ValueError('Missing bank quote or time')
@@ -41,7 +46,7 @@ def parse_misr(html):
     buy, sell = (float(re.sub(r'<[^>]+>', '', x).strip()) for x in cells[1:3])
     if not 1 < buy <= sell < 1000: raise ValueError('Invalid bank spread')
     when = datetime.strptime(stamp[1].strip(), '%d-%m-%Y %H:%M:%S').replace(tzinfo=ZoneInfo('Africa/Cairo'))
-    return {'sourceTime': when.isoformat(), 'buy': buy, 'sell': sell, 'quoteType': 'notes'}
+    return {'sourceTime': when.isoformat(), 'buy': buy, 'sell': sell, 'quoteType': 'notes','sourceTimeKind':'bank_page_quote_update','timezoneAssumption':'Africa/Cairo; page time has no explicit UTC offset'}
 
 def fetch(name):
     now = datetime.now(timezone.utc).isoformat()
@@ -52,20 +57,19 @@ def fetch(name):
         if name == 'gold':
             raw = json.loads(html)
             price = float(raw['price'])
-            if not 100 < price < 100000: raise ValueError('Invalid ounce price')
-            data = {'sell': price, 'sourceTime': datetime.fromisoformat(raw['updatedAt'].replace('Z', '+00:00')).isoformat(), 'name': 'gold-api.com'}
+            if raw.get('symbol')!='XAU' or raw.get('currency','USD')!='USD' or not math.isfinite(price) or not 100 < price < 100000: raise ValueError('Invalid ounce identity or price')
+            data = {'sell': price, 'sourceTime': datetime.fromisoformat(raw['updatedAt'].replace('Z', '+00:00')).isoformat(), 'name': 'gold-api.com','sourceTimeKind':'provider_upstream_fetch','quoteType':'spot_reference','currency':'USD','unit':'troy_ounce'}
         else:
             data = (parse_isagha if name == 'isagha' else parse_misr)(html)
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(data['sourceTime'])).total_seconds()
         if age < -120: raise ValueError('Source timestamp in future')
-        return name, dict(data, status='available', fetchedAt=now, url=URLS[name])
+        return name, dict(data, status='available', requestedAt=now,fetchedAt=datetime.now(timezone.utc).isoformat(), url=URLS[name])
     except Exception:
         return name, {'status': 'unavailable', 'fetchedAt': now, 'url': URLS[name], 'reason': 'تعذر توثيق السعر ووقت المصدر؛ لم يُستخدم سعر بديل'}
 
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=3) as pool: sources = dict(pool.map(fetch, URLS))
-    sources['nbe'] = {'status': 'unavailable', 'reason': 'لم يُتحقق من قناة ربط مستقرة للبنك الأهلي'}
-    sources['cbe'] = {'status': 'unavailable', 'reason': 'لم يُتحقق من قناة ربط مستقرة لمرجع البنك المركزي'}
+    with ThreadPoolExecutor(max_workers=2) as pool: sources.update(dict(pool.map(fetch_bank, ['nbe','cbe'])))
     out = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat(), 'sources': sources}
     Path('data').mkdir(exist_ok=True)
     Path('data/quotes.json').write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')

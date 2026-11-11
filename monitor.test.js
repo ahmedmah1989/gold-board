@@ -28,3 +28,5 @@ assert.equal(assess(sources,now).usable,false);
 sources.misr.sourceTime=new Date(now).toISOString();sources.misr.sell=-1;
 assert.equal(assess(sources,now).usable,false);
 console.log('Timestamp, stale bank quote, missing time, future time and invalid price gates passed.');
+sources.misr.sell=53;sources.misr.sourceTime='2026-11-11T12:00:00';
+assert.equal(assess(sources,now).usable,false);

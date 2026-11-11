@@ -2,7 +2,7 @@ name: Refresh verified public quotes
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'monitor.js', 'analytics.js', 'analytics.test.js', 'collect.py', 'test_collect.py', 'notify_telegram.py', 'test_telegram.py', '.github/workflows/quotes.yml']
+    paths: ['index.html', '**.js', '**.py', 'tests/fixtures/**', '.github/workflows/quotes.yml']
   workflow_dispatch:
   schedule:
     - cron: '*/5 * * * *'
@@ -16,6 +16,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     environment:
       name: github-pages
     steps:
@@ -26,7 +27,13 @@ jobs:
       - run: python -m unittest discover -p 'test_*.py'
       - run: node monitor.test.js
       - run: node analytics.test.js
+      - run: node alerts.test.js
+      - run: node services.test.js
+      - run: python history_collect.py
       - run: python collect.py
+      - run: python store_offers.py
+      - run: python audit_checks.py
+      - run: node audit_snapshot.test.js
       - name: Verify Telegram connection and evaluate conditional alerts
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -36,7 +43,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/quotes.json data/alert-state.json
+          git add data/quotes.json data/alert-state.json data/offers.json data/history.json data/audit.json
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh timestamped public source quotes'
             git pull --rebase
