@@ -61,6 +61,7 @@
     $('qualityBadge').textContent=result?(quality.fresh?'مقارنة حديثة ومتزامنة':'مقارنة استرشادية • آخر أسعار منشورة'):'المقارنة معلقة';
     $('qualityBadge').className='badge'+(result&&quality.fresh?' good':'');
     $('qualityText').textContent=quality.reason;
+    if($('marketFreshness'))$('marketFreshness').textContent=quality.fresh?'أوقات المصادر حديثة ومتقاربة؛ الأسعار قبل رسوم المنتج النهائي.':quality.usable?'بعض أوقات الأسعار أقدم من خمس دقائق؛ المعروض آخر أسعار منشورة، والمقارنة استرشادية. وقت فحص الصفحة لا يعني صدور سعر جديد.':quality.reason;
     $('collectedAt').textContent='جمع الأسعار المحلية والبنك: '+time(state.generatedAt);
     $('fetchStatus').textContent=state.busy?'جاري فحص المصادر…':state.lastCheck?'آخر فحص للصفحة: '+time(state.lastCheck):'تحميل الأسعار…';
     const table=$('sourceRows'); table.replaceChildren();

@@ -21,7 +21,7 @@
     if(focus)links.find(l=>l.dataset.tab===name)?.focus();
   }
   const aliases={prices:'market',comparison:'market',analysis:'analysis',calculator:'calculator',sources:'sources',faq:'guide',coverage:'guide',method:'guide',live:'live'};
-  function route(){const id=location.hash.slice(1);select(aliases[id]||id||'market');}
+  function route(){const id=location.hash.slice(1).split('/')[0];select(aliases[id]||id||'market');}
   links.forEach((l,i)=>{l.addEventListener('click',()=>{select(l.dataset.tab);window.scrollTo({top:document.querySelector('nav').offsetTop,behavior:'smooth'});});l.addEventListener('keydown',e=>{let index=i;if(e.key==='ArrowRight')index=(i-1+links.length)%links.length;else if(e.key==='ArrowLeft')index=(i+1)%links.length;else if(e.key==='Home')index=0;else if(e.key==='End')index=links.length-1;else return;e.preventDefault();location.hash=links[index].getAttribute('href').slice(1);select(links[index].dataset.tab,true);});});
   window.addEventListener('hashchange',route);route();
 })();
