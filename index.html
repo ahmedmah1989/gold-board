@@ -113,19 +113,36 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
 .note p:last-child{margin:0}
 .prog{font-weight:600}
 @media (max-width:520px){.ind{grid-template-columns:1fr} .fields{grid-template-columns:1fr} h1{font-size:1.4rem}}
+select{font:inherit;max-width:100%;padding:9px;border-radius:10px} .ind b{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
     <h1>لوحة الذهب: أشتري ولا أستنى؟</h1>
-    <p>أسعار تلقائية، وقراءة للسوق من بيانات يومية، وقواعد قرار مكتوب جنب كل واحدة أساسها ومصدرها.</p>
+    <p>متابعة الذهب العالمي والمحلي والفجوة السعرية. أسعار المصادر العامة لا تعني اتصالًا مباشرًا بالبنوك.</p>
     <div class="stamp" id="stamp" aria-live="polite">بجيب الأسعار…</div>
     <button class="go" id="go" type="button">حدّث الآن</button>
   </div>
 </header>
 
 <div class="wrap">
+
+
+  <section aria-labelledby="monitorHeading">
+  <h2 id="monitorHeading">السوق المحلي والفجوة مع العالمي</h2>
+  <p>أسعار منشورة من آي صاغة وبنك مصر مع أوقات مصادرها. الجمع الدوري مستهدف كل 5 دقائق وقد يتأخر؛ ليس بثًا لحظيًا. لا توجد خدمة إرسال تنبيهات مفعلة.</p>
+  <div class="panel"><p id="feedStatus" role="status">تحميل لقطة المصادر…</p><div class="fields"><label>وضع الحساب <select id="quoteMode"><option value="auto">تلقائي — يشترط تزامن المصادر</option><option value="manual">يدوي — حساب غير موثق</option></select></label>
+  <label>البنك المرجعي <select id="bankChoice"><option>بنك مصر — سعر بيع النقد المنشور</option></select></label>
+  <label>سعر بيع الدولار بالبنك <input id="bankSell" inputmode="decimal" placeholder="أدخل السعر المعلن"></label>
+  <label>بيع جرام 24 للعميل <input id="local24" inputmode="decimal"></label>
+  <label>بيع جرام 21 للعميل <input id="local21" inputmode="decimal"></label>
+  <label class="wide">وقت لقطة الأسعار المحلية والبنك — بتوقيت جهازك <input id="quoteTime" type="datetime-local"></label>
+  </div><p id="monitorQuality" role="status">البيانات غير مكتملة</p></div>
+  <p id="gapMeaning"></p><ul class="ind"><li><span>القيمة العالمية لجرام 24 بالجنيه</span><b id="metric0">—</b></li><li><span>القيمة العالمية لجرام 21 بالجنيه</span><b id="metric1">—</b></li><li><span>فجوة عيار 24 بالجنيه</span><b id="metric2">—</b></li><li><span>الفجوة بالدولار</span><b id="metric3">—</b></li><li><span>الفجوة بالنسبة المئوية</span><b id="metric4">—</b></li><li><span>سعر الدولار الضمني من عيار 24</span><b id="metric5">—</b></li><li><span>فرق الدولار الضمني عن البنك</span><b id="metric6">—</b></li><li><span>فرق الدولار الضمني %</span><b id="metric7">—</b></li><li><span>الهبوط من المرجع 7,735 لعيار 24</span><b id="metric8">—</b></li><li><span>الهبوط من المرجع 6,767 لعيار 21</span><b id="metric9">—</b></li></ul>
+  <p class="muted-note">القيمة العالمية قبل المصنعية والدمغة والضريبة. مرجعا القمة واردان من المستخدم وغير موثقين بتاريخ ومصدر؛ ليسا قمتين تاريخيتين مثبتتين.</p>
+  <p><a href="https://market.isagha.com/prices" target="_blank" rel="noopener">آي صاغة</a> · <a href="https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies" target="_blank" rel="noopener">بنك مصر</a> · <a href="https://www.nbe.com.eg/" target="_blank" rel="noopener">البنك الأهلي</a> · <a href="https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates" target="_blank" rel="noopener">مرجع البنك المركزي — منفصل عن سعر بيع البنوك</a></p>
+  </section>
 
   <div class="signal" id="signal" aria-live="polite">
     <div class="head" id="sigHead">بجهّز القراءة…</div>
@@ -136,7 +153,7 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
   <h2>القرار مبني على إيه</h2>
   <p>ثلاث فحوصات. جنب كل واحد نتيجته، وتحتها نوع الأساس اللي قايم عليه: «حساب مباشر» أو «مدعوم بأبحاث» أو «رأي محللين» أو «حد تقديري».</p>
   <ul class="checks">
-    <li><h3>سعر التاجر قريب من السعر العادل؟ <span class="tag none" id="t1">—</span></h3><p id="c1"></p>
+    <li><h3>سعر التاجر قريب من القيمة العالمية المحوّلة؟ <span class="tag none" id="t1">—</span></h3><p id="c1"></p>
       <span class="ev">حساب مباشر من السعر العالمي والدولار، وحدود 2% و4% تقديرية</span></li>
     <li><h3>اتجاه السعر (متوسط 50 و200 يوم تداول) <span class="tag none" id="t2">—</span></h3><p id="c2"></p>
       <span class="ev">مدعوم بأبحاث: متوسط 200 يوم (سيجل، فيبر)</span></li>
@@ -144,16 +161,16 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
       <span class="ev">رأي محللين: استطلاع رويترز لـ 30 محلل وتاجر</span></li>
   </ul>
 
-  <h2>خطة الشراء بالأرقام</h2>
-  <p>اكتب المبلغ اللي ناوي تشتري بيه وسعر التاجر، واللوحة تقسمه حسب القرار.</p>
+  <h2>حاسبة المبلغ والجرامات</h2>
+  <p>احسب الجرامات المتاحة بالمبلغ وسعر التاجر. خطة توزيع الشراء معلقة لحين تفعيل مصادر البنك والسوق المحلي.</p>
   <div class="panel">
     <div class="fields">
-      <label>جرام عيار 21 عند التاجر (شراء، من غير مصنعية) <input id="loc" inputmode="decimal" autocomplete="off" placeholder="مثال: 6145"></label>
+      <label>جرام عيار 21: بيع التاجر للعميل، من غير مصنعية <input id="loc" inputmode="decimal" autocomplete="off" placeholder="مثال: 6145"></label>
       <label>المبلغ اللي ناوي تشتري بيه (جنيه) <input id="bud" inputmode="decimal" autocomplete="off" placeholder="مثال: 100000"></label>
     </div>
     <ul class="rows">
-      <li><span>السعر العادل لعيار 21 دلوقتي</span><b id="f21">—</b></li>
-      <li><span>الفرق بين التاجر والعادل</span><b id="diff">—</b></li>
+      <li><span>القيمة العالمية المحوّلة لعيار 21 دلوقتي</span><b id="f21">—</b></li>
+      <li><span>الفرق بين التاجر والقيمة العالمية</span><b id="diff">—</b></li>
       <li><span>الجرامات بالمبلغ ده (من غير مصنعية)</span><b id="grams">—</b></li>
     </ul>
   </div>
@@ -167,7 +184,7 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
 
   <h3 style="margin-top:16px">مقارنة الفترات</h3>
   <div class="tblw"><table class="per">
-    <thead><tr><th>من</th><th>الأونصة وقتها</th><th>التغير</th><th>عيار 21 (عادل) وقتها</th><th>التغير</th></tr></thead>
+    <thead><tr><th>من</th><th>الأونصة وقتها</th><th>التغير</th><th>عيار 21 (قيمة عالمية) وقتها</th><th>التغير</th></tr></thead>
     <tbody id="perBody"><tr><td colspan="5">بجيب البيانات…</td></tr></tbody>
   </table></div>
   <p class="muted-note" id="perNote"></p>
@@ -199,8 +216,8 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
     </ul>
   </div>
 
-  <h2>توقعات المحللين والبنوك (متأكد منها بمصادرها)</h2>
-  <p>دي آراء منشورة ومؤرخة، مش ضمان. البنوك بتراجع أرقامها باستمرار، وGoldman مثلًا خفّض توقعه مرتين في أقل من شهرين. القائمة دي مش بتتحدث لوحدها.</p>
+  <h2>توقعات المحللين والبنوك — قائمة ثابتة تحتاج مراجعة</h2>
+  <p>أرقام منقولة من النسخة السابقة لم يُعَد التحقق من مستنداتها في هذا التحديث، ولا تدخل توصية شراء آلية. دي آراء منشورة ومؤرخة، مش ضمان. البنوك بتراجع أرقامها باستمرار، وGoldman مثلًا خفّض توقعه مرتين في أقل من شهرين. القائمة دي مش بتتحدث لوحدها.</p>
   <p class="muted-note" id="fcAge"></p>
   <ul class="fc">
     <li><div class="who">استطلاع رويترز (30 محلل وتاجر)</div>
@@ -219,14 +236,14 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
 
   <h2>المنهجية: كل قاعدة وأساسها</h2>
   <ul class="plain">
-    <li><strong>السعر العادل (حساب مباشر):</strong> الأونصة × الدولار ÷ 31.1035 جرام × 0.875 (نقاوة عيار 21). ده سعر الخام من غير مصنعية ولا دمغة.</li>
+    <li><strong>القيمة العالمية المحوّلة (حساب مباشر):</strong> الأونصة × الدولار ÷ 31.1034768 جرام × 0.875 (نقاوة عيار 21). ده سعر الخام من غير مصنعية ولا دمغة.</li>
     <li><strong>حدود علاوة التاجر 2% و4% (حد تقديري):</strong> مش رقم من دراسة. هو هامش معقول لفرق السوق المحلي. فوق 4% معناه إنك بتدفع زيادة واضحة عن قيمة الذهب نفسه.</li>
     <li><strong>متوسط 200 يوم (مدعوم بأبحاث):</strong> جيريمي سيجل اختبر الشراء فوقه والخروج تحته على داو جونز من 1886 لـ 2006، وميب فيبر اختبر فكرة مشابهة على أصول كتير منها السلع. الخلاصة: بيقلل الخسائر الكبيرة، لكن مش شرط يزوّد العائد. <a href="https://www.etf.com/sections/index-investor-corner/swedroe-why-financial-trends-persist" target="_blank" rel="noopener">ملخص الأبحاث</a></li>
     <li><strong>متوسط 50 يوم (شائع، مش مختبر بنفس القوة):</strong> مستخدم كمؤشر للاتجاه القريب، وبنستخدمه بس عشان نتأكد إن الاتجاه قلب فعلًا.</li>
     <li><strong>الشراء على دفعات مقابل مرة واحدة (مدعوم بأبحاث):</strong> فانجارد لقت إن الشراء مرة واحدة كسب حوالي ثلثين الوقت بين 1976 و2022، والدفعات كسبت في فترات الهبوط الكبير. ولقت إن الدفعات على 3 شهور أحسن من 6 شهور. الدراسة على الأسهم والسندات مش الذهب. <a href="https://smartasset.com/blog/investing/lump-sum-investing-research/" target="_blank" rel="noopener">ملخص الدراسة</a></li>
     <li><strong>نطاق الشهر الإحصائي (حساب مباشر):</strong> من تذبذب آخر 60 يوم تداول. بيفترض إن التذبذب هيفضل زي ما هو، والحركات الكبيرة في الواقع بتحصل أكتر من الحساب ده.</li>
     <li><strong>حجم الذهب من المدخرات (رأي محللين):</strong> UBS بتقترح إن الذهب يبقى نسبة محدودة من إجمالي الاستثمارات، في حدود 5% تقريبًا، وبتشوف ضعف السعر فرصة لبنائها. <a href="https://www.ubs.com/us/en/wealth-management/insights/market-news/article.3875359.html" target="_blank" rel="noopener">المصدر</a></li>
-    <li><strong>البيانات:</strong> اللحظي من gold-api.com، والدولار من open.er-api.com، والتاريخي اليومي من مشروع currency-api مفتوح المصدر. اتأكدت من التاريخي بمقارنته بأحداث معروفة (قمة يناير 2026 فوق 5,500 دولار)، واتأكدت من المتوسطات بمقارنتها بمواقع التحليل الفني المنشورة.</li>
+    <li><strong>البيانات:</strong> اللحظي من gold-api.com، والدولار من open.er-api.com، والتاريخي اليومي من مشروع currency-api مفتوح المصدر. البيانات التاريخية مرجعية وتحتاج تدقيقًا مستقلًا قبل استخدامها في قرار. التحقق الشكلي والتوقيت لا يضمنان صحة المصدر الخارجي.</li>
   </ul>
 
   <h2>متشتريش في الحالات دي، مهما كانت القراءة</h2>
@@ -239,13 +256,13 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
 
   <div class="note">
     <p><strong>حدود اللوحة:</strong> كل اللي هنا قواعد ثابتة مكتوبة قدامك ومصادر منشورة، مش توقع مضمون ولا نصيحة استثمار شخصية. المؤشرات بتوصف اللي حصل، والتوقعات آراء ممكن تغلط. القرار النهائي بتاعك.</p>
-    <p>سعر عيار 21 المحلي مش بيتجاب آليًا، والرقم النهائي دايمًا هو اللي عند التاجر.</p>
+    <p>أسعار آي صاغة وبنك مصر من صفحات المصادر المنشورة؛ السعر النهائي وشمول المصنعية يحددهما عرض التاجر.</p>
   </div>
 </div>
 
 <script>
 (function(){
-  var OZ=31.1035, K21=0.875, EVERY=5*60*1000, FC_REVIEWED="2026-11-11";
+  var OZ=31.1034768, K21=0.875, EVERY=5*60*1000, FC_REVIEWED="2026-11-11";
   var CONSENSUS_2027=4650; // استطلاع رويترز 27 أكتوبر 2026
   var HBASE="https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@";
   var SERIES=null, M=null;
@@ -329,7 +346,7 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
       tr.appendChild(cell(fmt(f(p))+" ج")); tr.appendChild(cell(sg(b),b>=0?"up":"dn"));
       tb.appendChild(tr);
     });
-    $("perNote").textContent="المقارنة كلها بآخر سعر يومي متاح ("+L.d+"): الأونصة "+fmt(L.usd)+" دولار، وعيار 21 العادل "+fmt(f(L))+" جنيه. عمود عيار 21 بيشمل أثر تغير الدولار.";
+    $("perNote").textContent="المقارنة كلها بآخر سعر يومي متاح ("+L.d+"): الأونصة "+fmt(L.usd)+" دولار، وعيار 21 بالقيمة العالمية "+fmt(f(L))+" جنيه. عمود عيار 21 بيشمل أثر تغير الدولار.";
 
     $("iA50").textContent=fmt(m.sma50)+" دولار ("+(L.usd>m.sma50?"السعر فوقه":"السعر تحته")+")";
     $("iA200").textContent=fmt(m.sma200)+" دولار ("+(L.usd>m.sma200?"السعر فوقه":"السعر تحته")+")";
@@ -381,7 +398,7 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
       "حساب مباشر: تذبذب آخر 60 يوم تداول");
     item("2) توقعات المحللين لسنة 2027",
       ["إجماع رويترز: متوسط "+fmt(CONSENSUS_2027)+" $ ← عيار 21 حوالي "+fmt(k21(CONSENSUS_2027,usd))+" جنيه ("+sg((CONSENSUS_2027/oz-1)*100)+")",
-       "مدى البنوك: من 4,000 $ (متوسط BofA للربع الأخير 2026) لـ 5,400 $ (UBS سبتمبر 2027) ← عيار 21 من "+fmt(k21(4000,usd))+" لـ "+fmt(k21(5400,usd))+" جنيه."],
+       "أمثلة بآجال مختلفة وليست نطاق توقع موحد: من 4,000 $ (متوسط BofA للربع الأخير 2026) لـ 5,400 $ (UBS سبتمبر 2027) ← عيار 21 من "+fmt(k21(4000,usd))+" لـ "+fmt(k21(5400,usd))+" جنيه."],
       "رأي محللين: مصادر مؤرخة تحت");
     item("3) اختبار ضغط: لو تكرر أسوأ هبوط في السنة",
       ["عيار 21 ممكن يوصل حوالي "+fmt(k21(stress,usd))+" جنيه (الأونصة "+fmt(stress)+" $، −"+fmt(M.mdd*100,1)+"%)",
@@ -402,9 +419,9 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
     // فحص 1
     var r1=null;
     if(pr===pr){ r1=pr<=2?"good":pr<=4?"warn":"bad"; tag($("t1"),r1,{good:"طبيعي",warn:"علاوة",bad:"غالي"}[r1]);
-      $("c1").textContent=pr<0?"التاجر أرخص من السعر العادل بـ"+fmt(Math.abs(pr),1)+"%، وده نادر وفي صالحك."
-        :"التاجر أغلى من السعر العادل بـ"+fmt(pr,1)+"%. لحد 2% طبيعي، من 2 لـ 4% علاوة (قارن بتاجر تاني)، فوق 4% غالي.";
-    } else { tag($("t1"),"none","اكتب سعر التاجر"); $("c1").textContent=f21>0?"السعر العادل دلوقتي "+fmt(f21)+" جنيه. لحد "+fmt(f21*1.02)+" طبيعي، وفوق "+fmt(f21*1.04)+" غالي.":"مستني الأسعار."; }
+      $("c1").textContent=pr<0?"التاجر أرخص من القيمة العالمية المحوّلة بـ"+fmt(Math.abs(pr),1)+"%، وده نادر وفي صالحك."
+        :"التاجر أغلى من القيمة العالمية المحوّلة بـ"+fmt(pr,1)+"%. لحد 2% طبيعي، من 2 لـ 4% علاوة (قارن بتاجر تاني)، فوق 4% غالي.";
+    } else { tag($("t1"),"none","اكتب سعر التاجر"); $("c1").textContent=f21>0?"القيمة العالمية المحوّلة دلوقتي "+fmt(f21)+" جنيه. لحد "+fmt(f21*1.02)+" طبيعي، وفوق "+fmt(f21*1.04)+" غالي.":"مستني الأسعار."; }
 
     // فحص 2
     var up=null;
@@ -428,32 +445,15 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
     function step(t){var li=document.createElement("li"); li.textContent=t; plan.appendChild(li)}
     var part=function(n){return (bud>0)?" ("+fmt(bud/n)+" جنيه"+(loc>0?" ≈ "+fmt(bud/n/loc,2)+" جرام":"")+")":""};
     if(!(oz>0&&usd>0)){ sig.classList.add("info"); H.textContent="مستني الأسعار"; T.textContent="لو الأسعار متجابتش لوحدها، اكتبها في قسم الأرقام اللحظية."; return; }
-    if(r1==="bad"){ sig.classList.add("bad"); H.textContent="استنى: سعر التاجر غالي";
-      T.textContent="التاجر أغلى من قيمة الذهب نفسه بأكتر من 4%. دوّر على تاجر تاني أو استنى العلاوة تقل. ده بيحصل غالبًا وقت تهافت الناس على الشراء."; return; }
-    if(!M){ sig.classList.add("info"); H.textContent="بجهّز قراءة الاتجاه…"; T.textContent="بحمّل البيانات اليومية. أول مرة ممكن تاخد دقيقة، وبعدها بتتحفظ على جهازك."; return; }
-    if(r1===null){ sig.classList.add("info"); H.textContent="اكتب سعر التاجر عشان القرار يكمل";
-      T.textContent="الاتجاه دلوقتي: "+(up?"طالع":"مش طالع")+". ناقص نعرف التاجر بيبيع بكام مقارنة بالسعر العادل ("+fmt(f21)+" جنيه)."; return; }
-    if(up&&r1==="good"&&cu>-5){
-      sig.classList.add("good"); H.textContent="الشراء مناسب، بمبلغ كامل أو على دفعات قصيرة";
-      T.textContent="الاتجاه طالع والسعر عند التاجر طبيعي. الأبحاث بتقول إن الشراء مرة واحدة بيكسب أغلب الوقت على المدى الطويل، لكن خسارته بتبقى أكبر لو حصل هبوط حاد. اختار حسب قدرتك تتحمل:";
-      step("مرة واحدة: المبلغ كله دلوقتي"+(bud>0?" ("+fmt(bud)+" جنيه)":"")+". مناسب لو مش هتحتاج الفلوس سنين وتقدر تشوف السعر نازل 20% من غير ما تبيع.");
-      step("أو على 3 دفعات خلال شهرين: دفعة كل حوالي 4 أسابيع"+part(3)+". أهدى نفسيًا وعائدها أقل شوية في المتوسط.");
-      return;
-    }
-    sig.classList.add("warn"); H.textContent="الشراء على دفعات، مش مرة واحدة";
-    T.textContent=(up?"الاتجاه طالع، بس "+(r1==="warn"?"علاوة التاجر عالية شوية":"إجماع المحللين مش في صالح الصعود")+".":"السوق مش في اتجاه طالع، ومحدش يقدر يحدد القاع.")+" الخطة دي بتحميك من إنك تشتري كل حاجة قبل نزول كبير، ومن إنك تستنى للأبد:";
-    step("دفعة 1 دلوقتي"+part(4)+(r1==="warn"?"، بعد ما تقارن بتاجر تاني":"")+".");
-    step("دفعة 2 بعد حوالي 4 أسابيع"+part(4)+"، أيًا كان السعر.");
-    step("دفعة 3 بعد حوالي 8 أسابيع"+part(4)+"، أيًا كان السعر.");
-    step("دفعة 4 بعد حوالي 12 أسبوع"+part(4)+". ولو الاتجاه قلب لطلوع (السعر فوق المتوسطين) قبل كده، ممكن تخلّص الباقي مرة واحدة.");
-    step("متزوّدش على الدفعات لو السعر نزل. الخطة اتحددت مسبقًا عشان القرار ميبقاش تحت ضغط الخوف.");
+    sig.classList.add("info"); H.textContent="قراءة استرشادية — اتصال البنوك لم يُفعّل بعد";
+    T.textContent="الحساب القديم يستخدم دولارًا مرجعيًا يوميًا. تم تعليق خطة الشراء الآلية لحين توثيق أسعار البنك والسوق المحلي وتزامنها."; return;
   }
 
   /* ===== الأسعار اللحظية ===== */
   function ago(t){var m=Math.round((Date.now()-t)/60000); if(!isFinite(m)) return ""; if(m<1) return "محدّث من أقل من دقيقة"; if(m<60) return "محدّث من "+m+" دقيقة"; var h=Math.round(m/60); return h<48?"محدّث من "+h+" ساعة":"محدّث من "+Math.round(h/24)+" يوم"}
   function srcLine(id,label,text,chk){var li=$(id); li.textContent=""; var k=document.createElement("span"); k.className="k"; k.textContent=label+": "; li.appendChild(k); li.appendChild(document.createTextNode(text)); var c=document.createElement("div"), s=document.createElement("span"); s.className="chk "+chk.cls; s.textContent=chk.text; c.appendChild(s); li.appendChild(c)}
   function cmp(a,b,lbl){ if(!(b>0)) return {cls:"warn",text:"المصدر التاني مش متاح، مفيش مقارنة",q:"warn"}; var d=Math.abs(a-b)/b*100;
-    return d<=3?{cls:"ok",text:"متطابق مع المصدر التاني ("+lbl+"): الفرق "+fmt(d,1)+"%",q:"ok"}:{cls:"bad",text:"فرق كبير مع المصدر التاني ("+lbl+"): "+fmt(d,1)+"%. اتأكد قبل ما تعتمد عليه",q:"bad"} }
+    return d<=3?{cls:"ok",text:"مقارنة استرشادية غير متزامنة مع المرجع اليومي ("+lbl+"): الفرق "+fmt(d,1)+"%",q:"ok"}:{cls:"bad",text:"فرق كبير مع المصدر التاني ("+lbl+"): "+fmt(d,1)+"%. اتأكد قبل ما تعتمد عليه",q:"bad"} }
   var busy=false;
   async function load(){
     if(busy) return; busy=true; $("go").disabled=true;
@@ -461,24 +461,24 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
     var rs=await Promise.allSettled([getJSON("https://api.gold-api.com/price/XAU"),getJSON("https://open.er-api.com/v6/latest/USD"),getJSON(FAW+"xau.json"),getJSON(FAW+"usd.json")]);
     var v=function(i){return rs[i].status==="fulfilled"?rs[i].value:null}, g=v(0), er=v(1), fx=v(2), fu=v(3), q=[];
     var gP=g?num(g.price):NaN, gT=g?Date.parse(g.updatedAt):NaN, bO=fx&&fx.xau?num(fx.xau.usd):NaN, bOd=fx&&fx.date?"سعر "+fx.date:"";
-    if(gP>500&&gP<20000){ $("oz").value=gP.toFixed(1); var st=isFinite(gT)&&(Date.now()-gT)>3600000, c=cmp(gP,bO,bOd);
+    if(gP>500&&gP<20000){ $("oz").value=gP.toFixed(1); $("oz").dataset.sourceTime=isFinite(gT)?new Date(gT).toISOString():""; var st=isFinite(gT)&&(Date.now()-gT)>3600000, c=cmp(gP,bO,bOd);
       srcLine("srcOz","الأونصة",fmt(gP,1)+" دولار من gold-api.com، "+ago(gT)+(st?". الرقم قديم شوية، ممكن السوق مقفول (السبت والأحد).":""),c); q.push(st?"warn":c.q); }
-    else if(bO>500){ $("oz").value=bO.toFixed(1); srcLine("srcOz","الأونصة",fmt(bO,1)+" دولار من المصدر الاحتياطي ("+bOd+")",{cls:"warn",text:"المصدر الأساسي واقف، والرقم ده سعر آخر يوم"}); q.push("warn"); }
-    else { srcLine("srcOz","الأونصة","مش متاح. اكتبه بإيدك",{cls:"bad",text:"المصدرين مش شغالين دلوقتي"}); q.push("bad"); }
+    else if(bO>500){ $("oz").value=bO.toFixed(1); $("oz").dataset.sourceTime=""; srcLine("srcOz","الأونصة",fmt(bO,1)+" دولار من المصدر الاحتياطي ("+bOd+")",{cls:"warn",text:"المصدر الأساسي واقف، والرقم ده سعر آخر يوم"}); q.push("warn"); }
+    else { $("oz").dataset.sourceTime=""; srcLine("srcOz","الأونصة","مش متاح. اكتبه بإيدك",{cls:"bad",text:"المصدرين مش شغالين دلوقتي"}); q.push("bad"); }
     var eP=er&&er.rates?num(er.rates.EGP):NaN, eT=er?num(er.time_last_update_unix)*1000:NaN, bU=fu&&fu.usd?num(fu.usd.egp):NaN, bUd=fu&&fu.date?"سعر "+fu.date:"";
-    if(eP>10&&eP<500){ $("usd").value=eP.toFixed(2); var c2=cmp(eP,bU,bUd); srcLine("srcUsd","الدولار",fmt(eP,2)+" جنيه من open.er-api.com، "+ago(eT)+". المصدر ده بيتحدث مرة في اليوم.",c2); q.push(c2.q); }
+    if(eP>10&&eP<500){ $("usd").value=eP.toFixed(2); var c2=cmp(eP,bU,bUd); srcLine("srcUsd","الدولار",fmt(eP,2)+" جنيه من open.er-api.com، "+ago(eT)+". المصدر ده بيتحدث مرة في اليوم.",c2); q.push("warn"); }
     else if(bU>10){ $("usd").value=bU.toFixed(2); srcLine("srcUsd","الدولار",fmt(bU,2)+" جنيه من المصدر الاحتياطي ("+bUd+")",{cls:"warn",text:"المصدر الأساسي واقف"}); q.push("warn"); }
     else { srcLine("srcUsd","الدولار","مش متاح. اكتبه بإيدك",{cls:"bad",text:"المصدرين مش شغالين دلوقتي"}); q.push("bad"); }
     var t=new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"}), stp=$("stamp");
-    stp.textContent="آخر تحديث الساعة "+t+". التحديث الجاي بعد 5 دقايق.";
-    var dq=document.createElement("span"), bad=q.indexOf("bad")>-1, wr=q.indexOf("warn")>-1; dq.className="dq chk "+(bad?"bad":wr?"warn":"ok"); dq.textContent=bad?"جودة البيانات: فيها مشكلة":wr?"جودة البيانات: مقبولة":"جودة البيانات: ممتازة"; stp.appendChild(dq);
+    stp.textContent="آخر فحص الساعة "+t+". التحديث الجاي بعد 5 دقايق.";
+    var dq=document.createElement("span"), bad=q.indexOf("bad")>-1, wr=q.indexOf("warn")>-1; dq.className="dq chk "+(bad?"bad":wr?"warn":"ok"); dq.textContent=bad?"جودة البيانات: فيها مشكلة":wr?"بيانات مرجعية؛ الدولار يومي وليس سعر بيع بنك":"التزامن مع البنوك غير موثق"; stp.appendChild(dq);
     if(M){ drawRanges(); drawMarket(); } render(); busy=false; $("go").disabled=false;
   }
 
   var fa=days(FC_REVIEWED,iso(new Date()));
-  $("fcAge").textContent="آخر مراجعة لقائمة التوقعات: "+FC_REVIEWED+" (من "+fa+" يوم)."+(fa>90?" عدّى عليها أكتر من 3 شهور، ومحتاجة تتحدث قبل ما تعتمد عليها.":"");
+  $("fcAge").textContent="تاريخ المراجعة المدون بالنسخة السابقة، لم يُعَد توثيق التوقعات في هذا التحديث: "+FC_REVIEWED+" (من "+fa+" يوم)."+(fa>90?" عدّى عليها أكتر من 3 شهور، ومحتاجة تتحدث قبل ما تعتمد عليها.":"");
   ["loc","bud"].forEach(function(k){var s=store("g_"+k); if(s) $(k).value=s; $(k).addEventListener("input",function(){store("g_"+k,$(k).value); render()})});
-  ["oz","usd"].forEach(function(k){$(k).addEventListener("input",function(){ if(M) drawRanges(); render()})});
+  ["oz","usd"].forEach(function(k){$(k).addEventListener("input",function(){ $(k).dataset.sourceTime=""; if(M) drawRanges(); render()})});
   $("go").addEventListener("click",load);
   render(); load(); setInterval(load,EVERY);
   loadSeries().then(function(S){
@@ -487,5 +487,6 @@ td.up{color:var(--good); font-weight:700} td.dn{color:var(--bad); font-weight:70
   }).catch(function(){ $("chart").textContent="معرفتش أجيب البيانات التاريخية دلوقتي."; });
 })();
 </script>
+<script src="monitor.js"></script>
 </body>
 </html>

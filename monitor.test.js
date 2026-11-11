@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+const {calculate, OUNCE} = require('./monitor.js');
+const equal = (a,b) => assert.ok(Math.abs(a-b)<1e-8, `${a} != ${b}`);
+const r=calculate(OUNCE*100,50,5100,4400);
+equal(r.globalEGP,5000); equal(r.global21,4375); equal(r.gapEGP,100);
+equal(r.gapUSD,2); equal(r.gapPercent,2); equal(r.implied,51);
+equal(r.fxGap,1); equal(r.fxPercent,2);
+assert.ok(calculate(OUNCE*100,50,4900,4200).gapPercent<0);
+assert.equal(calculate(0,50,5100,4400),null);
+assert.equal(calculate(3000,NaN,5100,4400),null);
+assert.equal(calculate(3000,50,8000,7000).drop24,0);
+assert.equal(calculate(3000,50,5100,0).drop21,null);
+console.log('Gold conversion, premium, implied FX and drawdown checks passed.');

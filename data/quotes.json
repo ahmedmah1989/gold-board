@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-11T10:16:30.823071+00:00",
+  "sources": {
+    "isagha": {
+      "sourceTime": "2026-11-11T12:15:46+02:00",
+      "24": {
+        "sell": 7040.0,
+        "buy": 6982.75
+      },
+      "21": {
+        "sell": 6160.0,
+        "buy": 6110.0
+      },
+      "status": "available",
+      "fetchedAt": "2026-11-11T10:16:29.377544+00:00",
+      "url": "https://market.isagha.com/prices"
+    },
+    "misr": {
+      "sourceTime": "2026-11-11T12:05:22+02:00",
+      "buy": 53.53,
+      "sell": 53.63,
+      "quoteType": "notes",
+      "status": "available",
+      "fetchedAt": "2026-11-11T10:16:29.378567+00:00",
+      "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
+    },
+    "nbe": {
+      "status": "unavailable",
+      "reason": "لم يُتحقق من قناة ربط مستقرة للبنك الأهلي"
+    },
+    "cbe": {
+      "status": "unavailable",
+      "reason": "لم يُتحقق من قناة ربط مستقرة لمرجع البنك المركزي"
+    }
+  }
+}
