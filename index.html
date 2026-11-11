@@ -80,7 +80,13 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold-bright); o
 .rows{list-style:none; margin:14px 0 0; padding:0}
 .rows li{display:flex; justify-content:space-between; gap:12px; padding:6px 0; border-top:1px solid rgba(255,247,227,.3)}
 .rows b{white-space:nowrap; color:var(--gold-bright)}
-.src{margin-top:10px; font-size:.95rem}
+ul.plain{margin:10px 0 0; padding:0 22px 0 0} ul.plain li{margin-bottom:8px} ul.plain li::marker{color:var(--gold)}
+.srcs{list-style:none; margin:14px 0 0; padding:0}
+.srcs li{background:var(--panel-2); border-radius:10px; padding:10px 12px; margin-top:8px; line-height:1.8}
+.srcs .k{font-weight:700; color:var(--gold-bright)}
+.chk{display:inline-block; margin-top:4px; padding:0 10px; border-radius:999px; font-weight:700; font-size:.9rem}
+.chk.ok{background:#DDF2E6; color:#12643E} .chk.warn{background:#FBEBC8; color:#8A5200} .chk.bad{background:#F9DDD5; color:#A3351F}
+.dq{display:inline-block; margin-inline-start:6px; padding:0 10px; border-radius:999px; font-weight:700; font-size:.9rem}
 
 /* التوقعات */
 .fc{list-style:none; margin:10px 0 0; padding:0; border-top:2px solid var(--line)}
@@ -97,7 +103,7 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
 <body>
 <header>
   <div class="wrap">
-    <h1>لوحة الذهب المباشرة: أشتري ولا أستنى؟</h1>
+    <h1>لوحة الذهب: أشتري ولا أستنى؟</h1>
     <p>الأونصة والدولار بيتحدثوا لوحدهم من الإنترنت كل 5 دقايق. انت بس تكتب سعر عيار 21 عند التاجر.</p>
     <div class="stamp" id="stamp" aria-live="polite">بجيب الأسعار…</div>
     <button class="go" id="go" type="button">حدّث الآن</button>
@@ -132,16 +138,27 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
       <li><span>الفرق بين الصاغة والعادل</span><b id="diff">—</b></li>
       <li><span>السعر العادل لعيار 24</span><b id="sell">—</b></li>
     </ul>
-    <div class="src" id="src"></div>
+    <ul class="srcs">
+      <li id="srcOz"><span class="k">الأونصة:</span> بجيب…</li>
+      <li id="srcUsd"><span class="k">الدولار:</span> بجيب…</li>
+    </ul>
   </div>
 
   <h2>توقعات المؤسسات الكبرى لسعر الأونصة</h2>
   <p>دي بنوك عالمية بتنشر توقعاتها علنًا. الجزء ده مش بيتحدث لوحده لأن مفيش مصدر آلي ليه، وتاريخ كل توقع مكتوب جنبه. وحتى البنوك دي بتغلط كتير.</p>
   <div id="fcBox"></div>
 
+  <h2>الأرقام دي جاية منين وبنتأكد منها إزاي</h2>
+  <p>كل رقم له مصدر أساسي ومصدر تاني مستقل. الصفحة بتقارن الاتنين: لو قريبين من بعض يبقى الرقم سليم، ولو بعيد يظهر لك تحذير.</p>
+  <ul class="plain">
+    <li><strong>الأونصة:</strong> المصدر الأساسي gold-api.com وبيتحدث كل كام دقيقة. المصدر التاني currency-api (مشروع مفتوح المصدر) وبيتحدث مرة في اليوم، فالفرق بينهم لحد 3% طبيعي لأنه سعر أمس.</li>
+    <li><strong>الدولار:</strong> المصدر الأساسي open.er-api.com وبيتحدث مرة في اليوم. والمصدر التاني نفس مشروع currency-api.</li>
+    <li><strong>ليه مش البنك المركزي أو بورصة لندن مباشرة؟</strong> لأنهم مش بيوفروا رابط بيانات مجاني تقدر صفحة تقراه لوحدها. للتأكد يدويًا: سعر الدولار الرسمي على موقع البنك المركزي المصري، وسعر عيار 21 من شعبة الذهب.</li>
+  </ul>
+
   <h2>إزاي تقرا اللوحة</h2>
   <ol class="read">
-    <li>بص على اللون والجملة اللي فوق أول حاجة.</li>
+    <li>بص على اللون والجملة اللي فوق أول حاجة، وعلى «جودة البيانات» جنب وقت التحديث.</li>
     <li>انزل للفحوصات الثلاثة وشوف أنهي واحد سبب النتيجة.</li>
     <li>لو النتيجة «مناسب»، اشتري جزء من المبلغ بس، مش كله.</li>
     <li>قبل الدفع قارن سعر التاجر بالسعر العادل المكتوب هنا.</li>
@@ -149,7 +166,7 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
 
   <div class="note">
     <p><strong>حدود اللوحة:</strong> المؤشر حساب آلي بقواعد ثابتة مكتوبة قدامك، مش ضمان ولا توصية شخصية. الذهب ممكن ينزل بعد ما تشتري حتى لو كل الفحوصات خضرا.</p>
-    <p>سعر الأونصة من gold-api.com وسعر الدولار من open.er-api.com (سعر الدولار بيتحدث مرة في اليوم). سعر عيار 21 المحلي مش بيتجاب آليًا، والرقم النهائي دايمًا هو اللي عند التاجر.</p>
+    <p>سعر عيار 21 المحلي مش بيتجاب آليًا، والرقم النهائي دايمًا هو اللي عند التاجر.</p>
   </div>
 </div>
 
@@ -229,23 +246,75 @@ ol.read{margin:8px 0 0; padding:0 22px 0 0} ol.read li{margin-bottom:6px} ol.rea
   }
 
   async function getJSON(u){var r=await fetch(u,{cache:"no-store"}); if(!r.ok) throw new Error(r.status); return r.json()}
+  function ago(t){
+    var m=Math.round((Date.now()-t)/60000);
+    if(!isFinite(m)) return "";
+    if(m<1) return "محدّث من أقل من دقيقة";
+    if(m<60) return "محدّث من "+m+" دقيقة";
+    var h=Math.round(m/60); if(h<48) return "محدّث من "+h+" ساعة";
+    return "محدّث من "+Math.round(h/24)+" يوم";
+  }
+  function line(id,label,main,bk){
+    var li=$(id); li.textContent="";
+    var k=document.createElement("span"); k.className="k"; k.textContent=label+": "; li.appendChild(k);
+    li.appendChild(document.createTextNode(main.text));
+    var c=document.createElement("div"); var ch=document.createElement("span"); ch.className="chk "+bk.cls; ch.textContent=bk.text; c.appendChild(ch); li.appendChild(c);
+  }
+  function compare(a,b,dateTxt,tol){
+    if(!(b>0)) return {cls:"warn",text:"المصدر التاني مش متاح دلوقتي، فمفيش مقارنة",q:"warn"};
+    var d=Math.abs(a-b)/b*100;
+    if(d<=tol) return {cls:"ok",text:"متطابق مع المصدر التاني ("+dateTxt+"): الفرق "+fmt(d,1)+"%",q:"ok"};
+    return {cls:"bad",text:"فرق كبير مع المصدر التاني ("+dateTxt+"): "+fmt(d,1)+"%. اتأكد من الرقم قبل ما تعتمد عليه",q:"bad"};
+  }
   var busy=false;
   async function load(){
     if(busy) return; busy=true; $("go").disabled=true;
-    var st=$("stamp"), got=[];
-    var rs=await Promise.allSettled([getJSON("https://api.gold-api.com/price/XAU"),getJSON("https://open.er-api.com/v6/latest/USD")]);
-    if(rs[0].status==="fulfilled"){var o=num(rs[0].value.price); if(o>500&&o<20000){$("oz").value=o.toFixed(1); got.push("الأونصة");}}
-    if(rs[1].status==="fulfilled"){var u=num(rs[1].value.rates&&rs[1].value.rates.EGP); if(u>10&&u<500){$("usd").value=u.toFixed(2); got.push("الدولار");}}
+    var FAW="https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/";
+    var rs=await Promise.allSettled([
+      getJSON("https://api.gold-api.com/price/XAU"),
+      getJSON("https://open.er-api.com/v6/latest/USD"),
+      getJSON(FAW+"xau.json"),
+      getJSON(FAW+"usd.json")
+    ]);
+    var v=function(i){return rs[i].status==="fulfilled"?rs[i].value:null};
+    var g=v(0), er=v(1), fx=v(2), fu=v(3), q=[];
+
+    var gP=g?num(g.price):NaN, gT=g?Date.parse(g.updatedAt):NaN;
+    var bOz=fx&&fx.xau?num(fx.xau.usd):NaN, bOzD=fx&&fx.date?"سعر "+fx.date:"";
+    if(gP>500&&gP<20000){
+      $("oz").value=gP.toFixed(1);
+      var stale=isFinite(gT)&&(Date.now()-gT)>60*60000;
+      line("srcOz","الأونصة",{text:fmt(gP,1)+" دولار من gold-api.com، "+ago(gT)+(stale?". الرقم قديم شوية، ممكن السوق مقفول (السبت والأحد).":"")},compare(gP,bOz,bOzD,3));
+      q.push(stale?"warn":compare(gP,bOz,bOzD,3).q);
+    } else if(bOz>500&&bOz<20000){
+      $("oz").value=bOz.toFixed(1);
+      line("srcOz","الأونصة",{text:fmt(bOz,1)+" دولار من المصدر الاحتياطي ("+bOzD+")"},{cls:"warn",text:"المصدر الأساسي واقف، والرقم ده سعر أمس",q:"warn"});
+      q.push("warn");
+    } else { line("srcOz","الأونصة",{text:"مش متاح. اكتبه بإيدك"},{cls:"bad",text:"المصدرين مش شغالين دلوقتي"}); q.push("bad"); }
+
+    var eP=er&&er.rates?num(er.rates.EGP):NaN, eT=er?num(er.time_last_update_unix)*1000:NaN;
+    var bU=fu&&fu.usd?num(fu.usd.egp):NaN, bUD=fu&&fu.date?"سعر "+fu.date:"";
+    if(eP>10&&eP<500){
+      $("usd").value=eP.toFixed(2);
+      var cU=compare(eP,bU,bUD,3);
+      line("srcUsd","الدولار",{text:fmt(eP,2)+" جنيه من open.er-api.com، "+ago(eT)+". المصدر ده بيتحدث مرة في اليوم."},cU);
+      q.push(cU.q);
+    } else if(bU>10&&bU<500){
+      $("usd").value=bU.toFixed(2);
+      line("srcUsd","الدولار",{text:fmt(bU,2)+" جنيه من المصدر الاحتياطي ("+bUD+")"},{cls:"warn",text:"المصدر الأساسي واقف"});
+      q.push("warn");
+    } else { line("srcUsd","الدولار",{text:"مش متاح. اكتبه بإيدك"},{cls:"bad",text:"المصدرين مش شغالين دلوقتي"}); q.push("bad"); }
+
     var t=new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
-    st.textContent=got.length===2?"آخر تحديث تلقائي الساعة "+t+". التحديث الجاي بعد 5 دقايق."
-      :got.length===1?"اتحدث "+got[0]+" بس الساعة "+t+". الرقم التاني اكتبه بإيدك أو اضغط «حدّث الآن»."
-      :"معرفتش أوصل لمصادر الأسعار. اتأكد من النت واضغط «حدّث الآن»، أو اكتب الأرقام بإيدك.";
+    var st=$("stamp"); st.textContent="آخر تحديث الساعة "+t+". التحديث الجاي بعد 5 دقايق.";
+    var dq=document.createElement("span"); dq.className="dq chk "+(q.indexOf("bad")>-1?"bad":q.indexOf("warn")>-1?"warn":"ok");
+    dq.textContent=q.indexOf("bad")>-1?"جودة البيانات: فيها مشكلة":q.indexOf("warn")>-1?"جودة البيانات: مقبولة":"جودة البيانات: ممتازة";
+    st.appendChild(dq);
     render(); busy=false; $("go").disabled=false;
   }
 
   var saved=store("gold_loc"); if(saved) $("loc").value=saved;
   $("oz").value=""; $("usd").value="";
-  $("src").textContent="المصدر: gold-api.com للأونصة، و open.er-api.com للدولار.";
   $("loc").addEventListener("input",function(){store("gold_loc",$("loc").value); render()});
   ["oz","usd"].forEach(function(i){$(i).addEventListener("input",render)});
   $("go").addEventListener("click",load);
