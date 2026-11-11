@@ -64,6 +64,9 @@
     table.append(row('آي صاغة • عيار 24',a,a?.['24']?.buy,a?.['24']?.sell,' جنيه'),row('آي صاغة • عيار 21',a,a?.['21']?.buy,a?.['21']?.sell,' جنيه'),row('بنك مصر • دولار نقدي',b,b?.buy,b?.sell,' جنيه'),row(g?.name||'gold-api.com • أونصة',g,g?.buy,g?.sell,' دولار'));
     if (!state.dealerEdited) $('dealer').value=usable(a)?a['21'].sell:'';
     calculator();
+    if($('reference24'))$('reference24').textContent=result?fmt(result.drop24)+' ('+fmt(result.drop24/7735*100,'%')+')':'—';
+    if($('reference21'))$('reference21').textContent=result?fmt(result.drop21)+' ('+fmt(result.drop21/6767*100,'%')+')':'—';
+    window.dispatchEvent(new CustomEvent('gold-board-updated',{detail:{sources:state.sources}}));
   }
   async function json(url) {
     const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);

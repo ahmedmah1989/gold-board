@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict');
+const {metrics,rollMean,asOf}=require('./analytics.js');
+const date=i=>new Date(Date.UTC(2026,0,1)+i*86400000).toISOString().slice(0,10);
+const series=Array.from({length:250},(_,i)=>({d:date(i),usd:100+i,egp:(100+i)*50}));
+const m=metrics(series);
+assert.equal(m.sma50,324.5);assert.equal(m.sma200,249.5);
+assert.equal(m.n200,200);assert.equal(m.mdd,0);
+assert.equal(m.hi.usd,349);assert.equal(m.lo.usd,100);
+assert.equal(rollMean(series,198,200),null);
+assert.equal(rollMean(series,199,200),199.5);
+assert.equal(asOf(series,'2026-01-03').usd,102);
+const withOld=[{d:'2024-01-01',usd:999999,egp:999999*50},...series];
+assert.equal(metrics(withOld).sma200,249.5);
+assert.equal(rollMean(withOld,199,200),null);
+const dd=metrics([{d:date(0),usd:100,egp:5000},{d:date(1),usd:200,egp:10000},{d:date(2),usd:150,egp:7500},{d:date(3),usd:160,egp:8000}]);
+assert.equal(dd.mdd,.25);assert.equal(dd.mddPk.usd,200);assert.equal(dd.mddTr.usd,150);
+console.log('Historical averages, drawdowns, date lookup and sparse-history exclusion passed.');

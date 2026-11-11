@@ -2,7 +2,7 @@ name: Refresh verified public quotes
 on:
   push:
     branches: [main]
-    paths: ['index.html', 'monitor.js', 'collect.py', 'test_collect.py', '.github/workflows/quotes.yml']
+    paths: ['index.html', 'monitor.js', 'analytics.js', 'analytics.test.js', 'collect.py', 'test_collect.py', '.github/workflows/quotes.yml']
   workflow_dispatch:
   schedule:
     - cron: '*/5 * * * *'
@@ -25,6 +25,7 @@ jobs:
           python-version: '3.12'
       - run: python -m unittest discover -p 'test_*.py'
       - run: node monitor.test.js
+      - run: node analytics.test.js
       - run: python collect.py
       - name: Save latest source observations
         run: |
