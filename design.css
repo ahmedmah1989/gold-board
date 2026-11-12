@@ -36,3 +36,20 @@ body{font-weight:500;background-color:#eef2f8;background-image:radial-gradient(e
 #panel-market .card > *,#panel-market .box > *,#panel-market .hero > *,#panel-market .chart > *{position:relative;z-index:11}
 @media(max-width:600px){#panel-market .dahabology-watermark{top:145px;width:84vw;opacity:.09}}
 @media print{#panel-market .dahabology-watermark{opacity:.05}}
+
+/* Brand watermark refinement: original image, optically isolated from data. */
+#panel-market .dahabology-watermark{
+ top:165px!important;left:50%!important;transform:translateX(-50%)!important;
+ width:min(53vw,460px)!important;height:auto!important;
+ opacity:.22!important;mix-blend-mode:screen;
+ -webkit-mask-image:radial-gradient(ellipse 66% 66% at 50% 47%,#000 37%,transparent 100%);
+ mask-image:radial-gradient(ellipse 66% 66% at 50% 47%,#000 37%,transparent 100%);
+ z-index:2!important;pointer-events:none!important;
+}
+#panel-market .dahabology-watermark img{width:100%!important;height:auto!important;display:block!important}
+#panel-market > section{position:relative;z-index:3}
+#panel-market .card,#panel-market .box,#panel-market .chart,#panel-market .tblw{position:relative;z-index:3}
+@media(max-width:600px){
+ #panel-market .dahabology-watermark{top:200px!important;width:72vw!important;opacity:.14!important}
+}
+@media print{#panel-market .dahabology-watermark{opacity:.065!important;mix-blend-mode:normal}}
