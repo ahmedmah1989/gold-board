@@ -95,3 +95,25 @@ body > .dahabology-viewport-watermark img{
  body > .dahabology-viewport-watermark img{max-width:82vw!important;max-height:52dvh!important;opacity:.05!important}
 }
 @media print{body > .dahabology-viewport-watermark{display:none!important}}
+
+/* Consistent site-wide watermark across every tab (market, live, analysis,
+   calculator, products, sources, guide), including opaque cards. */
+body > .dahabology-viewport-watermark{
+ position:fixed!important;inset:0!important;
+ width:100%!important;height:100vh!important;height:100dvh!important;
+ z-index:2147483000!important;pointer-events:none!important;
+ display:grid!important;place-items:center!important;
+ visibility:visible!important;opacity:1!important;
+}
+body > .dahabology-viewport-watermark img{
+ width:min(52vw,520px)!important;height:auto!important;
+ max-width:calc(100vw - 32px)!important;max-height:62vh!important;max-height:62dvh!important;
+ opacity:.13!important;mix-blend-mode:normal!important;
+}
+@media(min-width:601px) and (max-width:1024px){
+ body > .dahabology-viewport-watermark img{width:62vw!important;max-height:58dvh!important;opacity:.11!important}
+}
+@media(max-width:600px){
+ body > .dahabology-viewport-watermark img{width:80vw!important;max-height:50dvh!important;opacity:.09!important}
+}
+@media print{body > .dahabology-viewport-watermark{display:none!important}}
