@@ -1,28 +1,22 @@
 {
   "schemaVersion": 1,
-  "checkedDate": "2026-11-11",
-  "checkedAt": "2026-11-11T12:56:11.354308+00:00",
+  "checkedDate": "2026-11-12",
+  "checkedAt": "2026-11-12T00:11:42.097827+00:00",
   "source": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/v1/currencies/xau.json",
   "fallbackSource": "https://{date}.currency-api.pages.dev/v1/currencies/xau.json",
   "kind": "daily_reference_not_exchange_close",
   "independentVerification": "partial_manual_sample_only",
   "profile": {
     "expectedWeekdays": 267,
-    "availableWeekdays": 265,
+    "availableWeekdays": 266,
     "missingWeekdays": [
-      "2025-12-10",
-      "2026-08-19"
+      "2025-12-10"
     ],
-    "lastReferenceDate": "2026-11-10",
+    "lastReferenceDate": "2026-11-11",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
   "points": [
-    {
-      "d": "2024-11-07",
-      "usd": 2649.57935278,
-      "egp": 130467.01377702
-    },
     {
       "d": "2024-11-08",
       "usd": 2702.25135369,
@@ -39,9 +33,10 @@
       "egp": 132353.43809177
     },
     {
-      "d": "2025-11-03",
-      "usd": 3996.73067431,
-      "egp": 188915.51165147
+      "d": "2024-11-11",
+      "usd": 2677.6686717,
+      "egp": 131955.42923511,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-11/v1/currencies/xau.json"
     },
     {
       "d": "2025-11-04",
@@ -1479,6 +1474,12 @@
       "egp": 220971.16959591
     },
     {
+      "d": "2026-08-19",
+      "usd": 4350.73351192,
+      "egp": 219840.28778579,
+      "url": "https://2026-08-19.currency-api.pages.dev/v1/currencies/xau.json"
+    },
+    {
       "d": "2026-08-20",
       "usd": 4499.23715434,
       "egp": 227893.27590177
@@ -1895,6 +1896,12 @@
       "usd": 4121.18424702,
       "egp": 222457.34425076,
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-10/v1/currencies/xau.json"
+    },
+    {
+      "d": "2026-11-11",
+      "usd": 4060.25417191,
+      "egp": 216499.53920338,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-11/v1/currencies/xau.json"
     }
   ]
 }
