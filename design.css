@@ -9,17 +9,23 @@ body{font-weight:500;background-color:#eef2f8;background-image:radial-gradient(e
 @media(max-width:900px){.wrap{padding:0 22px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.compare{grid-template-columns:1fr 1fr}.checks,.rng{grid-template-columns:1fr}.ind{grid-template-columns:repeat(2,minmax(0,1fr))}.calculator{grid-template-columns:1fr}.hero .number{font-size:35px}}
 @media(max-width:600px){.wrap{padding:0 16px}.head{align-items:flex-start;gap:12px}header{padding:22px 0}header h1{font-size:26px}.brandmark{width:42px;height:42px;font-size:24px}header p{font-size:12px;max-width:230px}.head button{padding:9px 12px;font-size:12px}.eyebrow{font-size:11px}nav .wrap{gap:23px}nav a{font-size:13px;padding:13px 0}.section-head{align-items:flex-start}.section-head .small{max-width:140px;font-size:11px}h2{font-size:21px}.cards{gap:11px}.card{padding:16px}.label{font-size:12px}.number{font-size:25px}.source-time{font-size:11px;min-height:58px}.compare,.ind{grid-template-columns:1fr}.box{padding:20px}.hero .number{font-size:40px}.fields{grid-template-columns:1fr}.status{font-size:11px;gap:12px}.chart{padding:10px}.legend{gap:14px;font-size:11px}.fc{padding:0 16px}.fc .who{font-size:16px}.audit{margin-inline-start:0}.line{font-size:13px}.analytics>h2{margin-top:24px}.checks li,.rng li{padding:18px}}
 
-/* Dahabology: unobtrusive decorative watermark, no impact on controls */
+
+/* Dahabology branding: watermark sits above the panel background, below its content. */
 #panel-market { position:relative; isolation:isolate; }
 #panel-market::before {
- content:""; position:absolute; inset:0; z-index:-1;
- background-image:url("assets/dahabology-watermark.svg");
- background-repeat:no-repeat; background-position:center 160px;
- background-size:min(64vw,520px) auto;
- opacity:.075; pointer-events:none;
+  content:""; position:absolute; top:90px; left:50%; transform:translateX(-50%);
+  width:min(70vw,550px); height:610px; z-index:0;
+  background:url("assets/dahabology-watermark.svg") center top / contain no-repeat;
+  opacity:.19; pointer-events:none;
 }
-#panel-market > * { position:relative; }
+#panel-market > * {position:relative;z-index:1}
+.head .dahabology-identity{display:flex;align-items:center;gap:12px}
+.head .dahabology-identity img{width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 2px 9px #e7bf6740)}
+.head .dahabology-identity h1{margin:0}
+.head .dahabology-identity .brandmark{display:none}
 @media(max-width:600px){
- #panel-market::before { background-size:78vw auto; background-position:center 125px; opacity:.045; }
+ #panel-market::before{top:120px;width:82vw;height:410px;opacity:.13}
+ .head .dahabology-identity img{width:54px;height:54px}
+ .head .dahabology-identity{gap:7px}
 }
-@media print { #panel-market::before {opacity:.035;} }
+@media print{#panel-market::before{opacity:.08}}
