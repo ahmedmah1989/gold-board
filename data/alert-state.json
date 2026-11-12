@@ -4,19 +4,24 @@
     "confirmedAt": "2026-11-11T12:38:49.949852+00:00"
   },
   "service": {
-    "checkedAt": "2026-11-12T09:43:06.011625+00:00",
+    "checkedAt": "2026-11-12T10:41:01.189398+00:00",
     "enabled": true,
-    "status": "local_monitoring_gap_waiting"
+    "status": "sent"
   },
   "localBaseline": {
-    "local24": 7034.25,
-    "local21": 6155.0,
-    "time": 1794403357.0,
-    "dd24": 0,
-    "dd21": 0
+    "local24": 6891.5,
+    "local21": 6030.0,
+    "time": 1794479981.0,
+    "dd24": 2.029356363507126,
+    "dd21": 2.0308692120227456
   },
   "localPeaks": {
     "24": 7034.25,
     "21": 6155.0
+  },
+  "delivery": {
+    "id": "b73713f92cfc30c88cf7",
+    "status": "sent",
+    "sentAt": "2026-11-12T10:41:01.189398+00:00"
   }
 }
