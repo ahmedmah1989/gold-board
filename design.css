@@ -28,3 +28,11 @@ body{font-weight:500;background-color:#eef2f8;background-image:radial-gradient(e
  .head .dahabology-identity h1{font-size:clamp(22px,6vw,29px)}
 }
 @media print{#panel-market::before{opacity:.03}}
+
+/* Explicit image layer ensures watermark displays over opaque market cards. */
+#panel-market::before{display:none!important}
+#panel-market .dahabology-watermark{position:absolute!important;top:115px;left:50%;transform:translateX(-50%);width:min(65vw,540px);height:auto;z-index:10!important;pointer-events:none!important;display:block!important;opacity:.14}
+#panel-market .dahabology-watermark img{display:block;width:100%;height:auto;object-fit:contain}
+#panel-market .card > *,#panel-market .box > *,#panel-market .hero > *,#panel-market .chart > *{position:relative;z-index:11}
+@media(max-width:600px){#panel-market .dahabology-watermark{top:145px;width:84vw;opacity:.09}}
+@media print{#panel-market .dahabology-watermark{opacity:.05}}
