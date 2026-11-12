@@ -53,3 +53,19 @@ body{font-weight:500;background-color:#eef2f8;background-image:radial-gradient(e
  #panel-market .dahabology-watermark{top:200px!important;width:72vw!important;opacity:.14!important}
 }
 @media print{#panel-market .dahabology-watermark{opacity:.065!important;mix-blend-mode:normal}}
+
+/* Fixed viewport watermark: stays centered during horizontal and vertical scrolling. */
+#panel-market .dahabology-watermark{
+ position:fixed!important;
+ top:50%!important;left:50%!important;right:auto!important;bottom:auto!important;
+ transform:translate(-50%,-50%)!important;
+ width:min(48vw,430px)!important;
+ z-index:2!important;pointer-events:none!important;
+ opacity:.19!important;
+}
+@media(max-width:600px){
+ #panel-market .dahabology-watermark{width:72vw!important;opacity:.12!important}
+}
+@media print{
+ #panel-market .dahabology-watermark{position:absolute!important;top:180px!important;opacity:.05!important}
+}
