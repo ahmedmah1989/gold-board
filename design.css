@@ -69,3 +69,29 @@ body{font-weight:500;background-color:#eef2f8;background-image:radial-gradient(e
 @media print{
  #panel-market .dahabology-watermark{position:absolute!important;top:180px!important;opacity:.05!important}
 }
+
+/* Responsive, viewport-anchored watermark across the entire site.
+   Body-level element avoids containing-block issues from tab transforms/scroll containers. */
+#panel-market .dahabology-watermark{display:none!important}
+body > .dahabology-viewport-watermark{
+ position:fixed!important;inset:0!important;top:0!important;left:0!important;
+ width:100vw!important;height:100dvh!important;min-height:100vh;
+ z-index:100!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ pointer-events:none!important;overflow:hidden!important;opacity:1!important;
+ transform:none!important;mix-blend-mode:normal!important;
+}
+body > .dahabology-viewport-watermark img{
+ display:block!important;position:static!important;flex:none!important;
+ width:auto!important;height:auto!important;
+ max-width:min(54vw,540px)!important;max-height:65dvh!important;
+ object-fit:contain!important;opacity:.075!important;mix-blend-mode:screen!important;
+ -webkit-mask-image:radial-gradient(ellipse 70% 70% at center,#000 45%,transparent 100%);
+ mask-image:radial-gradient(ellipse 70% 70% at center,#000 45%,transparent 100%);
+}
+@media(min-width:601px) and (max-width:1024px){
+ body > .dahabology-viewport-watermark img{max-width:60vw!important;max-height:58dvh!important;opacity:.065!important}
+}
+@media(max-width:600px){
+ body > .dahabology-viewport-watermark img{max-width:82vw!important;max-height:52dvh!important;opacity:.05!important}
+}
+@media print{body > .dahabology-viewport-watermark{display:none!important}}
