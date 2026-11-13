@@ -14,7 +14,8 @@ class OfferTests(unittest.TestCase):
   self.assertEqual([c[k]['weight'] for k in ['quarter','half','pound']],[2,4,8])
   self.assertEqual(c['ounce']['weight'],31.1034768)
   self.assertEqual(c['bar100']['karat'],24)
-  self.assertEqual(len(PRODUCTS),21)
+  self.assertTrue(any(p['brand']=='Gold Era' and p['productId']=='bar10' for p in PRODUCTS))
+  self.assertEqual(len({p['url'] for p in PRODUCTS}),len(PRODUCTS))
  def test_jsonld_requires_weight_karat_brand_and_own_url(self):
   expected={'weight':100,'karat':24,'brand':'BTC','url':'https://example.test/bar'}
   product={'@type':'Product','name':'BTC 100 Gram Gold Bar 24K','url':expected['url'],'brand':{'name':'BTC'},'additionalProperty':[{'name':'Metal','value':'Gold'},{'name':'Karat','value':'24'},{'name':'Weight','value':100}], 'offers':{'url':expected['url'],'price':710000,'priceCurrency':'EGP','availability':'https://schema.org/OutOfStock'}}

@@ -30,6 +30,12 @@ for c in CATALOG:
   path='coins/'+COINS[c['id']][2] if c['id'] in COINS else 'ingots/'+DZ_BARS[c['weight']]
   PRODUCTS.append({**base,'store':'دهب زمان','brand':'BTC','url':DZ+path,'parser':'jsonld'})
 
+# Each additional brand retains the same strict weight, karat, metal and URL checks.
+for c in CATALOG:
+ if c['kind']=='bars':
+  slug='gold-era-'+str(c['weight']).replace('.','')+'-gram-gold-bar'
+  PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'دهب زمان','brand':'Gold Era','url':DZ+'ingots/'+slug,'parser':'jsonld'})
+
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.values=[]
  def handle_data(self,value):
