@@ -4,9 +4,9 @@
     "confirmedAt": "2026-11-11T12:38:49.949852+00:00"
   },
   "service": {
-    "checkedAt": "2026-11-13T21:37:44.436998+00:00",
+    "checkedAt": "2026-11-13T22:22:46.351782+00:00",
     "enabled": true,
-    "status": "local_monitoring_gap_waiting"
+    "status": "waiting_for_fresh_synchronized_quotes"
   },
   "localBaseline": {
     "local24": 6891.5,
