@@ -5,6 +5,7 @@ from html.parser import HTMLParser
 from datetime import datetime,timezone
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from retail_sources import extra_products,parse_btc,parse_lazurde,retailer_coverage
 
 ROOT=Path(__file__).resolve().parent
 CATALOG=[
@@ -52,6 +53,8 @@ for c in CATALOG:
  if c['id'] in ERA_PATHS:
   slug,title=ERA_PATHS[c['id']]
   PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'جولد إيرا','brand':'Gold Era','url':'https://gold-era.eg/product/'+slug+'/','parser':'era','expectedTitle':title})
+
+PRODUCTS.extend(extra_products(CATALOG))
 
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.values=[]
@@ -150,6 +153,8 @@ def fetch(product):
    if not title or product['expectedTitle'].lower() not in plain(title[1]).lower():raise ValueError('identity_mismatch')
    data=parse_galla(html)
   elif product['parser']=='era':data=parse_era(html,product)
+  elif product['parser']=='btc':data=parse_btc(html,product)
+  elif product['parser']=='lazurde':data=parse_lazurde(html,product)
   else:data=parse_jsonld(html,product)
   if not 100<data['listedPrice']/product['weight']<100000:raise ValueError('invalid_product_units')
   result.update(data,status='observed')
@@ -160,9 +165,10 @@ def fetch(product):
 
 def main():
  with ThreadPoolExecutor(max_workers=3) as pool:offers=list(pool.map(fetch,PRODUCTS))
- out={'schemaVersion':2,'catalogVersion':2,'checkedAt':datetime.now(timezone.utc).isoformat(),'catalog':CATALOG,'offers':offers,
+ out={'schemaVersion':2,'catalogVersion':3,'checkedAt':datetime.now(timezone.utc).isoformat(),'catalog':CATALOG,'offers':offers,
+      'retailers':retailer_coverage(offers),
       'qualifiedStores':len(set(o['store'] for o in offers if o['eligible'])),
-      'coverageNotes':['متجر BTC الرسمي غير موصول بقناة عروض مؤرخة مستقرة.','الأونصة الفعلية منتج مستقل عن السعر العالمي؛ الأوزان المعروضة حسب مواصفات كل منتج.']}
+      'coverageNotes':['أسعار BTC المعروضة استرشادية؛ لا يعتمد سعر نهائي دون مراجعة التصميم والرسوم والتوافر.','الأونصة الفعلية منتج مستقل عن السعر العالمي؛ الأوزان المعروضة حسب مواصفات كل منتج.']}
  path=ROOT/'data/offers.json';path.parent.mkdir(exist_ok=True);temp=path.with_suffix('.tmp');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8');temp.replace(path)
  print('Products:',len(CATALOG),'direct observations:',len(offers),'usable identities:',sum(o.get('identityVerified') is True for o in offers),'qualified stores:',out['qualifiedStores'])
 if __name__=='__main__':main()

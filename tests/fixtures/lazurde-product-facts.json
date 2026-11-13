@@ -1,0 +1,55 @@
+{
+  "sku": "115051400082450",
+  "name": "LGN522 - Rectangular Links Chain Necklace in 18K Gold",
+  "newTitle": "سلسلة بحلقات مستطيلة ذهب عيار 18 قيراط",
+  "prices": {
+    "price": {
+      "value": 35850,
+      "currencyCode": "EGP"
+    },
+    "salePrice": {
+      "value": 35850,
+      "currencyCode": "EGP"
+    },
+    "basePrice": {
+      "value": 35850,
+      "currencyCode": "EGP"
+    }
+  },
+  "inventory": {
+    "isInStock": true,
+    "hasVariantInventory": false,
+    "aggregated": {
+      "availableToSell": 2,
+      "warningLevel": 0
+    }
+  },
+  "brand": {
+    "name": "L'azurde"
+  },
+  "customFields": {
+    "edges": [
+      {
+        "node": {
+          "entityId": 175955,
+          "name": "Country",
+          "value": "EGY"
+        }
+      },
+      {
+        "node": {
+          "entityId": 175959,
+          "name": "Metal Karat",
+          "value": "18K"
+        }
+      },
+      {
+        "node": {
+          "entityId": 175961,
+          "name": "Gold Weight",
+          "value": "5.41g"
+        }
+      }
+    ]
+  }
+}
