@@ -36,6 +36,23 @@ for c in CATALOG:
   slug='gold-era-'+str(c['weight']).replace('.','')+'-gram-gold-bar'
   PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'دهب زمان','brand':'Gold Era','url':DZ+'ingots/'+slug,'parser':'jsonld'})
 
+ERA_PATHS={
+ 'quarter':('quarter-gold-pound-2-gm-queen-elizabeth-2','Quarter Gold Pound – 2 gm (Queen Elizabeth)'),
+ 'half':('half-gold-pound-4-gm-queen-elizabeth-2','Half Gold Pound – 4 gm (Queen Elizabeth)'),
+ 'pound':('gold-pound-8-gm-queen-elizabeth-2','Gold Pound – 8 gm (Queen Elizabeth)'),
+ 'bar1':('gold-era-1-gram-gold-bar','Gold 1 Gram Ingot'),
+ 'bar2_5':('gold-era-2-5-gold-grams-bar','Gold 2.5 Grams Ingot'),
+ 'bar5':('gold-era-5-grams-gold-bar','Gold 5 Gram Ingot'),
+ 'bar10':('gold-era-10-grams-gold-ingot','Gold 10 Gram Ingot'),
+ 'bar20':('20-grams-gold-bar','Gold 20 Gram Ingot'),
+ 'bar50':('gold-era-gold-50-grams-bar','Gold 50 Gram Ingot'),
+ 'bar100':('100-grams-gold-bar','Gold 100 Gram Ingot'),
+}
+for c in CATALOG:
+ if c['id'] in ERA_PATHS:
+  slug,title=ERA_PATHS[c['id']]
+  PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'جولد إيرا','brand':'Gold Era','url':'https://gold-era.eg/product/'+slug+'/','parser':'era','expectedTitle':title})
+
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.values=[]
  def handle_data(self,value):
@@ -91,6 +108,31 @@ def parse_jsonld(html,expected=None):
   if any(abs(float(w)-expected['weight'])>1e-6 for w in weights):result.update(identityVerified=False,contentWarning='وصف المتجر يذكر وزنًا يختلف عن مواصفات المنتج؛ السعر محجوب حتى يتأكد التطابق.',reason='تعارض وزن في وصف المصدر؛ لا يعتمد هذا العرض للمقارنة.')
  return result
 
+def parse_era(html,expected):
+ products=[]
+ for value in re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',html,re.S):
+  try:
+   j=json.loads(value)
+   if isinstance(j,dict) and j.get('@type')=='Product':products.append(j)
+  except ValueError:continue
+ if len(products)!=1:raise ValueError('ambiguous_product')
+ p=products[0];o=p['offers'];price=float(o['price'])
+ normalize=lambda v:re.sub(r'\s+',' ',unescape(str(v))).strip().casefold()
+ if normalize(p.get('name',''))!=normalize(expected['expectedTitle']):raise ValueError('identity_mismatch')
+ if p.get('brand',{}).get('name')!='Gold Era' or o.get('url','').rstrip('/')!=expected['url'].rstrip('/'):raise ValueError('identity_mismatch')
+ if o.get('priceCurrency')!='EGP' or not math.isfinite(price) or price<=0:raise ValueError('invalid_product_price')
+ desc=plain(p.get('description',''))
+ karats=re.findall(r'\b(\d{2})\s*(?:karat|karats|k)\b',desc,re.I)
+ if any(int(k)!=expected['karat'] for k in karats):raise ValueError('identity_mismatch')
+ amounts=re.findall(r'<p\b[^>]*class=["\']price["\'][^>]*>(.*?)</p>',html,re.S)
+ if len(amounts)!=1:raise ValueError('ambiguous_visible_price')
+ visible=re.search(r'(\d[\d,]*(?:\.\d+)?)',plain(amounts[0]))
+ if not visible or abs(float(visible[1].replace(',',''))-price)>.01:raise ValueError('price_mismatch')
+ included='price includes all the making and stamping' in desc.lower()
+ return {'listedPrice':price,'sourceTime':None,'inStock':True if o.get('availability','').endswith('/InStock') else False if o.get('availability','').endswith('/OutOfStock') else None,
+ 'manufacturingIncluded':True if included else None,'stampIncluded':True if included else None,'taxIncluded':None,'shippingIncluded':None,'identityVerified':True,'productTitle':p['name'],
+ 'reason':'سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.'}
+
 def eligible(offer,now):
  try:
   stamp=datetime.fromisoformat(offer['sourceTime'].replace('Z','+00:00'))
@@ -101,12 +143,13 @@ def eligible(offer,now):
 def fetch(product):
  result={k:v for k,v in product.items() if k not in ('parser','expectedTitle')};result.update(requestedAt=datetime.now(timezone.utc).isoformat(),eligible=False)
  try:
-  req=urllib.request.Request(product['url'],headers={'User-Agent':'GoldBoard/1.0 public product observation'})
+  req=urllib.request.Request(product['url'],headers={'User-Agent':'Mozilla/5.0 (compatible; Dahabology public product observation)'})
   with urllib.request.urlopen(req,timeout=20) as response:html=response.read().decode('utf-8')
   if product['parser']=='galla':
    title=re.search(r'<title[^>]*>(.*?)</title>',html,re.S|re.I)
    if not title or product['expectedTitle'].lower() not in plain(title[1]).lower():raise ValueError('identity_mismatch')
    data=parse_galla(html)
+  elif product['parser']=='era':data=parse_era(html,product)
   else:data=parse_jsonld(html,product)
   if not 100<data['listedPrice']/product['weight']<100000:raise ValueError('invalid_product_units')
   result.update(data,status='observed')

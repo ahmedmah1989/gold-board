@@ -24,10 +24,10 @@ def profile(points,end):
          'calendar':'Weekdays only; exchange holidays not independently reconciled'}
 
 def main():
- path=ROOT/'data/history.json';today=datetime.now(timezone.utc).date();end=today-timedelta(days=1)
+ path=ROOT/'data/history.json';today=datetime.now(timezone.utc).date();end=today
  try:old=json.loads(path.read_text(encoding='utf-8'))
  except (FileNotFoundError,ValueError):old={}
- if old.get('checkedDate')==today.isoformat() and '--force' not in sys.argv:print('History: cached daily check.');return
+ if old.get('checkedDate')==today.isoformat() and old.get('collectorVersion')==2 and '--force' not in sys.argv:print('History: cached daily check.');return
  wanted={(end-timedelta(days=i)).isoformat() for i in list(range(373))+[730,731,732,733]}
  known={p['d']:p for p in old.get('points',[]) if p.get('d') in wanted}
  # Revalidate recent files; backfill missing dates once a day, never every visitor/minute.
@@ -44,7 +44,7 @@ def main():
   for day,point in pool.map(fetch,todo):
    if point:known[day]=point
  points=sorted(known.values(),key=lambda p:p['d'])
- out={'schemaVersion':1,'checkedDate':today.isoformat(),'checkedAt':datetime.now(timezone.utc).isoformat(),'source':BASE+'{date}/v1/currencies/xau.json',
+ out={'schemaVersion':1,'collectorVersion':2,'checkedDate':today.isoformat(),'checkedAt':datetime.now(timezone.utc).isoformat(),'source':BASE+'{date}/v1/currencies/xau.json',
       'fallbackSource':'https://{date}.currency-api.pages.dev/v1/currencies/xau.json','kind':'daily_reference_not_exchange_close','independentVerification':'partial_manual_sample_only','profile':profile(points,end),'points':points}
  path.parent.mkdir(exist_ok=True);path.write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
  print('History:',len(points),'daily references;',len(out['profile']['missingWeekdays']),'missing weekdays.')
