@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "automatedCheckedAt": "2026-11-13T22:22:46.271806+00:00",
-  "quoteSnapshotTime": "2026-11-13T22:22:30.902565+00:00",
+  "automatedCheckedAt": "2026-11-13T22:54:48.836832+00:00",
+  "quoteSnapshotTime": "2026-11-13T22:54:25.252369+00:00",
   "arithmetic": {
     "method": "Python Decimal with original input prices; frontend independently checked in Node tests",
     "values": {
@@ -22,7 +22,7 @@
     "missingWeekdays": [
       "2025-12-10"
     ],
-    "lastReferenceDate": "2026-11-12",
+    "lastReferenceDate": "2026-11-13",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
