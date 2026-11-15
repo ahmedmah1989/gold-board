@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-15T09:14:19.155032+00:00",
+  "generatedAt": "2026-11-15T09:56:11.108894+00:00",
   "sources": {
     "isagha": {
       "sourceTime": "2026-11-14T20:48:06+02:00",
@@ -14,38 +14,38 @@
         "buy": 5930.0
       },
       "status": "available",
-      "requestedAt": "2026-11-15T09:14:15.790101+00:00",
-      "fetchedAt": "2026-11-15T09:14:16.520892+00:00",
+      "requestedAt": "2026-11-15T09:56:08.546603+00:00",
+      "fetchedAt": "2026-11-15T09:56:08.631838+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "misr": {
-      "sourceTime": "2026-11-15T10:15:32+02:00",
-      "buy": 53.63,
-      "sell": 53.73,
+      "sourceTime": "2026-11-15T10:26:10+02:00",
+      "buy": 53.64,
+      "sell": 53.74,
       "quoteType": "notes",
       "sourceTimeKind": "bank_page_quote_update",
       "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "requestedAt": "2026-11-15T09:14:15.790738+00:00",
-      "fetchedAt": "2026-11-15T09:14:17.857868+00:00",
+      "requestedAt": "2026-11-15T09:56:08.547172+00:00",
+      "fetchedAt": "2026-11-15T09:56:10.081428+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
       "sell": 3887.600098,
-      "sourceTime": "2026-11-15T09:13:56+00:00",
+      "sourceTime": "2026-11-15T09:55:56+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-15T09:14:15.791239+00:00",
-      "fetchedAt": "2026-11-15T09:14:16.030650+00:00",
+      "requestedAt": "2026-11-15T09:56:08.547646+00:00",
+      "fetchedAt": "2026-11-15T09:56:08.861987+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-15T09:14:17.858269+00:00",
+      "fetchedAt": "2026-11-15T09:56:10.081844+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -53,7 +53,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-15T09:14:17.858492+00:00",
+      "fetchedAt": "2026-11-15T09:56:10.082055+00:00",
       "quoteType": "average_market_reference",
       "status": "unavailable",
       "errorCode": "blocked",
