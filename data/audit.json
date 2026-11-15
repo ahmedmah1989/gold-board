@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "automatedCheckedAt": "2026-11-14T23:55:26.905220+00:00",
-  "quoteSnapshotTime": "2026-11-14T23:54:58.294567+00:00",
+  "automatedCheckedAt": "2026-11-15T00:26:50.455209+00:00",
+  "quoteSnapshotTime": "2026-11-15T00:26:21.689761+00:00",
   "arithmetic": {
     "method": "Python Decimal with original input prices; frontend independently checked in Node tests",
     "values": {
@@ -17,8 +17,8 @@
     "note": "Arithmetic only; snapshot timestamps must be assessed separately. Values are retained at quoteSnapshotTime, not live prices."
   },
   "historyProfile": {
-    "expectedWeekdays": 266,
-    "availableWeekdays": 265,
+    "expectedWeekdays": 265,
+    "availableWeekdays": 264,
     "missingWeekdays": [
       "2025-12-10"
     ],
