@@ -1,51 +1,51 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T08:46:41.249554+00:00",
+  "generatedAt": "2026-11-20T09:40:42.054228+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-20T10:45:36+02:00",
+      "sourceTime": "2026-11-20T11:40:03+02:00",
       "sourceTimeKind": "published_price_update",
       "24": {
-        "sell": 6480.0,
-        "buy": 6422.75
+        "sell": 6371.5,
+        "buy": 6314.25
       },
       "21": {
-        "sell": 5670.0,
-        "buy": 5620.0
+        "sell": 5575.0,
+        "buy": 5525.0
       },
       "status": "available",
-      "requestedAt": "2026-11-20T08:46:37.875506+00:00",
-      "fetchedAt": "2026-11-20T08:46:38.140608+00:00",
+      "requestedAt": "2026-11-20T09:40:38.442353+00:00",
+      "fetchedAt": "2026-11-20T09:40:39.041596+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "misr": {
-      "sourceTime": "2026-11-19T14:13:36+02:00",
+      "sourceTime": "2026-11-20T11:20:47+02:00",
       "buy": 53.77,
       "sell": 53.87,
       "quoteType": "notes",
       "sourceTimeKind": "bank_page_quote_update",
       "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "requestedAt": "2026-11-20T08:46:37.876275+00:00",
-      "fetchedAt": "2026-11-20T08:46:39.641553+00:00",
+      "requestedAt": "2026-11-20T09:40:38.442954+00:00",
+      "fetchedAt": "2026-11-20T09:40:40.604101+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 3584.919922,
-      "sourceTime": "2026-11-20T08:46:35+00:00",
+      "sell": 3575.100098,
+      "sourceTime": "2026-11-20T09:40:35+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-20T08:46:37.876854+00:00",
-      "fetchedAt": "2026-11-20T08:46:38.127030+00:00",
+      "requestedAt": "2026-11-20T09:40:38.443420+00:00",
+      "fetchedAt": "2026-11-20T09:40:38.650122+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-20T08:46:39.642073+00:00",
+      "fetchedAt": "2026-11-20T09:40:40.604471+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -53,7 +53,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-20T08:46:39.642345+00:00",
+      "fetchedAt": "2026-11-20T09:40:40.604687+00:00",
       "quoteType": "average_market_reference",
       "status": "unavailable",
       "errorCode": "blocked",
