@@ -74,6 +74,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+      - name: Prove published primary-quote freshness and signal independent monitor
+        env:
+          FRESHNESS_HEARTBEAT_URL: ${{ secrets.FRESHNESS_HEARTBEAT_URL }}
+        run: python published_health.py
       - name: Daily history maintenance after current-price publication
         run: |
           python history_collect.py
