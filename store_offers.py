@@ -6,6 +6,7 @@ from datetime import datetime,timezone
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from retail_sources import extra_products,parse_btc,parse_lazurde,retailer_coverage
+from marketplace_sources import parse_isagha_product
 
 ROOT=Path(__file__).resolve().parent
 CATALOG=[
@@ -55,6 +56,10 @@ for c in CATALOG:
   PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'جولد إيرا','brand':'Gold Era','url':'https://gold-era.eg/product/'+slug+'/','parser':'era','expectedTitle':title})
 
 PRODUCTS.extend(extra_products(CATALOG))
+# Verified seller-specific marketplace offer. Do not relabel other sellers as iSagha.
+PRODUCTS.append({'productId':'bar10','name':'سبيكة 10 جرام','kind':'bars','weight':10,'karat':24,
+ 'store':'آل حسن عبر آي صاغة','brand':'BTC','seller':'آل حسن','sku':'171','parser':'isagha_product',
+ 'url':'https://market.isagha.com/products/171'})
 
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.values=[]
@@ -155,6 +160,7 @@ def fetch(product):
   elif product['parser']=='era':data=parse_era(html,product)
   elif product['parser']=='btc':data=parse_btc(html,product)
   elif product['parser']=='lazurde':data=parse_lazurde(html,product)
+  elif product['parser']=='isagha_product':data=parse_isagha_product(html,product)
   else:data=parse_jsonld(html,product)
   if not 100<data['listedPrice']/product['weight']<100000:raise ValueError('invalid_product_units')
   result.update(data,status='observed')
@@ -163,10 +169,39 @@ def fetch(product):
   result.update(status='unavailable',identityVerified=False,errorCode=code,reason='تعذر توثيق صفحة المنتج ومواصفاته وسعره؛ افتح المصدر للمراجعة. لا نستخدم سعرًا محسوبًا من الجرام.')
  result['checkedAt']=datetime.now(timezone.utc).isoformat();result['eligible']=eligible(result,datetime.now(timezone.utc).timestamp());return result
 
+BASIC_KINDS={'quarter','half','pound','bars','ounce'}
+
+def verified_observation(o):
+ from urllib.parse import urlparse
+ u=urlparse(o.get('url',''))
+ return o.get('kind') in BASIC_KINDS and o.get('status')=='observed' and o.get('identityVerified') is True and type(o.get('listedPrice')) in (int,float) and math.isfinite(o['listedPrice']) and o['listedPrice']>0 and u.scheme=='https' and bool(u.hostname) and not u.username and not u.password
+
+def observation_key(o):
+ return tuple(o.get(k) for k in ('productId','store','brand','url','kind','weight','karat'))
+
+def with_previous(offers,previous):
+ old={observation_key(o):o for o in previous if verified_observation(o)}
+ for o in offers:
+  before=old.get(observation_key(o))
+  if not before:continue
+  try:
+   earlier=datetime.fromisoformat(before['checkedAt'].replace('Z','+00:00'))
+   current=datetime.fromisoformat(o['checkedAt'].replace('Z','+00:00'))
+   if earlier.tzinfo and current.tzinfo and earlier<current:
+    o['previousPrice']=before['listedPrice'];o['previousCheckedAt']=before['checkedAt']
+  except (KeyError,ValueError,TypeError):pass
+ return offers
+
 def main():
- with ThreadPoolExecutor(max_workers=3) as pool:offers=list(pool.map(fetch,PRODUCTS))
- out={'schemaVersion':2,'catalogVersion':3,'checkedAt':datetime.now(timezone.utc).isoformat(),'catalog':CATALOG,'offers':offers,
-      'retailers':retailer_coverage(offers),
+ path=ROOT/'data/offers.json'
+ try:previous=json.loads(path.read_text(encoding='utf-8')).get('offers',[])
+ except (OSError,ValueError):previous=[]
+ products=[p for p in PRODUCTS if p.get('kind') in BASIC_KINDS]
+ with ThreadPoolExecutor(max_workers=3) as pool:observations=list(pool.map(fetch,products))
+ offers=with_previous([o for o in observations if verified_observation(o)],previous)
+ out={'schemaVersion':2,'catalogVersion':4,'checkedAt':datetime.now(timezone.utc).isoformat(),'catalog':CATALOG,'offers':offers,
+      'retailers':[r for r in retailer_coverage(offers) if r.get('category')=='bullion'],
+      'verification':{'checkedProducts':len(observations),'publishedOffers':len(offers),'excludedOffers':len(observations)-len(offers)},
       'qualifiedStores':len(set(o['store'] for o in offers if o['eligible'])),
       'coverageNotes':['أسعار BTC المعروضة استرشادية؛ لا يعتمد سعر نهائي دون مراجعة التصميم والرسوم والتوافر.','الأونصة الفعلية منتج مستقل عن السعر العالمي؛ الأوزان المعروضة حسب مواصفات كل منتج.']}
  path=ROOT/'data/offers.json';path.parent.mkdir(exist_ok=True);temp=path.with_suffix('.tmp');temp.write_text(json.dumps(out,ensure_ascii=False,indent=2,allow_nan=False),encoding='utf-8');temp.replace(path)

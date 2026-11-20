@@ -6,6 +6,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
 from bank_sources import fetch as fetch_bank
+from goldtimo import crosscheck
 
 URLS = {
     'isagha': 'https://market.isagha.com/prices',
@@ -70,7 +71,7 @@ def fetch(name):
 if __name__ == '__main__':
     with ThreadPoolExecutor(max_workers=3) as pool: sources = dict(pool.map(fetch, URLS))
     with ThreadPoolExecutor(max_workers=2) as pool: sources.update(dict(pool.map(fetch_bank, ['nbe','cbe'])))
-    out = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat(), 'sources': sources}
+    out = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat(), 'sources': sources, 'crosschecks': {'goldtimo': crosscheck()}}
     Path('data').mkdir(exist_ok=True)
     Path('data/quotes.json').write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding='utf-8')
     print({name: value['status'] for name, value in sources.items()})

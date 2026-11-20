@@ -58,3 +58,17 @@ Python 3.12+ وقاعدة توقيت IANA (حزمة tzdata مطلوبة على W
 Telegram الحالي قناة إدارية للمالك، ولا يمثل اشتراكًا عامًا للزوار. الرابط مذكور ضمن تفاصيل حالة المراقبة فقط. أضيفت إيضاحات قبل الشراء، وبيان نطاق حفظ البيانات في المتصفح والاتصال بالرسم الخارجي، ورابط بلاغات GitHub العامة، ووصف مشاركة ومحركات بحث دون ادعاء لحظية كاملة.
 
 التوقعات التي لم يكتمل توثيقها محفوظة في تفاصيل قابلة للفتح أسفل المصادر الموثقة جزئيًا؛ لا تُحذف ولا تدخل الحسابات، ولا تظهر مستهدفاتها كعناوين جاهزة للاعتماد.
+
+
+## Freshness follow-up, 20 November 2026
+
+The five-minute GitHub Actions cron is a target, not a guarantee. Actual scheduled starts on this audit day were roughly hourly, while executions took under one minute. GitHub documents delayed and dropped scheduled events: https://docs.github.com/en/actions/how-tos/troubleshoot-workflows . Moving the cron off minute zero reduces avoidable contention; it cannot guarantee delivery. The primary free recommendation is an independent cron-job.org trigger plus an independent heartbeat check, as FRESHNESS-SETUP.md details. No external account or job is provisioned by this PR. Neither cron-job.org nor GitHub guarantees punctuality; this free plan must not be described as a guaranteed five-minute service.
+
+Current-price publication now precedes historical backfill, so history maintenance cannot hold up a new retail snapshot. `data/collection-health.json` records previous collection gap independently of source-price timestamps. It does not certify accuracy or change source times. Its `checkedAt` must itself be checked by a consumer: a stalled collector cannot update its own heartbeat. Tests also run on pull requests without publishing or reading production secrets.
+
+Gold Timo is an OPTIONAL free-tier cross-check enabled only by server-side GitHub Actions secret `GOLDTIMO_API_KEY`. No key belongs in source, browser JavaScript, fixtures, public JSON or PR text. Without it, collection works as before and records `not_configured`. Four karat reads per five-minute cycle consume48 of100 free requests/hour. No paid history or snapshot endpoint is called. API results retain `gramBuy` and `gramSell` exactly as named by the provider; their customer/dealer perspective and upstream independence are not confirmed. Results live under `crosschecks.goldtimo`, never replace primary iSagha/dealer prices and never drive alerts, comparisons or calculators. Provider `updatedAt` is not independently proved to be an underlying market-change time. The live four-karat trial succeeded, but one snapshot is not an uptime or accuracy guarantee.
+
+
+### Verified marketplace seller
+
+The added10g24kBTC listing at https://market.isagha.com/products/171 belongs to آل حسن عبر آي صاغة, not to every seller on the platform. Its schema, visible product price and product-table price must agree within one response. Seller, SKU171, direct URL,10g weight,24k purity and BTC brand must all match. Full fees and product-pricing time remain unknown, so it is a listed observation only and cannot qualify as the guaranteed lowest all-in offer. Other marketplace sellers require their own separately verified listing.
