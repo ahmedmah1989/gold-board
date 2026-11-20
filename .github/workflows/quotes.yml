@@ -13,7 +13,7 @@ permissions:
   pages: write
   id-token: write
 concurrency:
-  group: gold-board-quotes
+  group: gold-board-quotes-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
   cancel-in-progress: false
 jobs:
   validate:
