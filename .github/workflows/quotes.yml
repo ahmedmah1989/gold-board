@@ -12,12 +12,12 @@ permissions:
   contents: write
   pages: write
   id-token: write
-concurrency:
-  group: gold-board-quotes-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
-  cancel-in-progress: false
 jobs:
   validate:
     if: github.event_name == 'pull_request' || github.event_name == 'push'
+    concurrency:
+      group: gold-board-validate-${{ github.ref }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,6 +30,13 @@ jobs:
       - run: node monitor.test.js && node analytics.test.js && node alerts.test.js && node services.test.js
   collect:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    # Only the collector is serialized. The publication proof runs in its own job so a slow
+    # Pages build cannot hold the next 5-minute collection back.
+    concurrency:
+      group: gold-board-quotes-main
+      cancel-in-progress: false
+    outputs:
+      generated_at: ${{ steps.generated.outputs.generated_at }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     environment:
@@ -74,10 +81,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
-      - name: Prove published primary-quote freshness and signal independent monitor
-        env:
-          FRESHNESS_HEARTBEAT_URL: ${{ secrets.FRESHNESS_HEARTBEAT_URL }}
-        run: python published_health.py
+      - name: Record the generation time this run published
+        id: generated
+        run: python -c 'import json; print("generated_at=" + json.load(open("data/quotes.json"))["generatedAt"])' >> "$GITHUB_OUTPUT"
       - name: Daily history maintenance after current-price publication
         run: |
           python history_collect.py
@@ -90,3 +96,20 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ github.token }}
+  verify:
+    needs: collect
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prove published primary-quote freshness and signal independent monitor
+        env:
+          EXPECTED_GENERATED_AT: ${{ needs.collect.outputs.generated_at }}
+          FRESHNESS_HEARTBEAT_URL: ${{ secrets.FRESHNESS_HEARTBEAT_URL }}
+        run: python published_health.py
