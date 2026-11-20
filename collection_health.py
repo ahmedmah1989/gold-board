@@ -16,7 +16,7 @@ def receipt(previous, quotes, offers, now=None):
         except (TypeError, ValueError, AttributeError):
             return None
     gap = age(previous)
-    qage, oage = age(quotes.get('generatedAt')), age(offers.get('generatedAt'))
+    qage, oage = age(quotes.get('generatedAt')), age(offers.get('checkedAt') or offers.get('generatedAt'))
     return {'schemaVersion': 1, 'checkedAt': now.isoformat(), 'targetIntervalSeconds': 300,
             'schedulerGuarantee': False, 'previousCollectionTime': previous,
             'secondsSincePreviousCollection': gap,
