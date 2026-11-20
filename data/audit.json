@@ -1,19 +1,10 @@
 {
   "schemaVersion": 1,
-  "automatedCheckedAt": "2026-11-19T23:24:11.962091+00:00",
-  "quoteSnapshotTime": "2026-11-19T23:23:43.738018+00:00",
+  "automatedCheckedAt": "2026-11-20T00:02:57.987628+00:00",
+  "quoteSnapshotTime": "2026-11-20T00:02:30.619087+00:00",
   "arithmetic": {
     "method": "Python Decimal with original input prices; frontend independently checked in Node tests",
-    "values": {
-      "gramUSD": 116.65737481155162,
-      "globalEGP": 6284.3327810982855,
-      "gapEGP": 195.66721890171456,
-      "gapUSD": 3.6322112289161788,
-      "gapPercent": 3.1135718892900295,
-      "implied": 55.54728117676054,
-      "fxGap": 1.677281176760539,
-      "fxPercent": 3.1135718892900295
-    },
+    "values": {},
     "note": "Arithmetic only; snapshot timestamps must be assessed separately. Values are retained at quoteSnapshotTime, not live prices."
   },
   "historyProfile": {
@@ -21,9 +12,9 @@
     "availableWeekdays": 265,
     "missingWeekdays": [
       "2025-12-10",
-      "2026-11-19"
+      "2026-11-20"
     ],
-    "lastReferenceDate": "2026-11-18",
+    "lastReferenceDate": "2026-11-19",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
