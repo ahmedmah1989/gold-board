@@ -6,6 +6,7 @@ from datetime import datetime,timezone
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from retail_sources import extra_products,parse_btc,parse_lazurde,retailer_coverage
+from marketplace_sources import parse_isagha_product
 
 ROOT=Path(__file__).resolve().parent
 CATALOG=[
@@ -55,6 +56,10 @@ for c in CATALOG:
   PRODUCTS.append({**{k:v for k,v in c.items() if k!='id'},'productId':c['id'],'store':'جولد إيرا','brand':'Gold Era','url':'https://gold-era.eg/product/'+slug+'/','parser':'era','expectedTitle':title})
 
 PRODUCTS.extend(extra_products(CATALOG))
+# Verified seller-specific marketplace offer. Do not relabel other sellers as iSagha.
+PRODUCTS.append({'productId':'bar10','name':'سبيكة 10 جرام','kind':'bars','weight':10,'karat':24,
+ 'store':'آل حسن عبر آي صاغة','brand':'BTC','seller':'آل حسن','sku':'171','parser':'isagha_product',
+ 'url':'https://market.isagha.com/products/171'})
 
 class Text(HTMLParser):
  def __init__(self):super().__init__();self.values=[]
@@ -155,6 +160,7 @@ def fetch(product):
   elif product['parser']=='era':data=parse_era(html,product)
   elif product['parser']=='btc':data=parse_btc(html,product)
   elif product['parser']=='lazurde':data=parse_lazurde(html,product)
+  elif product['parser']=='isagha_product':data=parse_isagha_product(html,product)
   else:data=parse_jsonld(html,product)
   if not 100<data['listedPrice']/product['weight']<100000:raise ValueError('invalid_product_units')
   result.update(data,status='observed')
