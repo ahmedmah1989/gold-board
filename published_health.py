@@ -42,22 +42,35 @@ def ping(url):
     with urlopen(Request(url, data=b'', method='POST'), timeout=15) as r:
         if not 200 <= r.status < 300: raise ValueError('Heartbeat rejected')
 
+POLL_SECONDS = 20
+
+def wait_for_publication(fetch, check, expected, now=lambda: datetime.now(timezone.utc), sleep=time.sleep, window=600, poll=POLL_SECONDS):
+    """Poll until the published files prove a fresh run or the wall-clock window closes.
+    The window is the same 600 seconds validate() allows for every timestamp, measured from the
+    expected generation time, so waiting longer never accepts data older than that limit."""
+    try: start = datetime.fromisoformat(expected.replace('Z', '+00:00'))
+    except (AttributeError, ValueError): return False
+    if start.tzinfo is None: return False
+    while True:
+        current = now()
+        try:
+            if check(fetch('quotes.json'), fetch('offers.json'), current, expected): return True
+        except Exception:
+            pass  # Never include private heartbeat URLs in workflow errors.
+        if (current - start).total_seconds() + poll > window: return False
+        sleep(poll)
+
 def main():
     destination = os.environ.get('FRESHNESS_HEARTBEAT_URL', '')
     if not destination:
         print('Freshness heartbeat not configured; no external monitor was signaled.')
         return
-    expected = json.loads(Path('data/quotes.json').read_text())['generatedAt']
-    for attempt in range(6):
-        try:
-            if validate(get_json('quotes.json'), get_json('offers.json'), datetime.now(timezone.utc), expected):
-                ping(destination)
-                print('Published primary quote freshness verified; external heartbeat accepted.')
-                return
-        except Exception:
-            pass  # Never include private heartbeat URLs in workflow errors.
-        if attempt < 5: time.sleep(20)
-    print('Published freshness could not be proved; no success heartbeat sent.')
+    expected = os.environ.get('EXPECTED_GENERATED_AT') or json.loads(Path('data/quotes.json').read_text())['generatedAt']
+    if wait_for_publication(get_json, validate, expected):
+        ping(destination)
+        print('Published primary quote freshness verified; external heartbeat accepted.')
+        return
+    print('Published freshness could not be proved within the 10 minute wall-clock limit; no success heartbeat sent.')
     raise SystemExit(1)
 
 if __name__ == '__main__': main()
