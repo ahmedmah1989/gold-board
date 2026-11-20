@@ -45,7 +45,8 @@ class FollowupTests(unittest.TestCase):
     def test_receipt_rejects_missing_old_naive_future(self):
         for stamp in (None, 'bad', '2026-11-20T12:00:00', '2026-11-20T11:00:00Z', '2026-11-20T12:10:00Z'):
             self.assertEqual(receipt(None, {'generatedAt':stamp}, {'generatedAt':NOW.isoformat()}, NOW)['status'], 'delayed')
-        out=receipt('2026-11-20T11:55:00Z', {'generatedAt':NOW.isoformat()}, {'generatedAt':NOW.isoformat()}, NOW)
+        out=receipt('2026-11-20T11:55:00Z', {'generatedAt':NOW.isoformat()}, {'checkedAt':NOW.isoformat()}, NOW)
+        self.assertEqual(out['status'],'recent')
         self.assertFalse(out['missedTargetSincePrevious'])
 
 
