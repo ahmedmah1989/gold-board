@@ -3,9 +3,11 @@ on:
   push:
     branches: [main]
     paths: ['index.html', '**.js', '**.py', 'tests/fixtures/**', '.github/workflows/quotes.yml']
+  pull_request:
+    paths: ['**.js', '**.py', 'tests/fixtures/**', '.github/workflows/quotes.yml']
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '2-57/5 * * * *'
 permissions:
   contents: write
   pages: write
@@ -14,7 +16,20 @@ concurrency:
   group: gold-board-quotes
   cancel-in-progress: false
 jobs:
+  validate:
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -p 'test_*.py'
+      - run: node monitor.test.js && node analytics.test.js && node alerts.test.js && node services.test.js
   collect:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     environment:
@@ -29,10 +44,15 @@ jobs:
       - run: node analytics.test.js
       - run: node alerts.test.js
       - run: node services.test.js
-      - run: python history_collect.py
-      - run: python collect.py
+      - name: Preserve previous collection time
+        run: python -c 'import json,pathlib; p=pathlib.Path("data/quotes.json"); pathlib.Path("data/previous-collection-time.txt").write_text(json.loads(p.read_text()).get("generatedAt", "") if p.exists() else "")'
+      - name: Collect current prices and optional free API cross-check
+        env:
+          GOLDTIMO_API_KEY: ${{ secrets.GOLDTIMO_API_KEY }}
+        run: python collect.py
       - run: python local_history.py
       - run: python store_offers.py
+      - run: python collection_health.py
       - run: python audit_checks.py
       - run: node audit_snapshot.test.js
       - name: Verify Telegram connection and evaluate conditional alerts
@@ -44,7 +64,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/quotes.json data/alert-state.json data/offers.json data/history.json data/audit.json data/local-history.json
+          git add data/quotes.json data/alert-state.json data/offers.json data/history.json data/audit.json data/local-history.json data/collection-health.json
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh timestamped public source quotes'
             git pull --rebase
@@ -54,3 +74,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+      - name: Daily history maintenance after current-price publication
+        run: |
+          python history_collect.py
+          git add data/history.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh daily historical references'
+            git pull --rebase
+            git push
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
