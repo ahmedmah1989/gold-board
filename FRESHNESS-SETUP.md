@@ -31,3 +31,14 @@ https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-eve
 - PR tests run with read-only repository permission and no production secrets.
 - Frontend PR3 labels retail observations older than ten minutes as delayed while retaining their actual check time. It never relabels the check time as the market's own pricing timestamp.
 - Gold Timo is an optional server-side free cross-check. It is not the scheduler, not a dealer-specific source and not a guarantee of accuracy.
+
+
+## Provisioned account state, pending activation
+
+The free cron-job.org account and free Healthchecks.io account are email-verified. Their login is saved in the user's shared preferred-password vault entry. The Healthchecks check has a5minute period and5minute grace, with email delivery to the account owner ON. It has not been seeded with a fake success ping.
+
+The external dispatch job must remain disabled until its repository-scoped credential is installed and the owner-approved collector version is merged. GitHub token creation rejected two bounded attempts. The owner is supplying a fine-grained gold-board-only Actions read/write token through a secure vault request. No broader token was created.
+
+`published_health.py` reads the actual public `quotes.json` and `offers.json` after publication. It requires the expected run timestamp, recent collection and offer-check times, recent primary iSagha source and fetch times, finite positive21k/24k bid/ask values and a nonempty offer snapshot. It never substitutes fetch time for source time. Only then does it send success to the secret `FRESHNESS_HEARTBEAT_URL`. Stale data, old cached generations, invalid prices or an outage send no success, so the independent monitor eventually emails after the5+5minute window. A check that has never received its first real ping is not active coverage. Missing secret is reported as not configured, not healthy.
+
+This verifies primary local gold quote freshness, not every dealer's last price change. Published dealer observations are checks, not promises of executable prices. No free service supplies contractual end-to-end punctuality.
