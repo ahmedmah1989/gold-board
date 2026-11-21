@@ -42,11 +42,24 @@ def source_state(local, now):
         if p['buy'] > p['sell']: return None
     return 'fresh' if age <= 600 else 'quiet'
 
+def generated_at_least(published, expected):
+    """True when the published generation time is the expected run's own or a later one.
+    A newer published generation means a subsequent run superseded this one's commit
+    (its Pages build is cancelled when a newer push lands first); that still proves the
+    publication pipeline is alive, while an older one is this run not yet published."""
+    try:
+        pub = datetime.fromisoformat(published.replace('Z', '+00:00'))
+        want = datetime.fromisoformat(expected.replace('Z', '+00:00'))
+        if pub.tzinfo is None or want.tzinfo is None: return False
+        return pub >= want
+    except (TypeError, ValueError, AttributeError): return False
+
 def validate(quotes, offers, now, expected=None):
-    # Proves this run's collection was published. Source quietness never fails the
-    # pipeline proof here; it is reported by source_state() and surfaced as a warning.
+    # Proves a collection at or after this run's was published. Source quietness never
+    # fails the pipeline proof here; it is reported by source_state() and surfaced as a
+    # warning. Every other leg (recency of all timestamps, prices, offers) is unchanged.
     if not recent(quotes.get('generatedAt'), now): return False
-    if expected and quotes.get('generatedAt') != expected: return False
+    if expected and not generated_at_least(quotes.get('generatedAt'), expected): return False
     if not recent(offers.get('checkedAt'), now): return False
     local = quotes.get('sources', {}).get('isagha', {})
     if source_state(local, now) is None: return False
