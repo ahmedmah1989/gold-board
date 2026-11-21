@@ -1,6 +1,6 @@
 import copy, unittest
 from datetime import datetime, timezone, timedelta
-from published_health import validate, recent, wait_for_publication, source_state
+from published_health import validate, recent, wait_for_publication, source_state, generated_at_least
 
 class PublishedHealthTests(unittest.TestCase):
     def setUp(self):
@@ -11,6 +11,16 @@ class PublishedHealthTests(unittest.TestCase):
     def test_real_published_observation(self):
         self.assertTrue(validate(self.q,self.o,self.now,self.t))
         self.assertFalse(validate(self.q,self.o,self.now,'different-run'))
+    def test_newer_published_generation_proves_superseded_run_alive(self):
+        # A later run published over this one: pipeline demonstrably alive.
+        self.assertTrue(validate(self.q,self.o,self.now,(self.now-timedelta(minutes=3)).isoformat()))
+    def test_older_published_generation_is_not_this_run(self):
+        # A recent but older publication (previous cycle's file) must not satisfy this run.
+        self.q['generatedAt']=(self.now-timedelta(minutes=3)).isoformat()
+        self.assertFalse(validate(self.q,self.o,self.now,self.t))
+        self.assertFalse(generated_at_least('bad', self.t))
+        self.assertFalse(generated_at_least(self.t, 'bad'))
+        self.assertFalse(generated_at_least('2026-11-20T14:00:00', self.t))
     def test_fresh_fetch_cannot_hide_stale_provider(self):
         self.q['sources']['isagha']['sourceTime']=(self.now-timedelta(minutes=11)).isoformat()
         # The pipeline proof passes on its own timestamps; provider age is reported, not hidden.
