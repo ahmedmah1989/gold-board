@@ -24,16 +24,20 @@ def parse(html,name):
  buy,sell=[float(re.sub(r'[^\d.]','',v)) for v in rows[0][1:3]]
  if not 1<buy<=sell<1000:raise ValueError('unrecognized')
  if name=='cbe':
-  date=re.search(r'This page was last updated\s*(\d{1,2}\s+[A-Za-z]+\s+\d{4})',re.sub('<[^>]+>',' ',html))
-  if not date:raise ValueError('missing_time')
-  # A page-maintenance date does not establish the effective date of this USD row.
-  raise ValueError('missing_quote_time')
+  text=re.sub(r'<[^>]+>',' ',html)
+  # The table's own heading names the rate date (date only). The footer maintenance date is never used.
+  date=re.search(r'Average Market Rate in EGP\s+(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})',text)
+  if not date:raise ValueError('missing_quote_time')
+  try:day=datetime.strptime(' '.join(date.groups())[:40],'%d %b %Y' if len(date.group(2))==3 else '%d %B %Y').date()
+  except ValueError:raise ValueError('missing_quote_time')
+  if day>datetime.now(ZoneInfo('Africa/Cairo')).date():raise ValueError('missing_quote_time')
+  return {'buy':buy,'sell':sell,'quoteDate':day.isoformat(),'quoteDateKind':'official_daily_rate_date','quoteType':'average_market_reference'}
  raise ValueError('missing_time')
 
 def fetch(name):
  out={'url':URLS[name],'fetchedAt':datetime.now(timezone.utc).isoformat(),'quoteType':'average_market_reference' if name=='cbe' else 'bank_quote'}
  try:
-  req=urllib.request.Request(URLS[name],headers={'User-Agent':'GoldBoard/1.0 official public reference check'})
+  req=urllib.request.Request(URLS[name],headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36','Accept-Language':'en'})
   with urllib.request.urlopen(req,timeout=20) as response:html=response.read().decode('utf-8')
   out.update(parse(html,name),status='available')
  except ValueError as error:
