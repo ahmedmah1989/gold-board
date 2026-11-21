@@ -7,9 +7,11 @@ from zoneinfo import ZoneInfo
 from concurrent.futures import ThreadPoolExecutor
 from bank_sources import fetch as fetch_bank
 from goldtimo import crosscheck
+from silver_sources import parse_isagha_silver
 
 URLS = {
     'isagha': 'https://market.isagha.com/prices',
+    'isagha_silver': 'https://market.isagha.com/prices/silver',
     'misr': 'https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies',
     'gold': 'https://api.gold-api.com/price/XAU',
 }
@@ -61,7 +63,7 @@ def fetch(name):
             if raw.get('symbol')!='XAU' or raw.get('currency','USD')!='USD' or not math.isfinite(price) or not 100 < price < 100000: raise ValueError('Invalid ounce identity or price')
             data = {'sell': price, 'sourceTime': datetime.fromisoformat(raw['updatedAt'].replace('Z', '+00:00')).isoformat(), 'name': 'gold-api.com','sourceTimeKind':'provider_upstream_fetch','quoteType':'spot_reference','currency':'USD','unit':'troy_ounce'}
         else:
-            data = (parse_isagha if name == 'isagha' else parse_misr)(html)
+            data = {'isagha': parse_isagha, 'isagha_silver': parse_isagha_silver}.get(name, parse_misr)(html)
         age = (datetime.now(timezone.utc) - datetime.fromisoformat(data['sourceTime'])).total_seconds()
         if age < -120: raise ValueError('Source timestamp in future')
         return name, dict(data, status='available', requestedAt=now,fetchedAt=datetime.now(timezone.utc).isoformat(), url=URLS[name])
@@ -69,7 +71,7 @@ def fetch(name):
         return name, {'status': 'unavailable', 'fetchedAt': now, 'url': URLS[name], 'reason': 'تعذر توثيق السعر ووقت المصدر؛ لم يُستخدم سعر بديل'}
 
 if __name__ == '__main__':
-    with ThreadPoolExecutor(max_workers=3) as pool: sources = dict(pool.map(fetch, URLS))
+    with ThreadPoolExecutor(max_workers=4) as pool: sources = dict(pool.map(fetch, URLS))
     with ThreadPoolExecutor(max_workers=2) as pool: sources.update(dict(pool.map(fetch_bank, ['nbe','cbe'])))
     out = {'schemaVersion': 1, 'generatedAt': datetime.now(timezone.utc).isoformat(), 'sources': sources, 'crosschecks': {'goldtimo': crosscheck()}}
     Path('data').mkdir(exist_ok=True)
