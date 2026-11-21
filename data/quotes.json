@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-21T09:51:01.454774+00:00",
+  "generatedAt": "2026-11-21T09:55:48.245579+00:00",
   "sources": {
     "isagha": {
       "sourceTime": "2026-11-21T11:34:22+02:00",
@@ -14,32 +14,32 @@
         "buy": 5400.0
       },
       "status": "available",
-      "requestedAt": "2026-11-21T09:50:34.929689+00:00",
-      "fetchedAt": "2026-11-21T09:50:35.065510+00:00",
+      "requestedAt": "2026-11-21T09:55:21.205490+00:00",
+      "fetchedAt": "2026-11-21T09:55:21.487298+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "misr": {
       "status": "unavailable",
-      "fetchedAt": "2026-11-21T09:50:34.930310+00:00",
+      "fetchedAt": "2026-11-21T09:55:21.206353+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies",
       "reason": "تعذر توثيق السعر ووقت المصدر؛ لم يُستخدم سعر بديل"
     },
     "gold": {
       "sell": 3539.0,
-      "sourceTime": "2026-11-21T09:50:07+00:00",
+      "sourceTime": "2026-11-21T09:55:07+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-21T09:50:34.930758+00:00",
-      "fetchedAt": "2026-11-21T09:50:35.701045+00:00",
+      "requestedAt": "2026-11-21T09:55:21.206992+00:00",
+      "fetchedAt": "2026-11-21T09:55:21.492216+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-21T09:51:00.445365+00:00",
+      "fetchedAt": "2026-11-21T09:55:46.905415+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -47,7 +47,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-21T09:51:00.445644+00:00",
+      "fetchedAt": "2026-11-21T09:55:46.905789+00:00",
       "quoteType": "average_market_reference",
       "status": "unavailable",
       "errorCode": "blocked",
