@@ -1,6 +1,6 @@
 import copy, unittest
 from datetime import datetime, timezone, timedelta
-from published_health import validate, recent, wait_for_publication
+from published_health import validate, recent, wait_for_publication, source_state
 
 class PublishedHealthTests(unittest.TestCase):
     def setUp(self):
@@ -13,7 +13,15 @@ class PublishedHealthTests(unittest.TestCase):
         self.assertFalse(validate(self.q,self.o,self.now,'different-run'))
     def test_fresh_fetch_cannot_hide_stale_provider(self):
         self.q['sources']['isagha']['sourceTime']=(self.now-timedelta(minutes=11)).isoformat()
+        # The pipeline proof passes on its own timestamps; provider age is reported, not hidden.
+        self.assertTrue(validate(self.q,self.o,self.now))
+        self.assertEqual(source_state(self.q['sources']['isagha'],self.now),'quiet')
+    def test_fresh_provider_reports_fresh(self):
+        self.assertEqual(source_state(self.q['sources']['isagha'],self.now),'fresh')
+    def test_provider_older_than_display_limit_fails_closed(self):
+        self.q['sources']['isagha']['sourceTime']=(self.now-timedelta(hours=25)).isoformat()
         self.assertFalse(validate(self.q,self.o,self.now))
+        self.assertIsNone(source_state(self.q['sources']['isagha'],self.now))
     def test_static200_or_bad_times_not_healthy(self):
         for value in [None,'bad','2026-11-20T14:00:00',(self.now+timedelta(minutes=3)).isoformat(),(self.now-timedelta(minutes=11)).isoformat()]:
             self.assertFalse(recent(value,self.now))
