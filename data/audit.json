@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "automatedCheckedAt": "2026-11-22T09:23:36.241121+00:00",
-  "quoteSnapshotTime": "2026-11-22T09:23:09.979742+00:00",
+  "automatedCheckedAt": "2026-11-22T09:25:54.168291+00:00",
+  "quoteSnapshotTime": "2026-11-22T09:25:28.209112+00:00",
   "arithmetic": {
     "method": "Python Decimal with original input prices; frontend independently checked in Node tests",
     "values": {
       "gramUSD": 113.78149210637443,
       "globalEGP": 6155.578722954856,
-      "gapEGP": 135.9212770451437,
-      "gapUSD": 2.5124080784684604,
-      "gapPercent": 2.208099078292635,
-      "implied": 55.29458160135631,
-      "fxGap": 1.1945816013563153,
-      "fxPercent": 2.208099078292635
+      "gapEGP": 158.6712770451437,
+      "gapUSD": 2.9329256385423976,
+      "gapPercent": 2.5776825248524626,
+      "implied": 55.49452624594518,
+      "fxGap": 1.3945262459451822,
+      "fxPercent": 2.5776825248524626
     },
     "note": "Arithmetic only; snapshot timestamps must be assessed separately. Values are retained at quoteSnapshotTime, not live prices."
   },
