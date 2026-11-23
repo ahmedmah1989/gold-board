@@ -1,50 +1,50 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-23T08:55:32.221432+00:00",
+  "generatedAt": "2026-11-23T09:00:49.042289+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-23T10:55:16+02:00",
+      "sourceTime": "2026-11-23T11:00:23+02:00",
       "sourceTimeKind": "published_price_update",
       "24": {
-        "sell": 6400.0,
-        "buy": 6342.75
+        "sell": 6428.5,
+        "buy": 6371.5
       },
       "21": {
-        "sell": 5600.0,
-        "buy": 5550.0
+        "sell": 5625.0,
+        "buy": 5575.0
       },
       "status": "available",
-      "requestedAt": "2026-11-23T08:55:29.623982+00:00",
-      "fetchedAt": "2026-11-23T08:55:29.750796+00:00",
+      "requestedAt": "2026-11-23T09:00:42.814925+00:00",
+      "fetchedAt": "2026-11-23T09:00:43.200606+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "isagha_silver": {
       "source": "iSagha local trader quote",
       "unitBasis": "per gram, not printed on the page; matches the silver pound row on the same page; the same site lists 925 silver pound products of 8 g (products 9042 and 9053), but the row itself does not state weight or grade",
-      "sourceTime": "2026-11-23T10:32:11+02:00",
+      "sourceTime": "2026-11-23T10:57:59+02:00",
       "sourceTimeKind": "published_price_update",
       "unit": "gram",
       "currency": "EGP",
       "grades": {
         "999": {
-          "sell": 75.75,
-          "buy": 73.0
+          "sell": 77.0,
+          "buy": 74.0
         },
         "925": {
-          "sell": 70.25,
-          "buy": 67.75
+          "sell": 71.5,
+          "buy": 68.5
         },
         "900": {
-          "sell": 68.25,
-          "buy": 65.75
+          "sell": 69.5,
+          "buy": 66.75
         },
         "800": {
-          "sell": 60.75,
-          "buy": 58.5
+          "sell": 61.75,
+          "buy": 59.25
         },
         "600": {
-          "sell": 45.5,
-          "buy": 44.0
+          "sell": 46.25,
+          "buy": 44.5
         }
       },
       "ounceUsd": {
@@ -52,38 +52,38 @@
         "buy": 42.4
       },
       "status": "available",
-      "requestedAt": "2026-11-23T08:55:29.624597+00:00",
-      "fetchedAt": "2026-11-23T08:55:29.859843+00:00",
+      "requestedAt": "2026-11-23T09:00:42.815385+00:00",
+      "fetchedAt": "2026-11-23T09:00:43.351970+00:00",
       "url": "https://market.isagha.com/prices/silver"
     },
     "misr": {
-      "sourceTime": "2026-11-23T08:24:19+02:00",
-      "buy": 54.37,
-      "sell": 54.47,
+      "sourceTime": "2026-11-23T10:49:37+02:00",
+      "buy": 54.2,
+      "sell": 54.3,
       "quoteType": "notes",
       "sourceTimeKind": "bank_page_quote_update",
       "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "requestedAt": "2026-11-23T08:55:29.625009+00:00",
-      "fetchedAt": "2026-11-23T08:55:31.299400+00:00",
+      "requestedAt": "2026-11-23T09:00:42.815808+00:00",
+      "fetchedAt": "2026-11-23T09:00:47.476053+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 3611.800049,
-      "sourceTime": "2026-11-23T08:55:11+00:00",
+      "sell": 3613.649902,
+      "sourceTime": "2026-11-23T09:00:41+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-23T08:55:29.625402+00:00",
-      "fetchedAt": "2026-11-23T08:55:30.075658+00:00",
+      "requestedAt": "2026-11-23T09:00:42.816106+00:00",
+      "fetchedAt": "2026-11-23T09:00:43.060401+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-23T08:55:31.300100+00:00",
+      "fetchedAt": "2026-11-23T09:00:47.476470+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -91,7 +91,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-23T08:55:31.300319+00:00",
+      "fetchedAt": "2026-11-23T09:00:47.476665+00:00",
       "quoteType": "average_market_reference",
       "buy": 54.3743,
       "sell": 54.4743,
