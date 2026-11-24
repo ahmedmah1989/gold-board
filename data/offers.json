@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "catalogVersion": 4,
-  "checkedAt": "2026-11-24T16:06:05.625756+00:00",
+  "checkedAt": "2026-11-24T16:10:56.626457+00:00",
   "catalog": [
     {
       "id": "quarter",
@@ -92,7 +92,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Coins/Quarter-Gold-Coin/",
-      "requestedAt": "2026-11-24T16:05:40.171399+00:00",
+      "requestedAt": "2026-11-24T16:10:32.610978+00:00",
       "eligible": false,
       "listedPrice": 11365.0,
       "goldAmount": 11201.0,
@@ -108,9 +108,9 @@
       "buybackPrice": 11170.0,
       "cashback": 50.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:41.395958+00:00",
-      "previousPrice": 11385.0,
-      "previousCheckedAt": "2026-11-24T16:00:46.032101+00:00"
+      "checkedAt": "2026-11-24T16:10:34.114650+00:00",
+      "previousPrice": 11365.0,
+      "previousCheckedAt": "2026-11-24T16:05:41.395958+00:00"
     },
     {
       "name": "نصف جنيه ذهب",
@@ -121,7 +121,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Coins/Half-Gold-Coin/",
-      "requestedAt": "2026-11-24T16:05:40.172348+00:00",
+      "requestedAt": "2026-11-24T16:10:32.612301+00:00",
       "eligible": false,
       "listedPrice": 22710.0,
       "goldAmount": 22402.0,
@@ -137,9 +137,9 @@
       "buybackPrice": 22340.0,
       "cashback": 100.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:41.379616+00:00",
-      "previousPrice": 22750.0,
-      "previousCheckedAt": "2026-11-24T16:00:46.027837+00:00"
+      "checkedAt": "2026-11-24T16:10:33.962497+00:00",
+      "previousPrice": 22710.0,
+      "previousCheckedAt": "2026-11-24T16:05:41.379616+00:00"
     },
     {
       "name": "نصف جنيه ذهب",
@@ -150,9 +150,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/coins/btc-half-gold-pound-4-grams",
-      "requestedAt": "2026-11-24T16:05:41.379795+00:00",
+      "requestedAt": "2026-11-24T16:10:33.962585+00:00",
       "eligible": false,
-      "listedPrice": 22440.0,
+      "listedPrice": 22460.0,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -164,9 +164,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 328.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:43.310118+00:00",
+      "checkedAt": "2026-11-24T16:10:35.294624+00:00",
       "previousPrice": 22440.0,
-      "previousCheckedAt": "2026-11-24T16:00:47.366256+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:43.310118+00:00"
     },
     {
       "name": "جنيه ذهب",
@@ -177,7 +177,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Coins/One-Gold-Coin/",
-      "requestedAt": "2026-11-24T16:05:41.396015+00:00",
+      "requestedAt": "2026-11-24T16:10:34.114769+00:00",
       "eligible": false,
       "listedPrice": 45375.0,
       "goldAmount": 44799.0,
@@ -193,9 +193,9 @@
       "buybackPrice": 44680.0,
       "cashback": 200.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:42.805452+00:00",
-      "previousPrice": 45455.0,
-      "previousCheckedAt": "2026-11-24T16:00:47.305214+00:00"
+      "checkedAt": "2026-11-24T16:10:35.285525+00:00",
+      "previousPrice": 45375.0,
+      "previousCheckedAt": "2026-11-24T16:05:42.805452+00:00"
     },
     {
       "name": "جنيه ذهب",
@@ -206,9 +206,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/coins/btc-gold-pound-8-gm",
-      "requestedAt": "2026-11-24T16:05:42.644582+00:00",
+      "requestedAt": "2026-11-24T16:10:34.904862+00:00",
       "eligible": false,
-      "listedPrice": 44880.0,
+      "listedPrice": 44920.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -220,9 +220,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 616.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:44.585396+00:00",
+      "checkedAt": "2026-11-24T16:10:36.420506+00:00",
       "previousPrice": 44880.0,
-      "previousCheckedAt": "2026-11-24T16:00:48.933439+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:44.585396+00:00"
     },
     {
       "name": "سبيكة 1 جرام",
@@ -233,7 +233,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/1gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:42.805497+00:00",
+      "requestedAt": "2026-11-24T16:10:35.285573+00:00",
       "eligible": false,
       "listedPrice": 6550.0,
       "goldAmount": 6398.0,
@@ -249,9 +249,9 @@
       "buybackPrice": 6385.0,
       "cashback": 29.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:43.472020+00:00",
-      "previousPrice": 6565.0,
-      "previousCheckedAt": "2026-11-24T16:00:48.015102+00:00"
+      "checkedAt": "2026-11-24T16:10:36.899068+00:00",
+      "previousPrice": 6550.0,
+      "previousCheckedAt": "2026-11-24T16:05:43.472020+00:00"
     },
     {
       "name": "سبيكة 1 جرام",
@@ -262,9 +262,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-1-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:43.310210+00:00",
+      "requestedAt": "2026-11-24T16:10:35.294758+00:00",
       "eligible": false,
-      "listedPrice": 6411.43,
+      "listedPrice": 6417.14,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -276,9 +276,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 187.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:45.313374+00:00",
+      "checkedAt": "2026-11-24T16:10:37.046209+00:00",
       "previousPrice": 6411.43,
-      "previousCheckedAt": "2026-11-24T16:00:49.298792+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:45.313374+00:00"
     },
     {
       "name": "سبيكة 2.5 جرام",
@@ -289,7 +289,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/2.5gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:43.472064+00:00",
+      "requestedAt": "2026-11-24T16:10:36.420631+00:00",
       "eligible": false,
       "listedPrice": 16250.0,
       "goldAmount": 15995.0,
@@ -305,9 +305,9 @@
       "buybackPrice": 15960.0,
       "cashback": 72.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:44.147255+00:00",
-      "previousPrice": 16280.0,
-      "previousCheckedAt": "2026-11-24T16:00:49.251787+00:00"
+      "checkedAt": "2026-11-24T16:10:37.296955+00:00",
+      "previousPrice": 16250.0,
+      "previousCheckedAt": "2026-11-24T16:05:44.147255+00:00"
     },
     {
       "name": "سبيكة 2.5 جرام",
@@ -318,9 +318,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-25-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:44.147305+00:00",
+      "requestedAt": "2026-11-24T16:10:36.899131+00:00",
       "eligible": false,
-      "listedPrice": 16028.575,
+      "listedPrice": 16042.85,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -332,9 +332,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 280.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:46.086093+00:00",
+      "checkedAt": "2026-11-24T16:10:38.891031+00:00",
       "previousPrice": 16028.575,
-      "previousCheckedAt": "2026-11-24T16:00:51.014763+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:46.086093+00:00"
     },
     {
       "name": "سبيكة 5 جرام",
@@ -345,7 +345,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/5gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:44.585485+00:00",
+      "requestedAt": "2026-11-24T16:10:37.046339+00:00",
       "eligible": false,
       "listedPrice": 32390.0,
       "goldAmount": 31995.0,
@@ -361,9 +361,9 @@
       "buybackPrice": 31915.0,
       "cashback": 145.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:45.237481+00:00",
-      "previousPrice": 32450.0,
-      "previousCheckedAt": "2026-11-24T16:00:50.288431+00:00"
+      "checkedAt": "2026-11-24T16:10:38.012694+00:00",
+      "previousPrice": 32390.0,
+      "previousCheckedAt": "2026-11-24T16:05:45.237481+00:00"
     },
     {
       "name": "سبيكة 5 جرام",
@@ -374,9 +374,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-5-gram-golds-bar",
-      "requestedAt": "2026-11-24T16:05:45.237525+00:00",
+      "requestedAt": "2026-11-24T16:10:37.297014+00:00",
       "eligible": false,
-      "listedPrice": 32057.15,
+      "listedPrice": 32085.7,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -388,9 +388,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 435.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:47.396452+00:00",
+      "checkedAt": "2026-11-24T16:10:38.746040+00:00",
       "previousPrice": 32057.15,
-      "previousCheckedAt": "2026-11-24T16:00:50.831538+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:47.396452+00:00"
     },
     {
       "name": "سبيكة 10 جرام",
@@ -401,7 +401,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/10gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:45.313475+00:00",
+      "requestedAt": "2026-11-24T16:10:38.012753+00:00",
       "eligible": false,
       "listedPrice": 64760.0,
       "goldAmount": 63990.0,
@@ -417,9 +417,9 @@
       "buybackPrice": 63830.0,
       "cashback": 290.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:46.216152+00:00",
-      "previousPrice": 64880.0,
-      "previousCheckedAt": "2026-11-24T16:00:51.542686+00:00"
+      "checkedAt": "2026-11-24T16:10:39.406885+00:00",
+      "previousPrice": 64760.0,
+      "previousCheckedAt": "2026-11-24T16:05:46.216152+00:00"
     },
     {
       "name": "سبيكة 10 جرام",
@@ -430,9 +430,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-10-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:46.086181+00:00",
+      "requestedAt": "2026-11-24T16:10:38.746190+00:00",
       "eligible": false,
-      "listedPrice": 64114.3,
+      "listedPrice": 64171.4,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -444,9 +444,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 840.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:48.028385+00:00",
+      "checkedAt": "2026-11-24T16:10:40.466426+00:00",
       "previousPrice": 64114.3,
-      "previousCheckedAt": "2026-11-24T16:00:52.620283+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:48.028385+00:00"
     },
     {
       "name": "سبيكة 20 جرام",
@@ -457,7 +457,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/20gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:46.216197+00:00",
+      "requestedAt": "2026-11-24T16:10:38.891167+00:00",
       "eligible": false,
       "listedPrice": 129500.0,
       "goldAmount": 127980.0,
@@ -473,9 +473,9 @@
       "buybackPrice": 127660.0,
       "cashback": 580.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:46.865134+00:00",
-      "previousPrice": 129740.0,
-      "previousCheckedAt": "2026-11-24T16:00:51.739267+00:00"
+      "checkedAt": "2026-11-24T16:10:40.058188+00:00",
+      "previousPrice": 129500.0,
+      "previousCheckedAt": "2026-11-24T16:05:46.865134+00:00"
     },
     {
       "name": "سبيكة 20 جرام",
@@ -486,9 +486,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-20-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:46.865177+00:00",
+      "requestedAt": "2026-11-24T16:10:39.406948+00:00",
       "eligible": false,
-      "listedPrice": 128228.6,
+      "listedPrice": 128342.8,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -500,9 +500,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 1640.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:48.790530+00:00",
+      "checkedAt": "2026-11-24T16:10:40.782263+00:00",
       "previousPrice": 128228.6,
-      "previousCheckedAt": "2026-11-24T16:00:53.603537+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:48.790530+00:00"
     },
     {
       "name": "سبيكة 50 جرام",
@@ -513,7 +513,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/50gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:47.396593+00:00",
+      "requestedAt": "2026-11-24T16:10:40.058239+00:00",
       "eligible": false,
       "listedPrice": 323600.0,
       "goldAmount": 319950.0,
@@ -529,9 +529,9 @@
       "buybackPrice": 319150.0,
       "cashback": 1450.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:48.008906+00:00",
-      "previousPrice": 324200.0,
-      "previousCheckedAt": "2026-11-24T16:00:52.447476+00:00"
+      "checkedAt": "2026-11-24T16:10:40.918849+00:00",
+      "previousPrice": 323600.0,
+      "previousCheckedAt": "2026-11-24T16:05:48.008906+00:00"
     },
     {
       "name": "سبيكة 50 جرام",
@@ -542,9 +542,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-50-gram-golds-bar",
-      "requestedAt": "2026-11-24T16:05:48.008961+00:00",
+      "requestedAt": "2026-11-24T16:10:40.466587+00:00",
       "eligible": false,
-      "listedPrice": 320571.5,
+      "listedPrice": 320857.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -556,9 +556,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 3950.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:49.939446+00:00",
+      "checkedAt": "2026-11-24T16:10:41.930056+00:00",
       "previousPrice": 320571.5,
-      "previousCheckedAt": "2026-11-24T16:00:53.943272+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:49.939446+00:00"
     },
     {
       "name": "سبيكة 100 جرام",
@@ -569,7 +569,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/100gr-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:48.028519+00:00",
+      "requestedAt": "2026-11-24T16:10:40.782418+00:00",
       "eligible": false,
       "listedPrice": 647100.0,
       "goldAmount": 639900.0,
@@ -585,9 +585,9 @@
       "buybackPrice": 638300.0,
       "cashback": 2900.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:48.730775+00:00",
-      "previousPrice": 648300.0,
-      "previousCheckedAt": "2026-11-24T16:00:53.324015+00:00"
+      "checkedAt": "2026-11-24T16:10:41.730505+00:00",
+      "previousPrice": 647100.0,
+      "previousCheckedAt": "2026-11-24T16:05:48.730775+00:00"
     },
     {
       "name": "سبيكة 100 جرام",
@@ -598,9 +598,9 @@
       "store": "دهب زمان",
       "brand": "BTC",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/btc-100-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:48.730819+00:00",
+      "requestedAt": "2026-11-24T16:10:40.918909+00:00",
       "eligible": false,
-      "listedPrice": 641143.0,
+      "listedPrice": 641714.0,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -612,9 +612,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 7700.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:50.476598+00:00",
+      "checkedAt": "2026-11-24T16:10:42.388727+00:00",
       "previousPrice": 641143.0,
-      "previousCheckedAt": "2026-11-24T16:00:55.167941+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:50.476598+00:00"
     },
     {
       "name": "أونصة ذهب فعلية",
@@ -626,7 +626,7 @@
       "store": "الجلا جولد",
       "brand": "El Galla",
       "url": "https://www.elgallagold.com/shop/Gold-Bars/One-Troy-Ounce-Gold-Bar/",
-      "requestedAt": "2026-11-24T16:05:48.790666+00:00",
+      "requestedAt": "2026-11-24T16:10:41.730555+00:00",
       "eligible": false,
       "listedPrice": 201340.0,
       "goldAmount": 199008.0,
@@ -642,9 +642,9 @@
       "buybackPrice": 198510.0,
       "cashback": 902.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:49.440519+00:00",
-      "previousPrice": 201715.0,
-      "previousCheckedAt": "2026-11-24T16:00:54.838227+00:00"
+      "checkedAt": "2026-11-24T16:10:42.934302+00:00",
+      "previousPrice": 201340.0,
+      "previousCheckedAt": "2026-11-24T16:05:49.440519+00:00"
     },
     {
       "name": "سبيكة 1 جرام",
@@ -655,9 +655,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-1-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:49.440562+00:00",
+      "requestedAt": "2026-11-24T16:10:41.930210+00:00",
       "eligible": false,
-      "listedPrice": 6411.43,
+      "listedPrice": 6417.14,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -669,9 +669,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 175.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:51.309111+00:00",
+      "checkedAt": "2026-11-24T16:10:43.439448+00:00",
       "previousPrice": 6411.43,
-      "previousCheckedAt": "2026-11-24T16:00:55.859294+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:51.309111+00:00"
     },
     {
       "name": "سبيكة 5 جرام",
@@ -682,9 +682,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-5-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:50.476698+00:00",
+      "requestedAt": "2026-11-24T16:10:42.934360+00:00",
       "eligible": false,
-      "listedPrice": 32057.15,
+      "listedPrice": 32085.7,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -696,9 +696,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 385.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:52.418396+00:00",
+      "checkedAt": "2026-11-24T16:10:44.252476+00:00",
       "previousPrice": 32057.15,
-      "previousCheckedAt": "2026-11-24T16:00:56.675648+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:52.418396+00:00"
     },
     {
       "name": "سبيكة 10 جرام",
@@ -709,9 +709,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-10-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:51.309403+00:00",
+      "requestedAt": "2026-11-24T16:10:43.439604+00:00",
       "eligible": false,
-      "listedPrice": 64114.3,
+      "listedPrice": 64171.4,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -723,9 +723,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 750.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:53.248860+00:00",
+      "checkedAt": "2026-11-24T16:10:44.834466+00:00",
       "previousPrice": 64114.3,
-      "previousCheckedAt": "2026-11-24T16:00:57.753834+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:53.248860+00:00"
     },
     {
       "name": "سبيكة 20 جرام",
@@ -736,9 +736,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-20-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:51.948897+00:00",
+      "requestedAt": "2026-11-24T16:10:44.048627+00:00",
       "eligible": false,
-      "listedPrice": 128228.6,
+      "listedPrice": 128342.8,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -750,9 +750,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 1400.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:53.895840+00:00",
+      "checkedAt": "2026-11-24T16:10:45.378425+00:00",
       "previousPrice": 128228.6,
-      "previousCheckedAt": "2026-11-24T16:00:58.531313+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:53.895840+00:00"
     },
     {
       "name": "سبيكة 50 جرام",
@@ -763,9 +763,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-50-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:52.418856+00:00",
+      "requestedAt": "2026-11-24T16:10:44.252640+00:00",
       "eligible": false,
-      "listedPrice": 320571.5,
+      "listedPrice": 320857.0,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -777,9 +777,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 3300.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:54.362071+00:00",
+      "checkedAt": "2026-11-24T16:10:45.568467+00:00",
       "previousPrice": 320571.5,
-      "previousCheckedAt": "2026-11-24T16:00:59.344205+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:54.362071+00:00"
     },
     {
       "name": "سبيكة 100 جرام",
@@ -790,9 +790,9 @@
       "store": "دهب زمان",
       "brand": "Gold Era",
       "url": "https://dahabzaman.eg/en/products/gold/ingots/gold-era-100-gram-gold-bar",
-      "requestedAt": "2026-11-24T16:05:53.248973+00:00",
+      "requestedAt": "2026-11-24T16:10:44.834599+00:00",
       "eligible": false,
-      "listedPrice": 641143.0,
+      "listedPrice": 641714.0,
       "sourceTime": null,
       "inStock": false,
       "manufacturingIncluded": null,
@@ -804,9 +804,9 @@
       "reason": "سعر منشور للمنتج؛ شمول المصنعية والضريبة والدمغة ووقت التسعير غير مؤكدة، والسعر النهائي يراجَع لدى المتجر.",
       "declaredMakingCharge": 6400.0,
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:55.398473+00:00",
+      "checkedAt": "2026-11-24T16:10:46.319077+00:00",
       "previousPrice": 641143.0,
-      "previousCheckedAt": "2026-11-24T16:00:59.838724+00:00"
+      "previousCheckedAt": "2026-11-24T16:05:55.398473+00:00"
     },
     {
       "name": "ربع جنيه ذهب",
@@ -817,9 +817,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/quarter-gold-pound-2-gm-queen-elizabeth-2/",
-      "requestedAt": "2026-11-24T16:05:53.895991+00:00",
+      "requestedAt": "2026-11-24T16:10:45.378597+00:00",
       "eligible": false,
-      "listedPrice": 11330.0,
+      "listedPrice": 11350.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -830,9 +830,9 @@
       "productTitle": "Quarter Gold Pound – 2 gm (Queen Elizabeth)",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:56.301902+00:00",
-      "previousPrice": 11340.0,
-      "previousCheckedAt": "2026-11-24T16:01:00.659141+00:00"
+      "checkedAt": "2026-11-24T16:10:47.536763+00:00",
+      "previousPrice": 11330.0,
+      "previousCheckedAt": "2026-11-24T16:05:56.301902+00:00"
     },
     {
       "name": "نصف جنيه ذهب",
@@ -843,9 +843,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/half-gold-pound-4-gm-queen-elizabeth-2/",
-      "requestedAt": "2026-11-24T16:05:54.362210+00:00",
+      "requestedAt": "2026-11-24T16:10:45.568630+00:00",
       "eligible": false,
-      "listedPrice": 22640.0,
+      "listedPrice": 22680.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -856,9 +856,9 @@
       "productTitle": "Half Gold Pound – 4 gm (Queen Elizabeth)",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:56.995872+00:00",
-      "previousPrice": 22660.0,
-      "previousCheckedAt": "2026-11-24T16:01:01.601658+00:00"
+      "checkedAt": "2026-11-24T16:10:47.682103+00:00",
+      "previousPrice": 22640.0,
+      "previousCheckedAt": "2026-11-24T16:05:56.995872+00:00"
     },
     {
       "name": "جنيه ذهب",
@@ -869,9 +869,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-pound-8-gm-queen-elizabeth-2/",
-      "requestedAt": "2026-11-24T16:05:55.398607+00:00",
+      "requestedAt": "2026-11-24T16:10:46.319234+00:00",
       "eligible": false,
-      "listedPrice": 45256.0,
+      "listedPrice": 45336.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": null,
@@ -882,9 +882,9 @@
       "productTitle": "Gold Pound – 8 gm (Queen Elizabeth)",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:57.179580+00:00",
-      "previousPrice": 45296.0,
-      "previousCheckedAt": "2026-11-24T16:01:01.628699+00:00"
+      "checkedAt": "2026-11-24T16:10:48.371980+00:00",
+      "previousPrice": 45256.0,
+      "previousCheckedAt": "2026-11-24T16:05:57.179580+00:00"
     },
     {
       "name": "سبيكة 1 جرام",
@@ -895,9 +895,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-era-1-gram-gold-bar/",
-      "requestedAt": "2026-11-24T16:05:56.301971+00:00",
+      "requestedAt": "2026-11-24T16:10:47.536829+00:00",
       "eligible": false,
-      "listedPrice": 6558.0,
+      "listedPrice": 6569.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -908,9 +908,9 @@
       "productTitle": "Gold 1 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:58.760375+00:00",
-      "previousPrice": 6564.0,
-      "previousCheckedAt": "2026-11-24T16:01:02.920246+00:00"
+      "checkedAt": "2026-11-24T16:10:49.319248+00:00",
+      "previousPrice": 6558.0,
+      "previousCheckedAt": "2026-11-24T16:05:58.760375+00:00"
     },
     {
       "name": "سبيكة 2.5 جرام",
@@ -921,9 +921,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-era-2-5-gold-grams-bar/",
-      "requestedAt": "2026-11-24T16:05:56.995955+00:00",
+      "requestedAt": "2026-11-24T16:10:47.682169+00:00",
       "eligible": false,
-      "listedPrice": 16220.0,
+      "listedPrice": 16248.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -934,9 +934,9 @@
       "productTitle": "Gold 2.5 Grams Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:58.959836+00:00",
-      "previousPrice": 16234.0,
-      "previousCheckedAt": "2026-11-24T16:01:03.357686+00:00"
+      "checkedAt": "2026-11-24T16:10:49.385360+00:00",
+      "previousPrice": 16220.0,
+      "previousCheckedAt": "2026-11-24T16:05:58.959836+00:00"
     },
     {
       "name": "سبيكة 5 جرام",
@@ -947,9 +947,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-era-5-grams-gold-bar/",
-      "requestedAt": "2026-11-24T16:05:57.179633+00:00",
+      "requestedAt": "2026-11-24T16:10:48.372063+00:00",
       "eligible": false,
-      "listedPrice": 32299.0,
+      "listedPrice": 32356.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -960,9 +960,9 @@
       "productTitle": "Gold 5 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:05:59.121834+00:00",
-      "previousPrice": 32328.0,
-      "previousCheckedAt": "2026-11-24T16:01:03.811988+00:00"
+      "checkedAt": "2026-11-24T16:10:50.298024+00:00",
+      "previousPrice": 32299.0,
+      "previousCheckedAt": "2026-11-24T16:05:59.121834+00:00"
     },
     {
       "name": "سبيكة 10 جرام",
@@ -973,9 +973,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-era-10-grams-gold-ingot/",
-      "requestedAt": "2026-11-24T16:05:58.760495+00:00",
+      "requestedAt": "2026-11-24T16:10:49.319435+00:00",
       "eligible": false,
-      "listedPrice": 64579.0,
+      "listedPrice": 64693.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -986,9 +986,9 @@
       "productTitle": "Gold 10 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:00.669794+00:00",
-      "previousPrice": 64636.0,
-      "previousCheckedAt": "2026-11-24T16:01:04.720267+00:00"
+      "checkedAt": "2026-11-24T16:10:50.878374+00:00",
+      "previousPrice": 64579.0,
+      "previousCheckedAt": "2026-11-24T16:06:00.669794+00:00"
     },
     {
       "name": "سبيكة 20 جرام",
@@ -999,9 +999,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/20-grams-gold-bar/",
-      "requestedAt": "2026-11-24T16:05:58.959891+00:00",
+      "requestedAt": "2026-11-24T16:10:49.385423+00:00",
       "eligible": false,
-      "listedPrice": 129057.0,
+      "listedPrice": 129286.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -1012,9 +1012,9 @@
       "productTitle": "Gold 20 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:00.821502+00:00",
-      "previousPrice": 129171.0,
-      "previousCheckedAt": "2026-11-24T16:01:05.210541+00:00"
+      "checkedAt": "2026-11-24T16:10:51.093242+00:00",
+      "previousPrice": 129057.0,
+      "previousCheckedAt": "2026-11-24T16:06:00.821502+00:00"
     },
     {
       "name": "سبيكة 50 جرام",
@@ -1025,9 +1025,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/gold-era-gold-50-grams-bar/",
-      "requestedAt": "2026-11-24T16:05:59.121882+00:00",
+      "requestedAt": "2026-11-24T16:10:50.298089+00:00",
       "eligible": false,
-      "listedPrice": 322443.0,
+      "listedPrice": 323014.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -1038,9 +1038,9 @@
       "productTitle": "Gold 50 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:00.839314+00:00",
-      "previousPrice": 322729.0,
-      "previousCheckedAt": "2026-11-24T16:01:05.676363+00:00"
+      "checkedAt": "2026-11-24T16:10:52.033372+00:00",
+      "previousPrice": 322443.0,
+      "previousCheckedAt": "2026-11-24T16:06:00.839314+00:00"
     },
     {
       "name": "سبيكة 100 جرام",
@@ -1051,9 +1051,9 @@
       "store": "جولد إيرا",
       "brand": "Gold Era",
       "url": "https://gold-era.eg/product/100-grams-gold-bar/",
-      "requestedAt": "2026-11-24T16:06:00.669846+00:00",
+      "requestedAt": "2026-11-24T16:10:50.878447+00:00",
       "eligible": false,
-      "listedPrice": 644686.0,
+      "listedPrice": 645829.0,
       "sourceTime": null,
       "inStock": true,
       "manufacturingIncluded": true,
@@ -1064,9 +1064,9 @@
       "productTitle": "Gold 100 Gram Ingot",
       "reason": "سعر المنتج مطابق لصفحة الشراء. شمول الضريبة والشحن يراجع قبل الدفع.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:02.665898+00:00",
-      "previousPrice": 645257.0,
-      "previousCheckedAt": "2026-11-24T16:01:06.556068+00:00"
+      "checkedAt": "2026-11-24T16:10:52.942166+00:00",
+      "previousPrice": 644686.0,
+      "previousCheckedAt": "2026-11-24T16:06:02.665898+00:00"
     },
     {
       "name": "ربع جنيه ذهب",
@@ -1077,7 +1077,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/2gm-322",
-      "requestedAt": "2026-11-24T16:06:00.821554+00:00",
+      "requestedAt": "2026-11-24T16:10:51.093314+00:00",
       "eligible": false,
       "listedPrice": 11715.75,
       "sourceTime": null,
@@ -1090,9 +1090,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:02.081659+00:00",
+      "checkedAt": "2026-11-24T16:10:52.502230+00:00",
       "previousPrice": 11715.75,
-      "previousCheckedAt": "2026-11-24T16:01:07.319880+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:02.081659+00:00"
     },
     {
       "name": "نصف جنيه ذهب",
@@ -1103,7 +1103,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/4gm-329",
-      "requestedAt": "2026-11-24T16:06:00.839353+00:00",
+      "requestedAt": "2026-11-24T16:10:52.033438+00:00",
       "eligible": false,
       "listedPrice": 23411.0,
       "sourceTime": null,
@@ -1116,9 +1116,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:02.077318+00:00",
+      "checkedAt": "2026-11-24T16:10:53.412145+00:00",
       "previousPrice": 23411.0,
-      "previousCheckedAt": "2026-11-24T16:01:07.453402+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:02.077318+00:00"
     },
     {
       "name": "جنيه ذهب",
@@ -1129,7 +1129,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/8gm-340",
-      "requestedAt": "2026-11-24T16:06:02.077366+00:00",
+      "requestedAt": "2026-11-24T16:10:52.502274+00:00",
       "eligible": false,
       "listedPrice": 46781.0,
       "sourceTime": null,
@@ -1142,9 +1142,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:03.231354+00:00",
+      "checkedAt": "2026-11-24T16:10:54.560825+00:00",
       "previousPrice": 46781.0,
-      "previousCheckedAt": "2026-11-24T16:01:08.535064+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:03.231354+00:00"
     },
     {
       "name": "سبيكة 1 جرام",
@@ -1155,7 +1155,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/1gm-311",
-      "requestedAt": "2026-11-24T16:06:02.081695+00:00",
+      "requestedAt": "2026-11-24T16:10:52.942240+00:00",
       "eligible": false,
       "listedPrice": 6784.11,
       "sourceTime": null,
@@ -1168,9 +1168,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:03.288727+00:00",
+      "checkedAt": "2026-11-24T16:10:53.920314+00:00",
       "previousPrice": 6784.11,
-      "previousCheckedAt": "2026-11-24T16:01:09.283578+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:03.288727+00:00"
     },
     {
       "name": "سبيكة 2.5 جرام",
@@ -1181,7 +1181,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/2-5gm-314",
-      "requestedAt": "2026-11-24T16:06:02.665987+00:00",
+      "requestedAt": "2026-11-24T16:10:53.412206+00:00",
       "eligible": false,
       "listedPrice": 16768.08,
       "sourceTime": null,
@@ -1194,9 +1194,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:03.664116+00:00",
+      "checkedAt": "2026-11-24T16:10:54.424018+00:00",
       "previousPrice": 16768.08,
-      "previousCheckedAt": "2026-11-24T16:01:08.552401+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:03.664116+00:00"
     },
     {
       "name": "سبيكة 5 جرام",
@@ -1207,7 +1207,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/5gm-335",
-      "requestedAt": "2026-11-24T16:06:03.231409+00:00",
+      "requestedAt": "2026-11-24T16:10:53.920367+00:00",
       "eligible": false,
       "listedPrice": 33408.04,
       "sourceTime": null,
@@ -1220,9 +1220,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:04.208714+00:00",
+      "checkedAt": "2026-11-24T16:10:54.850975+00:00",
       "previousPrice": 33408.04,
-      "previousCheckedAt": "2026-11-24T16:01:09.578062+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:04.208714+00:00"
     },
     {
       "name": "سبيكة 10 جرام",
@@ -1233,7 +1233,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/10gm-307",
-      "requestedAt": "2026-11-24T16:06:03.288765+00:00",
+      "requestedAt": "2026-11-24T16:10:54.424075+00:00",
       "eligible": false,
       "listedPrice": 66785.33,
       "sourceTime": null,
@@ -1246,9 +1246,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:04.402681+00:00",
+      "checkedAt": "2026-11-24T16:10:55.369137+00:00",
       "previousPrice": 66785.33,
-      "previousCheckedAt": "2026-11-24T16:01:09.534522+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:04.402681+00:00"
     },
     {
       "name": "سبيكة 20 جرام",
@@ -1259,7 +1259,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/20gm-318",
-      "requestedAt": "2026-11-24T16:06:03.664168+00:00",
+      "requestedAt": "2026-11-24T16:10:54.560891+00:00",
       "eligible": false,
       "listedPrice": 133529.67,
       "sourceTime": null,
@@ -1272,9 +1272,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:04.735751+00:00",
+      "checkedAt": "2026-11-24T16:10:55.412268+00:00",
       "previousPrice": 133529.67,
-      "previousCheckedAt": "2026-11-24T16:01:10.182148+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:04.735751+00:00"
     },
     {
       "name": "سبيكة 50 جرام",
@@ -1285,7 +1285,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/50gm-334",
-      "requestedAt": "2026-11-24T16:06:04.208767+00:00",
+      "requestedAt": "2026-11-24T16:10:54.851036+00:00",
       "eligible": false,
       "listedPrice": 333670.42,
       "sourceTime": null,
@@ -1298,9 +1298,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:05.624624+00:00",
+      "checkedAt": "2026-11-24T16:10:56.625368+00:00",
       "previousPrice": 333670.42,
-      "previousCheckedAt": "2026-11-24T16:01:10.604171+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:05.624624+00:00"
     },
     {
       "name": "سبيكة 100 جرام",
@@ -1311,7 +1311,7 @@
       "store": "BTC",
       "brand": "BTC",
       "url": "https://eg-backend.bulliontradingcenter.com/shop/100gm-306",
-      "requestedAt": "2026-11-24T16:06:04.402733+00:00",
+      "requestedAt": "2026-11-24T16:10:55.369204+00:00",
       "eligible": false,
       "listedPrice": 667135.83,
       "sourceTime": null,
@@ -1324,9 +1324,9 @@
       "priceKind": "indicative",
       "reason": "سعر استرشادي للوزن المعروض. التصميم والتوافر والرسوم والإجمالي يراجعون قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:05.364973+00:00",
+      "checkedAt": "2026-11-24T16:10:56.226399+00:00",
       "previousPrice": 667135.83,
-      "previousCheckedAt": "2026-11-24T16:01:10.544748+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:05.364973+00:00"
     },
     {
       "productId": "bar10",
@@ -1339,7 +1339,7 @@
       "seller": "آل حسن",
       "sku": "171",
       "url": "https://market.isagha.com/products/171",
-      "requestedAt": "2026-11-24T16:06:04.735816+00:00",
+      "requestedAt": "2026-11-24T16:10:55.412330+00:00",
       "eligible": false,
       "listedPrice": 65730,
       "sourceTime": null,
@@ -1352,9 +1352,9 @@
       "shippingIncluded": null,
       "reason": "سعر المنتج لدى البائع المحدد عبر آي صاغة؛ وقت تسعير المنتج وشمول الرسوم غير مثبتين، والإجمالي يراجع قبل الشراء.",
       "status": "observed",
-      "checkedAt": "2026-11-24T16:06:05.304869+00:00",
+      "checkedAt": "2026-11-24T16:10:55.621147+00:00",
       "previousPrice": 65730,
-      "previousCheckedAt": "2026-11-24T16:01:10.569374+00:00"
+      "previousCheckedAt": "2026-11-24T16:06:05.304869+00:00"
     }
   ],
   "retailers": [
