@@ -4,9 +4,9 @@
     "confirmedAt": "2026-11-11T12:38:49.949852+00:00"
   },
   "service": {
-    "checkedAt": "2026-11-24T09:55:55.785023+00:00",
+    "checkedAt": "2026-11-24T10:01:36.842975+00:00",
     "enabled": true,
-    "status": "local_monitoring_gap_waiting"
+    "status": "baseline_created"
   },
   "localBaseline": {
     "local24": 6228.5,
@@ -23,5 +23,17 @@
     "id": "35ba8f2bbca16067b996",
     "status": "sent",
     "sentAt": "2026-11-21T09:35:55.453538+00:00"
+  },
+  "baseline": {
+    "local24": 6491.5,
+    "local21": 5680.0,
+    "gap": 171.93293212995286,
+    "gapPct": 2.7206441562127592,
+    "fxGap": 1.4764935835766693,
+    "fxPct": 2.7206441562127592,
+    "implied": 55.74649358357667,
+    "bank": 54.27,
+    "ounce": 3621.899902,
+    "time": 1795514443.0
   }
 }
