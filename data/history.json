@@ -1,30 +1,24 @@
 {
   "schemaVersion": 1,
   "collectorVersion": 2,
-  "checkedDate": "2026-11-23",
-  "checkedAt": "2026-11-23T00:01:17.356728+00:00",
+  "checkedDate": "2026-11-24",
+  "checkedAt": "2026-11-24T00:01:21.059758+00:00",
   "source": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/v1/currencies/xau.json",
   "fallbackSource": "https://{date}.currency-api.pages.dev/v1/currencies/xau.json",
   "kind": "daily_reference_not_exchange_close",
   "independentVerification": "partial_manual_sample_only",
   "profile": {
-    "expectedWeekdays": 266,
-    "availableWeekdays": 264,
+    "expectedWeekdays": 267,
+    "availableWeekdays": 265,
     "missingWeekdays": [
       "2025-12-10",
-      "2026-11-23"
+      "2026-11-24"
     ],
-    "lastReferenceDate": "2026-11-20",
+    "lastReferenceDate": "2026-11-23",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
   "points": [
-    {
-      "d": "2024-11-20",
-      "usd": 2638.73408316,
-      "egp": 130742.6829313,
-      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-20/v1/currencies/xau.json"
-    },
     {
       "d": "2024-11-21",
       "usd": 2655.76316541,
@@ -44,9 +38,10 @@
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-23/v1/currencies/xau.json"
     },
     {
-      "d": "2025-11-16",
-      "usd": 4080.45348528,
-      "egp": 192340.40398122
+      "d": "2024-11-24",
+      "usd": 2713.18586626,
+      "egp": 134774.66938229,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-24/v1/currencies/xau.json"
     },
     {
       "d": "2025-11-17",
@@ -1913,6 +1908,12 @@
       "usd": 3537.28617989,
       "egp": 190361.0188693,
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-22/v1/currencies/xau.json"
+    },
+    {
+      "d": "2026-11-23",
+      "usd": 3624.02088016,
+      "egp": 197211.44316267,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-23/v1/currencies/xau.json"
     }
   ]
 }
