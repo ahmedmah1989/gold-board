@@ -43,6 +43,11 @@ jobs:
       name: github-pages
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Always collect on the live tip of main. The default event SHA is
+          # stale when an earlier run pushed while this run was queued/running,
+          # which made the Save step's pull --rebase conflict on every race.
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -74,13 +79,41 @@ jobs:
           git add data/quotes.json data/alert-state.json data/offers.json data/history.json data/audit.json data/local-history.json data/collection-health.json
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh timestamped public source quotes'
-            git pull --rebase
-            git push
+            # Guard: integrate anything pushed during this run. On conflict,
+            # abort and FAIL LOUDLY: the next scheduled run recollects on a
+            # fresh base. Never resolve with -X theirs (silent data loss).
+            if ! git pull --rebase; then
+              git rebase --abort
+              echo 'Save step: rebase conflict; failing loudly so the next run recollects fresh.' >&2
+              exit 1
+            fi
+            # Bounded push retry: one extra fetch+rebase for a non-fast-forward.
+            if ! git push; then
+              git fetch origin main
+              if ! git rebase origin/main; then
+                git rebase --abort
+                echo 'Save step: concurrent update on retry; failing loudly.' >&2
+                exit 1
+              fi
+              git push
+            fi
           fi
       - name: Rebuild branch-based GitHub Pages
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+        run: |
+          # Bounded retry: the API intermittently returns an empty body, which
+          # gh fails to parse as JSON ("unexpected end of JSON input").
+          ok=0
+          for i in 1 2 3; do
+            if gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"; then ok=1; break; fi
+            echo "pages/builds attempt $i failed; retrying in $((i*10))s" >&2
+            sleep $((i*10))
+          done
+          if [ "$ok" -ne 1 ]; then
+            echo 'pages/builds failed after 3 attempts; failing loudly.' >&2
+            exit 1
+          fi
       - name: Record the generation time this run published
         id: generated
         run: python -c 'import json; print("generated_at=" + json.load(open("data/quotes.json"))["generatedAt"])' >> "$GITHUB_OUTPUT"
@@ -90,9 +123,22 @@ jobs:
           git add data/history.json
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh daily historical references'
-            git pull --rebase
+            if ! git pull --rebase; then
+              git rebase --abort
+              echo 'History step: rebase conflict; failing loudly so the next run recollects fresh.' >&2
+              exit 1
+            fi
             git push
-            gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+            ok=0
+            for i in 1 2 3; do
+              if gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"; then ok=1; break; fi
+              echo "pages/builds attempt $i failed; retrying in $((i*10))s" >&2
+              sleep $((i*10))
+            done
+            if [ "$ok" -ne 1 ]; then
+              echo 'pages/builds failed after 3 attempts; failing loudly.' >&2
+              exit 1
+            fi
           fi
         env:
           GH_TOKEN: ${{ github.token }}
