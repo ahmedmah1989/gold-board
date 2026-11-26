@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T14:35:28.193509+00:00",
+  "generatedAt": "2026-11-26T14:40:32.345383+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-26T16:35:10+02:00",
+      "sourceTime": "2026-11-26T16:40:10+02:00",
       "sourceTimeKind": "published_price_update",
       "24": {
         "sell": 6451.5,
@@ -14,8 +14,8 @@
         "buy": 5595.0
       },
       "status": "available",
-      "requestedAt": "2026-11-26T14:35:25.594092+00:00",
-      "fetchedAt": "2026-11-26T14:35:25.722525+00:00",
+      "requestedAt": "2026-11-26T14:40:29.282031+00:00",
+      "fetchedAt": "2026-11-26T14:40:29.568279+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "isagha_silver": {
@@ -52,8 +52,8 @@
         "buy": 41.78
       },
       "status": "available",
-      "requestedAt": "2026-11-26T14:35:25.594894+00:00",
-      "fetchedAt": "2026-11-26T14:35:25.825025+00:00",
+      "requestedAt": "2026-11-26T14:40:29.282902+00:00",
+      "fetchedAt": "2026-11-26T14:40:29.691433+00:00",
       "url": "https://market.isagha.com/prices/silver"
     },
     "misr": {
@@ -64,26 +64,26 @@
       "sourceTimeKind": "bank_page_quote_update",
       "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "requestedAt": "2026-11-26T14:35:25.595480+00:00",
-      "fetchedAt": "2026-11-26T14:35:27.133750+00:00",
+      "requestedAt": "2026-11-26T14:40:29.283692+00:00",
+      "fetchedAt": "2026-11-26T14:40:30.924330+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 3578.0,
-      "sourceTime": "2026-11-26T14:35:18+00:00",
+      "sell": 3578.5,
+      "sourceTime": "2026-11-26T14:40:18+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-26T14:35:25.596102+00:00",
-      "fetchedAt": "2026-11-26T14:35:25.965809+00:00",
+      "requestedAt": "2026-11-26T14:40:29.284400+00:00",
+      "fetchedAt": "2026-11-26T14:40:29.812869+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-26T14:35:27.134296+00:00",
+      "fetchedAt": "2026-11-26T14:40:30.925097+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -91,7 +91,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-26T14:35:27.134610+00:00",
+      "fetchedAt": "2026-11-26T14:40:30.925448+00:00",
       "quoteType": "average_market_reference",
       "buy": 54.7695,
       "sell": 54.8695,
@@ -108,18 +108,18 @@
       "sourceTimeKind": "provider_reported_update_not_independently_verified",
       "documentation": "https://goldtimo.com/eg/en/docs",
       "status": "available",
-      "checkedAt": "2026-11-26T14:35:28.697886+00:00",
+      "checkedAt": "2026-11-26T14:40:32.837083+00:00",
       "karats": {
         "24": {
           "symbol": "XAU",
           "currency": "EGP",
           "unit": "oz",
           "karat": 24,
-          "price": 199713.31,
-          "gram": 6421,
-          "gramBuy": 6434,
-          "gramSell": 6408,
-          "updatedAt": "2026-11-26T16:35:28+02:00",
+          "price": 199495.61,
+          "gram": 6414,
+          "gramBuy": 6427,
+          "gramSell": 6401,
+          "updatedAt": "2026-11-26T16:40:32+02:00",
           "status": "available"
         },
         "22": {
@@ -127,11 +127,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 22,
-          "price": 199713.31,
-          "gram": 5885,
-          "gramBuy": 5897,
-          "gramSell": 5874,
-          "updatedAt": "2026-11-26T16:35:28+02:00",
+          "price": 199495.61,
+          "gram": 5879,
+          "gramBuy": 5891,
+          "gramSell": 5867,
+          "updatedAt": "2026-11-26T16:40:32+02:00",
           "status": "available"
         },
         "21": {
@@ -139,11 +139,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 21,
-          "price": 199713.31,
-          "gram": 5618,
-          "gramBuy": 5630,
-          "gramSell": 5607,
-          "updatedAt": "2026-11-26T16:35:28+02:00",
+          "price": 199495.61,
+          "gram": 5612,
+          "gramBuy": 5623,
+          "gramSell": 5601,
+          "updatedAt": "2026-11-26T16:40:32+02:00",
           "status": "available"
         },
         "18": {
@@ -151,11 +151,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 18,
-          "price": 199713.31,
-          "gram": 4816,
-          "gramBuy": 4825,
-          "gramSell": 4806,
-          "updatedAt": "2026-11-26T16:35:28+02:00",
+          "price": 199495.61,
+          "gram": 4810,
+          "gramBuy": 4820,
+          "gramSell": 4801,
+          "updatedAt": "2026-11-26T16:40:32+02:00",
           "status": "available"
         }
       }
