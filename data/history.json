@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "collectorVersion": 2,
-  "checkedDate": "2026-11-25",
-  "checkedAt": "2026-11-25T00:01:19.752959+00:00",
+  "checkedDate": "2026-11-26",
+  "checkedAt": "2026-11-26T00:01:19.288172+00:00",
   "source": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/v1/currencies/xau.json",
   "fallbackSource": "https://{date}.currency-api.pages.dev/v1/currencies/xau.json",
   "kind": "daily_reference_not_exchange_close",
@@ -12,19 +12,13 @@
     "availableWeekdays": 265,
     "missingWeekdays": [
       "2025-12-10",
-      "2026-11-25"
+      "2026-11-26"
     ],
-    "lastReferenceDate": "2026-11-24",
+    "lastReferenceDate": "2026-11-25",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
   "points": [
-    {
-      "d": "2024-11-22",
-      "usd": 2676.94040702,
-      "egp": 133111.11347443,
-      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-22/v1/currencies/xau.json"
-    },
     {
       "d": "2024-11-23",
       "usd": 2708.90022714,
@@ -44,9 +38,10 @@
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-25/v1/currencies/xau.json"
     },
     {
-      "d": "2025-11-18",
-      "usd": 4023.73359021,
-      "egp": 189338.94903257
+      "d": "2024-11-26",
+      "usd": 2629.84532565,
+      "egp": 130502.22418748,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-26/v1/currencies/xau.json"
     },
     {
       "d": "2025-11-19",
@@ -1915,6 +1910,12 @@
       "usd": 3618.14528807,
       "egp": 196074.67672813,
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-24/v1/currencies/xau.json"
+    },
+    {
+      "d": "2026-11-25",
+      "usd": 3525.09746013,
+      "egp": 191104.80238868,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-25/v1/currencies/xau.json"
     }
   ]
 }
