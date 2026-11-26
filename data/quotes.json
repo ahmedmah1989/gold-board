@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-26T10:25:27.954856+00:00",
+  "generatedAt": "2026-11-26T10:30:41.191525+00:00",
   "sources": {
     "isagha": {
-      "sourceTime": "2026-11-26T12:24:36+02:00",
+      "sourceTime": "2026-11-26T12:29:36+02:00",
       "sourceTimeKind": "published_price_update",
       "24": {
         "sell": 6428.5,
@@ -14,37 +14,37 @@
         "buy": 5575.0
       },
       "status": "available",
-      "requestedAt": "2026-11-26T10:25:24.045391+00:00",
-      "fetchedAt": "2026-11-26T10:25:24.565269+00:00",
+      "requestedAt": "2026-11-26T10:30:37.381910+00:00",
+      "fetchedAt": "2026-11-26T10:30:38.010443+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "isagha_silver": {
       "source": "iSagha local trader quote",
       "unitBasis": "per gram, not printed on the page; matches the silver pound row on the same page; the same site lists 925 silver pound products of 8 g (products 9042 and 9053), but the row itself does not state weight or grade",
-      "sourceTime": "2026-11-26T11:26:48+02:00",
+      "sourceTime": "2026-11-26T12:27:23+02:00",
       "sourceTimeKind": "published_price_update",
       "unit": "gram",
       "currency": "EGP",
       "grades": {
         "999": {
-          "sell": 75.75,
-          "buy": 73.0
+          "sell": 77.0,
+          "buy": 74.0
         },
         "925": {
-          "sell": 70.25,
-          "buy": 67.75
+          "sell": 71.5,
+          "buy": 68.5
         },
         "900": {
-          "sell": 68.25,
-          "buy": 65.75
+          "sell": 69.5,
+          "buy": 66.75
         },
         "800": {
-          "sell": 60.75,
-          "buy": 58.5
+          "sell": 61.75,
+          "buy": 59.25
         },
         "600": {
-          "sell": 45.5,
-          "buy": 44.0
+          "sell": 46.25,
+          "buy": 44.5
         }
       },
       "ounceUsd": {
@@ -52,8 +52,8 @@
         "buy": 41.53
       },
       "status": "available",
-      "requestedAt": "2026-11-26T10:25:24.046257+00:00",
-      "fetchedAt": "2026-11-26T10:25:24.677479+00:00",
+      "requestedAt": "2026-11-26T10:30:37.382779+00:00",
+      "fetchedAt": "2026-11-26T10:30:38.200201+00:00",
       "url": "https://market.isagha.com/prices/silver"
     },
     "misr": {
@@ -64,26 +64,26 @@
       "sourceTimeKind": "bank_page_quote_update",
       "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
       "status": "available",
-      "requestedAt": "2026-11-26T10:25:24.046855+00:00",
-      "fetchedAt": "2026-11-26T10:25:26.363241+00:00",
+      "requestedAt": "2026-11-26T10:30:37.383372+00:00",
+      "fetchedAt": "2026-11-26T10:30:39.730964+00:00",
       "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
-      "sell": 3559.600098,
-      "sourceTime": "2026-11-26T10:25:17+00:00",
+      "sell": 3562.0,
+      "sourceTime": "2026-11-26T10:30:17+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-26T10:25:24.047408+00:00",
-      "fetchedAt": "2026-11-26T10:25:24.139933+00:00",
+      "requestedAt": "2026-11-26T10:30:37.383977+00:00",
+      "fetchedAt": "2026-11-26T10:30:37.614121+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-26T10:25:26.363775+00:00",
+      "fetchedAt": "2026-11-26T10:30:39.731524+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -91,7 +91,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-26T10:25:26.364053+00:00",
+      "fetchedAt": "2026-11-26T10:30:39.731815+00:00",
       "quoteType": "average_market_reference",
       "buy": 54.6306,
       "sell": 54.7306,
@@ -108,18 +108,18 @@
       "sourceTimeKind": "provider_reported_update_not_independently_verified",
       "documentation": "https://goldtimo.com/eg/en/docs",
       "status": "available",
-      "checkedAt": "2026-11-26T10:25:28.654571+00:00",
+      "checkedAt": "2026-11-26T10:30:41.915935+00:00",
       "karats": {
         "24": {
           "symbol": "XAU",
           "currency": "EGP",
           "unit": "oz",
           "karat": 24,
-          "price": 199076.36,
-          "gram": 6400,
+          "price": 199081.95,
+          "gram": 6401,
           "gramBuy": 6413,
           "gramSell": 6388,
-          "updatedAt": "2026-11-26T12:25:28+02:00",
+          "updatedAt": "2026-11-26T12:30:41+02:00",
           "status": "available"
         },
         "22": {
@@ -127,11 +127,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 22,
-          "price": 199076.36,
+          "price": 199081.95,
           "gram": 5867,
-          "gramBuy": 5878,
+          "gramBuy": 5879,
           "gramSell": 5855,
-          "updatedAt": "2026-11-26T12:25:28+02:00",
+          "updatedAt": "2026-11-26T12:30:41+02:00",
           "status": "available"
         },
         "21": {
@@ -139,11 +139,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 21,
-          "price": 199076.36,
-          "gram": 5600,
+          "price": 199081.95,
+          "gram": 5601,
           "gramBuy": 5612,
           "gramSell": 5589,
-          "updatedAt": "2026-11-26T12:25:28+02:00",
+          "updatedAt": "2026-11-26T12:30:41+02:00",
           "status": "available"
         },
         "18": {
@@ -151,11 +151,11 @@
           "currency": "EGP",
           "unit": "oz",
           "karat": 18,
-          "price": 199076.36,
+          "price": 199081.95,
           "gram": 4800,
           "gramBuy": 4810,
           "gramSell": 4791,
-          "updatedAt": "2026-11-26T12:25:28+02:00",
+          "updatedAt": "2026-11-26T12:30:41+02:00",
           "status": "available"
         }
       }
