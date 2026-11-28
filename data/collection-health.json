@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-28T09:10:53.556566+00:00",
+  "checkedAt": "2026-11-28T09:15:56.293661+00:00",
   "targetIntervalSeconds": 300,
   "schedulerGuarantee": false,
-  "previousCollectionTime": "2026-11-28T09:05:39.831649+00:00",
-  "secondsSincePreviousCollection": 313.7,
+  "previousCollectionTime": "2026-11-28T09:10:30.909934+00:00",
+  "secondsSincePreviousCollection": 325.4,
   "missedTargetSincePrevious": false,
-  "quotesAgeSeconds": 22.6,
-  "offersAgeSeconds": 0.1,
+  "quotesAgeSeconds": 23.0,
+  "offersAgeSeconds": 0.0,
   "status": "recent",
   "note": "Collection receipt only; each source/product keeps its own pricing and check timestamps. GitHub scheduled starts may be delayed or dropped."
 }
