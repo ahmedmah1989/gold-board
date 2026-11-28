@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-28T11:31:12.992233+00:00",
+  "generatedAt": "2026-11-28T11:35:26.272180+00:00",
   "sources": {
     "isagha": {
       "sourceTime": "2026-11-28T12:46:43+02:00",
@@ -14,8 +14,8 @@
         "buy": 5750.0
       },
       "status": "available",
-      "requestedAt": "2026-11-28T11:30:46.103616+00:00",
-      "fetchedAt": "2026-11-28T11:30:46.335807+00:00",
+      "requestedAt": "2026-11-28T11:35:23.016146+00:00",
+      "fetchedAt": "2026-11-28T11:35:23.317660+00:00",
       "url": "https://market.isagha.com/prices"
     },
     "isagha_silver": {
@@ -52,32 +52,38 @@
         "buy": 43.62
       },
       "status": "available",
-      "requestedAt": "2026-11-28T11:30:46.104200+00:00",
-      "fetchedAt": "2026-11-28T11:30:46.352383+00:00",
+      "requestedAt": "2026-11-28T11:35:23.016689+00:00",
+      "fetchedAt": "2026-11-28T11:35:23.434118+00:00",
       "url": "https://market.isagha.com/prices/silver"
     },
     "misr": {
-      "status": "unavailable",
-      "fetchedAt": "2026-11-28T11:30:46.104701+00:00",
-      "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies",
-      "reason": "تعذر توثيق السعر ووقت المصدر؛ لم يُستخدم سعر بديل"
+      "sourceTime": "2026-11-26T14:20:10+02:00",
+      "buy": 54.77,
+      "sell": 54.87,
+      "quoteType": "notes",
+      "sourceTimeKind": "bank_page_quote_update",
+      "timezoneAssumption": "Africa/Cairo; page time has no explicit UTC offset",
+      "status": "available",
+      "requestedAt": "2026-11-28T11:35:23.017087+00:00",
+      "fetchedAt": "2026-11-28T11:35:24.921508+00:00",
+      "url": "https://www.banquemisr.com/CAPITAL-MARKETS/Exchange-Rates-and-Currencies"
     },
     "gold": {
       "sell": 3650.0,
-      "sourceTime": "2026-11-28T11:30:26+00:00",
+      "sourceTime": "2026-11-28T11:34:56+00:00",
       "name": "gold-api.com",
       "sourceTimeKind": "provider_upstream_fetch",
       "quoteType": "spot_reference",
       "currency": "USD",
       "unit": "troy_ounce",
       "status": "available",
-      "requestedAt": "2026-11-28T11:30:46.105105+00:00",
-      "fetchedAt": "2026-11-28T11:30:46.510159+00:00",
+      "requestedAt": "2026-11-28T11:35:23.017348+00:00",
+      "fetchedAt": "2026-11-28T11:35:23.302378+00:00",
       "url": "https://api.gold-api.com/price/XAU"
     },
     "nbe": {
       "url": "https://www.nbe.com.eg/NBE/E/#/EN/ExchangeRates",
-      "fetchedAt": "2026-11-28T11:31:11.852936+00:00",
+      "fetchedAt": "2026-11-28T11:35:24.921941+00:00",
       "quoteType": "bank_quote",
       "status": "unavailable",
       "errorCode": "unrecognized",
@@ -85,7 +91,7 @@
     },
     "cbe": {
       "url": "https://www.cbe.org.eg/en/economic-research/statistics/exchange-rates",
-      "fetchedAt": "2026-11-28T11:31:11.853172+00:00",
+      "fetchedAt": "2026-11-28T11:35:24.922146+00:00",
       "quoteType": "average_market_reference",
       "buy": 54.7695,
       "sell": 54.8695,
@@ -102,7 +108,7 @@
       "sourceTimeKind": "provider_reported_update_not_independently_verified",
       "documentation": "https://goldtimo.com/eg/en/docs",
       "status": "available",
-      "checkedAt": "2026-11-28T11:31:13.403999+00:00",
+      "checkedAt": "2026-11-28T11:35:26.839101+00:00",
       "karats": {
         "24": {
           "symbol": "XAU",
@@ -113,7 +119,7 @@
           "gram": 6611,
           "gramBuy": 6624,
           "gramSell": 6598,
-          "updatedAt": "2026-11-28T13:31:13+02:00",
+          "updatedAt": "2026-11-28T13:35:26+02:00",
           "status": "available"
         },
         "22": {
@@ -125,7 +131,7 @@
           "gram": 6060,
           "gramBuy": 6072,
           "gramSell": 6047,
-          "updatedAt": "2026-11-28T13:31:13+02:00",
+          "updatedAt": "2026-11-28T13:35:26+02:00",
           "status": "available"
         },
         "21": {
@@ -137,7 +143,7 @@
           "gram": 5785,
           "gramBuy": 5796,
           "gramSell": 5773,
-          "updatedAt": "2026-11-28T13:31:13+02:00",
+          "updatedAt": "2026-11-28T13:35:26+02:00",
           "status": "available"
         },
         "18": {
@@ -149,7 +155,7 @@
           "gram": 4958,
           "gramBuy": 4968,
           "gramSell": 4948,
-          "updatedAt": "2026-11-28T13:31:13+02:00",
+          "updatedAt": "2026-11-28T13:35:26+02:00",
           "status": "available"
         }
       }
