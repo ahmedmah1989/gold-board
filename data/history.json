@@ -1,30 +1,23 @@
 {
   "schemaVersion": 1,
   "collectorVersion": 2,
-  "checkedDate": "2026-11-27",
-  "checkedAt": "2026-11-27T00:00:42.505108+00:00",
+  "checkedDate": "2026-11-28",
+  "checkedAt": "2026-11-28T00:01:14.985475+00:00",
   "source": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/v1/currencies/xau.json",
   "fallbackSource": "https://{date}.currency-api.pages.dev/v1/currencies/xau.json",
   "kind": "daily_reference_not_exchange_close",
   "independentVerification": "partial_manual_sample_only",
   "profile": {
-    "expectedWeekdays": 267,
+    "expectedWeekdays": 266,
     "availableWeekdays": 265,
     "missingWeekdays": [
-      "2025-12-10",
-      "2026-11-27"
+      "2025-12-10"
     ],
-    "lastReferenceDate": "2026-11-26",
+    "lastReferenceDate": "2026-11-27",
     "maxCalendarGap": 3,
     "calendar": "Weekdays only; exchange holidays not independently reconciled"
   },
   "points": [
-    {
-      "d": "2024-11-24",
-      "usd": 2713.18586626,
-      "egp": 134774.66938229,
-      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-24/v1/currencies/xau.json"
-    },
     {
       "d": "2024-11-25",
       "usd": 2698.44426593,
@@ -44,9 +37,10 @@
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-27/v1/currencies/xau.json"
     },
     {
-      "d": "2025-11-20",
-      "usd": 4090.68224398,
-      "egp": 193869.85643301
+      "d": "2024-11-28",
+      "usd": 2625.98490846,
+      "egp": 130430.28157491,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2024-11-28/v1/currencies/xau.json"
     },
     {
       "d": "2025-11-21",
@@ -1917,6 +1911,12 @@
       "usd": 3570.56780955,
       "egp": 195236.95614129,
       "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-26/v1/currencies/xau.json"
+    },
+    {
+      "d": "2026-11-27",
+      "usd": 3655.08431366,
+      "egp": 200390.89495105,
+      "url": "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@2026-11-27/v1/currencies/xau.json"
     }
   ]
 }
